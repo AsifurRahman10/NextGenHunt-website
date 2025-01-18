@@ -18,6 +18,8 @@ export const FeatureSection = () => {
         para={
           " Discover the latest and most exciting tech products handpicked for you. Explore cutting-edge web apps, AI tools, software, games, and mobile apps that are shaping the future of technology."
         }
+        align={"center"}
+        btn={"hidden"}
       ></Title>
 
       {/* card container */}
