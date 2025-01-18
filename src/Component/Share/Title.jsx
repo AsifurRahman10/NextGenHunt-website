@@ -1,5 +1,4 @@
 export const Title = ({ title, para, align, btn }) => {
-  console.log(align);
   return (
     <div
       className={`my-10 w-11/12 lg:w-9/12 mx-auto text-center ${
