@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import logo from "../../assets/logo.png";
+import { FaUnlockAlt } from "react-icons/fa";
 
 export const Navbar = () => {
   const [profileDropdown, setProfileDropdown] = useState(false);
@@ -8,14 +10,17 @@ export const Navbar = () => {
   const navList = (
     <>
       <li className="">
+        <NavLink to="/xc">Home</NavLink>
+      </li>
+      <li className="">
         <NavLink to="/product">Products</NavLink>
       </li>
     </>
   );
 
   return (
-    <nav className="py-3 shadow-md bg-[#FFFFFF]">
-      <div className="navbar w-9/12 mx-auto">
+    <nav className="shadow-md bg-[#FFFFFF]">
+      <div className="navbar w-11/12 lg:w-9/12 mx-auto">
         {/* Navbar Start */}
         <div className="navbar-start">
           {/* Dropdown for Mobile */}
@@ -25,7 +30,7 @@ export const Navbar = () => {
               role="button"
               aria-label="Open menu"
               className="btn btn-ghost lg:hidden"
-              onClick={() => setProfileDropdown(!profileDropdown)}
+              onClick={() => setOpenMenu(!openMenu)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,32 +47,33 @@ export const Navbar = () => {
                 />
               </svg>
             </button>
-            {profileDropdown && (
+            {openMenu && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 w-52 rounded-box p-2 shadow"
+                className="menu menu-sm dropdown-content mt-3 w-52 rounded-box p-2 shadow bg-[#FFFFFF]"
               >
                 {navList}
               </ul>
             )}
           </div>
           {/* Brand Name */}
-          <a href="/" className="btn btn-ghost text-xl font-bold">
-            NextGenHunt
+          <a href="/" className="">
+            <img className="lg:w-60" src={logo} alt="" />
           </a>
         </div>
 
         {/* Navbar Center */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 hover:underline">
-            {navList}
-          </ul>
+          <ul className="menu menu-horizontal px-1 ">{navList}</ul>
         </div>
 
         {/* Navbar End */}
         <div className="navbar-end">
+          <button className="btn bg-btnPrimary text-white font-medium px-4 lg:px-8">
+            <FaUnlockAlt /> Login
+          </button>
           {/* User Profile */}
-          <div className="dropdown dropdown-end">
+          {/* <div className="dropdown dropdown-end">
             <button
               tabIndex={0}
               role="button"
@@ -90,7 +96,7 @@ export const Navbar = () => {
                 {navList}
               </ul>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>
