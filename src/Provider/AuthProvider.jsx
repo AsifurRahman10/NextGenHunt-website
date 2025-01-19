@@ -19,26 +19,26 @@ const AuthProvider = ({ children }) => {
 
   //   login in to site
   const login = (email, password) => {
-    useState(true);
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // register to site
   const register = (email, password) => {
-    useState(true);
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // google login
 
   const googleLogin = () => {
-    useState(true);
+    setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
   // manage profile image and name
   const updateUser = (name, image) => {
-    useState(true);
+    setLoading(true);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: image,
