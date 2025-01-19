@@ -1,11 +1,47 @@
 import { FaEye } from "react-icons/fa";
 import login from "../../assets/login.jpg";
 import { SocialLogin } from "../../Component/Share/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../Hooks/useAuth";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export const Register = () => {
   const [showPass, setShowPass] = useState(false);
+  const { register: registerFn, updateUser } = useAuth();
+  const navigate = useNavigate();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    const imageFile = data.image[0];
+
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    formData.append("upload_preset", "test_01");
+    try {
+      await registerFn(data.email, data.password);
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dsa8ooidh/image/upload",
+        formData
+      );
+      const image = response.data.url;
+      await updateUser(data.name, image);
+      navigate("/");
+      Swal.fire({
+        title: "Account Created Successfully",
+        text: "Your account has been created successfully",
+        icon: "success",
+      });
+    } catch (error) {}
+  };
+
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto flex flex-col-reverse my-10 md:my-20 lg:my-0 lg:flex-row justify-center items-center">
       {/* image */}
@@ -21,10 +57,14 @@ export const Register = () => {
         <h3 className="text-2xl font-bold text-center">
           Join our community, register to NextGenHunt
         </h3>
-        <form className="card-body w-full lg:w-9/12 mx-auto">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="card-body w-full lg:w-9/12 mx-auto"
+        >
           {/* name */}
           <div className="form-control mt-2">
             <input
+              {...register("name")}
               type="text"
               placeholder="Enter you Name"
               className="input rounded-full bg-[#f3f3f3]"
@@ -34,6 +74,7 @@ export const Register = () => {
           {/* email */}
           <div className="form-control mt-2">
             <input
+              {...register("email")}
               type="email"
               placeholder="Enter you email"
               className="input rounded-full bg-[#f3f3f3]"
@@ -41,10 +82,29 @@ export const Register = () => {
             />
           </div>
           {/* upload photo */}
+          <div className="form-control mt-2">
+            <input
+              {...register("image")}
+              id="example1"
+              type="file"
+              class="mt-2 block w-full text-sm py-2 file:mr-4 bg-[#f3f3f3] rounded-full file:rounded-md file:ml-3 file:border-0 file:bg-btnPrimary file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-gray-500 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
+            />
+          </div>
 
           {/* password */}
           <div className="form-control relative mt-2">
             <input
+              {...register("password", {
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+                  message:
+                    "Password must include an uppercase letter, a lowercase letter, and a number",
+                },
+              })}
               type={showPass ? "text" : "password"}
               placeholder="Password"
               className="input rounded-full bg-[#f3f3f3]"
@@ -56,15 +116,10 @@ export const Register = () => {
             >
               <FaEye />
             </span>
-            <label className="label block text-right mt-4 ">
-              <a
-                href="#"
-                className="label-text-alt link link-hover text-gray-700 font-medium"
-              >
-                Forgot password?
-              </a>
-            </label>
           </div>
+          {errors.password && (
+            <p className="text-red-500 mt-4">{errors.password.message}</p>
+          )}
           <div className="form-control mt-2 ">
             <button className="btn bg-btnPrimary text-white rounded-full">
               Register
