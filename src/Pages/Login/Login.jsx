@@ -1,24 +1,31 @@
 import { FaEye } from "react-icons/fa";
 import loginImg from "../../assets/login.jpg";
 import { SocialLogin } from "../../Component/Share/SocialLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 export const Login = () => {
   const { login } = useAuth();
   const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     try {
-      const res = login(data.email, data.password);
-      console.log(res);
+      await login(data.email, data.password);
+      Swal.fire({
+        title: "Success!",
+        text: "Login successful!",
+        icon: "success",
+      });
+      navigate("/");
     } catch (error) {
       console.error("Login failed:", error);
     }

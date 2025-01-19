@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { FaUnlockAlt } from "react-icons/fa";
+import { useAuth } from "../../Hooks/useAuth";
+import { IoIosLogOut } from "react-icons/io";
 
 export const Navbar = () => {
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const { user } = useAuth();
 
   const navList = (
     <>
@@ -69,36 +72,53 @@ export const Navbar = () => {
 
         {/* Navbar End */}
         <div className="navbar-end">
-          <Link to={"/login"}>
-            <button className="btn bg-btnPrimary text-white font-medium px-4 lg:px-8">
-              <FaUnlockAlt /> Login
-            </button>
-          </Link>
-          {/* User Profile */}
-          {/* <div className="dropdown dropdown-end">
-            <button
-              tabIndex={0}
-              role="button"
-              aria-label="User profile menu"
-              className="btn btn-ghost btn-circle avatar"
-              onClick={() => setOpenMenu(!openMenu)}
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                  alt="User avatar"
-                />
-              </div>
-            </button>
-            {openMenu && (
-              <ul
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <button
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 w-52 rounded-box p-2 shadow"
+                role="button"
+                aria-label="User profile menu"
+                className="btn btn-ghost btn-circle avatar"
+                onClick={() => setOpenMenu(!openMenu)}
               >
-                {navList}
-              </ul>
-            )}
-          </div> */}
+                <div className="w-20 rounded-full">
+                  <img src={user.photoURL} alt="User avatar" />
+                </div>
+              </button>
+              {openMenu && (
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 w-52 rounded-box p-2 shadow bg-white"
+                >
+                  <li className="text-sm  text-gray-700 block px-4 py-2">
+                    Hi {user.displayName}!
+                  </li>
+                  <li>
+                    <Link
+                      to={"/"}
+                      class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                  <div class="py-1">
+                    <Link
+                      href="#"
+                      class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                    >
+                      Sign out
+                    </Link>
+                  </div>
+                </ul>
+              )}
+            </div>
+          ) : (
+            <Link to={"/login"}>
+              <button className="btn bg-btnPrimary text-white font-medium px-4 lg:px-8">
+                <FaUnlockAlt /> Login
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

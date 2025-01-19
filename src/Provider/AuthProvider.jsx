@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -48,7 +49,15 @@ const AuthProvider = ({ children }) => {
   // observer
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
+      if (currentUser && currentUser.email) {
+        const userInfo = {
+          userData: {
+            email: currentUser,
+          },
+        };
+        axios.post(`${import.meta.env.VITE_DB / userInfo}`).then((res) => {
+          console.log(res);
+        });
         console.log(currentUser);
         setUser(currentUser);
       } else {
@@ -59,7 +68,7 @@ const AuthProvider = ({ children }) => {
 
     return () => unsubscribe();
   }, []);
-  const authInfo = { login, register, updateUser, googleLogin };
+  const authInfo = { login, register, updateUser, googleLogin, user, loading };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
