@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { FaUnlockAlt } from "react-icons/fa";
 
@@ -69,9 +69,11 @@ export const Navbar = () => {
 
         {/* Navbar End */}
         <div className="navbar-end">
-          <button className="btn bg-btnPrimary text-white font-medium px-4 lg:px-8">
-            <FaUnlockAlt /> Login
-          </button>
+          <Link to={"/login"}>
+            <button className="btn bg-btnPrimary text-white font-medium px-4 lg:px-8">
+              <FaUnlockAlt /> Login
+            </button>
+          </Link>
           {/* User Profile */}
           {/* <div className="dropdown dropdown-end">
             <button
