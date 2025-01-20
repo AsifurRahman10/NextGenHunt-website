@@ -6,17 +6,21 @@ import { useQuery } from "@tanstack/react-query";
 import { Loading } from "../../Component/Share/Loading";
 import { VoteButton } from "../../Component/Share/VoteButton";
 import { HiMiniPaperAirplane } from "react-icons/hi2";
-import noImg from "../../assets/noImg.png";
 import { Rating } from "@smastrom/react-rating";
 import { useState } from "react";
 import "@smastrom/react-rating/style.css";
-import { FaStar } from "react-icons/fa";
+import Swal from "sweetalert2";
+import { ReviewCard } from "../../Component/ReviewCard/ReviewCard";
+import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 
 export const ProductDetails = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const [rating, setRating] = useState(0);
-  console.log(rating);
+  const [review, setReview] = useState("");
+
+  // get product details
   const {
     data = {},
     isLoading,
@@ -24,17 +28,55 @@ export const ProductDetails = () => {
   } = useQuery({
     queryKey: ["products", id],
     queryFn: async () => {
-      const res = await axios.get(
+      const res = await axiosSecure.get(
         `${import.meta.env.VITE_DB}/product-details/${id}`
       );
       return res.data;
     },
   });
-  if (isLoading) {
+
+  // get product review
+  const {
+    data: reviews = [],
+    isLoading: reviewsLoading,
+    refetch: refetchReview,
+  } = useQuery({
+    queryKey: ["reviewsItem"],
+    queryFn: async () => {
+      const res = await axios.get(`${import.meta.env.VITE_DB}/all-review`);
+      return res.data;
+    },
+  });
+
+  if (isLoading || reviewsLoading) {
     return <Loading></Loading>;
   }
 
-  const { image, name, tags, timestamp, upvotes, _id } = data;
+  const { image, name, tags, upvotes, _id } = data;
+
+  const handleReview = async () => {
+    const reviewData = {
+      name: user?.displayName,
+      photo: user?.photoURL,
+      review,
+      rating,
+      productId: _id,
+    };
+    try {
+      await axios.post(`${import.meta.env.VITE_DB}/post-review`, reviewData);
+      setReview("");
+      setRating(0);
+      refetchReview();
+      Swal.fire({
+        text: "You review has been posted!",
+        icon: "success",
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // data for vote
   const voteData = {
     name,
     productId: _id,
@@ -42,13 +84,13 @@ export const ProductDetails = () => {
     email: user.email,
   };
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto py-20">
-      <div className="flex items-center justify-between">
+    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto py-10 lg:py-20">
+      <div className="flex items-center flex-col md:flex-row justify-between">
         {/* title part */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col md:flex-row items-center lg:gap-4">
           {/* image */}
           <div>
-            <img src={image} className="w-16" alt="" />
+            <img src={image} className="w-full md:w-16" alt="" />
           </div>
           {/* text */}
           <div>
@@ -66,7 +108,7 @@ export const ProductDetails = () => {
           </div>
         </div>
         {/* vote */}
-        <div>
+        <div className="mt-4 md:mt-0">
           <VoteButton
             voteData={voteData}
             refetch={refetch}
@@ -109,16 +151,21 @@ export const ProductDetails = () => {
       </div>
       <div className="relative">
         <textarea
+          value={review}
+          onChange={(e) => setReview(e.target.value)}
           className="textarea textarea-bordered w-full mt-4"
           placeholder="Share your thoughts about this product"
           rows={6}
         ></textarea>
-        <button className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4">
+        <button
+          onClick={handleReview}
+          className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4"
+        >
           <HiMiniPaperAirplane className="text-lg" />
           Post
         </button>
       </div>
-      <div className="flex items-center gap-2 justify-end my-2">
+      <div className="flex items-center gap-2 justify-end my-4 lg:my-2">
         <h4 className=" text-gray-500">Posting as {user.displayName}</h4>
         <div className="avatar">
           <div className="w-12 rounded-full">
@@ -128,36 +175,12 @@ export const ProductDetails = () => {
       </div>
 
       {/* Show reviews */}
-      <h4 className="mt-4 font-bold">
+      <h4 className="my-2 lg:my-4 font-bold">
         See the reviews posted by our community
       </h4>
-      <div className="mt-6">
-        <div className="flex items-start gap-4">
-          {/* Image */}
-          <img src={noImg} className="w-12 h-12" alt="" />
-          {/* Review content */}
-          <div>
-            {/* User Info */}
-            <p className="font-bold">{user.displayName}</p>
-            <p className="flex text-2xl text-yellow-400">
-              <Rating style={{ maxWidth: 100 }} value={rating} isRequired />
-            </p>
-            {/* Description */}
-            <p className="mt-2">
-              Synergistically repurpose cross-unit functionalities vis-a-vis
-              virtual action items. Compellingly visualize innovative
-              information rather than corporate e-tailers. Efficiently repurpose
-              resource maximizing growth strategies without turnkey
-              functionalities. Professionally supply granular mindshare through
-              future-proof alignments. Credibly incentivize top-line paradigms
-              without high-payoff platforms. Energistically transition
-              goal-oriented relationships without intermandated partnerships.
-              Synergistically benchmark extensive sources whereas frictionless
-              best practices. Objectively unleash
-            </p>
-          </div>
-        </div>
-      </div>
+      {reviews.map((review) => (
+        <ReviewCard key={review._id} review={review}></ReviewCard>
+      ))}
     </div>
   );
 };

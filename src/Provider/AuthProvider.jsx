@@ -56,10 +56,16 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.photoURL) {
-        console.log(currentUser);
         setUser(currentUser);
+        const userInfo = currentUser?.email;
+        axios.post(`${import.meta.env.VITE_DB}/jwt`, userInfo).then((res) => {
+          if (res?.data?.token) {
+            localStorage.setItem("token", res?.data?.token);
+          }
+        });
       } else {
         setUser(null);
+        localStorage.removeItem("token");
       }
       setLoading(false);
     });

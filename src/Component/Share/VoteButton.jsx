@@ -2,23 +2,22 @@ import axios from "axios";
 import React from "react";
 import { BiSolidUpvote } from "react-icons/bi";
 import { useAuth } from "../../Hooks/useAuth";
-import { Navigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export const VoteButton = ({ _id, refetch, voteData, upvotes }) => {
   const { user } = useAuth();
-  const location = useLocation();
-  if (!user) {
-    return <Navigate to={"/login"} state={{ from: location }} />;
-  }
-  const handleUpvote = async (id) => {
-    console.log(id);
+  const navigate = useNavigate();
 
+  const handleUpvote = async (id) => {
+    if (!user) {
+      return navigate("/login");
+    }
     try {
-      const res = await axios.patch(
-        `${import.meta.env.VITE_DB}/vote/${id}`,
-        voteData
-      );
+      const res = await axios.patch(`${import.meta.env.VITE_DB}/vote/${id}`, {
+        ...voteData,
+        email: user?.email,
+      });
       refetch();
     } catch (error) {
       if (error.status === 409) {

@@ -64,9 +64,9 @@ export const Navbar = () => {
             )}
           </div>
           {/* Brand Name */}
-          <a href="/" className="">
+          <Link to={"/"} className="">
             <img className="lg:w-60" src={logo} alt="" />
-          </a>
+          </Link>
         </div>
 
         {/* Navbar Center */}

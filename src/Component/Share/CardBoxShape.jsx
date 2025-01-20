@@ -1,17 +1,12 @@
-import { BiSolidUpvote } from "react-icons/bi";
-import { FaRegThumbsUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { VoteButton } from "./VoteButton";
-import { useAuth } from "../../Hooks/useAuth";
 
 export const CardBoxShape = ({ product, refetch }) => {
-  const { user } = useAuth();
   const { image, name, tags, upvotes, _id } = product;
   const voteData = {
     name,
     productId: _id,
     image,
-    email: user.email,
   };
   return (
     <div className="card bg-base-100 hover:border-2 hover:border-btnPrimary transition-all duration-100 ease-in-out">
