@@ -97,7 +97,7 @@ export const Register = () => {
               {...register("image")}
               id="example1"
               type="file"
-              class="mt-2 block w-full text-sm py-2 file:mr-4 bg-[#f3f3f3] rounded-full file:rounded-md file:ml-3 file:border-0 file:bg-btnPrimary file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-gray-500 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
+              className="mt-2 block w-full text-sm py-2 file:mr-4 bg-[#f3f3f3] rounded-full file:rounded-md file:ml-3 file:border-0 file:bg-btnPrimary file:py-2 file:px-4 file:text-sm file:font-semibold file:text-white hover:file:bg-gray-500 focus:outline-none disabled:pointer-events-none disabled:opacity-60"
             />
           </div>
 

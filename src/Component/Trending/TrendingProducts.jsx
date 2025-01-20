@@ -2,14 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Title } from "../Share/Title";
 import axios from "axios";
 import { CardBoxShape } from "../Share/CardBoxShape";
+import { useQuery } from "@tanstack/react-query";
+import { Loading } from "../Share/Loading";
 
 export const TrendingProducts = () => {
-  const [trendingProduct, setTrendingProduct] = useState([]);
-  useEffect(() => {
-    axios(`${import.meta.env.VITE_DB}/trending`).then((res) => {
-      setTrendingProduct(res.data);
-    });
-  }, []);
+  const {
+    data: trendingProduct = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["trendingItem"],
+    queryFn: async () => {
+      const res = await axios.get(`${import.meta.env.VITE_DB}/trending`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div className="bg-bannerPrimary py-10">
       <Title
@@ -22,7 +33,11 @@ export const TrendingProducts = () => {
       ></Title>
       <div className="w-11/12 lg:w-9/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-10 gap-6">
         {trendingProduct.map((product) => (
-          <CardBoxShape key={product._id} product={product}></CardBoxShape>
+          <CardBoxShape
+            key={product._id}
+            product={product}
+            refetch={refetch}
+          ></CardBoxShape>
         ))}
       </div>
     </div>

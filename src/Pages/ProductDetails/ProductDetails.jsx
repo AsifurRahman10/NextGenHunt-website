@@ -1,14 +1,22 @@
 import axios from "axios";
-import { BiSolidUpvote } from "react-icons/bi";
-import { CiShoppingTag } from "react-icons/ci";
-import { useLoaderData, useParams } from "react-router-dom";
+import { CiShoppingTag, CiStar } from "react-icons/ci";
+import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "../../Component/Share/Loading";
 import { VoteButton } from "../../Component/Share/VoteButton";
+import { HiMiniPaperAirplane } from "react-icons/hi2";
+import noImg from "../../assets/noImg.png";
+import { Rating } from "@smastrom/react-rating";
+import { useState } from "react";
+import "@smastrom/react-rating/style.css";
+import { FaStar } from "react-icons/fa";
 
 export const ProductDetails = () => {
+  const { user } = useAuth();
   const { id } = useParams();
+  const [rating, setRating] = useState(0);
+  console.log(rating);
   const {
     data = {},
     isLoading,
@@ -25,7 +33,7 @@ export const ProductDetails = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-  const { user } = useAuth();
+
   const { image, name, tags, timestamp, upvotes, _id } = data;
   const voteData = {
     name,
@@ -77,6 +85,79 @@ export const ProductDetails = () => {
         bleeding-edge schemas. Distinctively integrate B2B vortals without
         strategic mindshare. Progressively re-engineer diverse.
       </p>
+      {/* External Link */}
+      <p className="mt-4 font-semibold">
+        Want to know more?{" "}
+        <Link to="https://google.com" target="_blank">
+          <span className="underline text-blue-500 hover:text-blue-700">
+            Visit their website
+          </span>
+        </Link>
+      </p>
+      <div className="divider"></div>
+
+      {/* Post a review */}
+      <h2 className="text-2xl font-bold mb-4">Leave a Review</h2>
+      <div className="flex items-center gap-2">
+        <h2 className="font-semibold">Rate this product</h2>
+        <Rating
+          style={{ maxWidth: 180 }}
+          value={rating}
+          onChange={setRating}
+          isRequired
+        />
+      </div>
+      <div className="relative">
+        <textarea
+          className="textarea textarea-bordered w-full mt-4"
+          placeholder="Share your thoughts about this product"
+          rows={6}
+        ></textarea>
+        <button className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4">
+          <HiMiniPaperAirplane className="text-lg" />
+          Post
+        </button>
+      </div>
+      <div className="flex items-center gap-2 justify-end my-2">
+        <h4 className=" text-gray-500">Posting as {user.displayName}</h4>
+        <div className="avatar">
+          <div className="w-12 rounded-full">
+            <img src={user.photoURL} alt="" />
+          </div>
+        </div>
+      </div>
+
+      {/* Show reviews */}
+      <h4 className="mt-4 font-bold">
+        See the reviews posted by our community
+      </h4>
+      <div className="mt-6">
+        <div className="flex items-start gap-4">
+          {/* Image */}
+          <img src={noImg} className="w-12 h-12" alt="" />
+          {/* Review content */}
+          <div>
+            {/* User Info */}
+            <p className="font-bold">{user.displayName}</p>
+            <p className="flex text-2xl text-yellow-400">
+              <Rating style={{ maxWidth: 100 }} value={rating} isRequired />
+            </p>
+            {/* Description */}
+            <p className="mt-2">
+              Synergistically repurpose cross-unit functionalities vis-a-vis
+              virtual action items. Compellingly visualize innovative
+              information rather than corporate e-tailers. Efficiently repurpose
+              resource maximizing growth strategies without turnkey
+              functionalities. Professionally supply granular mindshare through
+              future-proof alignments. Credibly incentivize top-line paradigms
+              without high-payoff platforms. Energistically transition
+              goal-oriented relationships without intermandated partnerships.
+              Synergistically benchmark extensive sources whereas frictionless
+              best practices. Objectively unleash
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

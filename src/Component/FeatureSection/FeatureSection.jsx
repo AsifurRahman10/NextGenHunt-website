@@ -1,15 +1,25 @@
 import axios from "axios";
 import { CardBoxShape } from "../Share/CardBoxShape";
 import { Title } from "../Share/Title";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Loading } from "../Share/Loading";
 
 export const FeatureSection = () => {
-  const [featureProduct, setFeatureProduct] = useState([]);
-  useEffect(() => {
-    axios(`${import.meta.env.VITE_DB}/featureProducts`).then((res) => {
-      setFeatureProduct(res.data);
-    });
-  }, []);
+  const {
+    data: featureProduct = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["item"],
+    queryFn: async () => {
+      const res = await axios(`${import.meta.env.VITE_DB}/featureProducts`);
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="py-10 w-11/12 md:w-9/12 mx-auto">
@@ -25,7 +35,11 @@ export const FeatureSection = () => {
       {/* card container */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
         {featureProduct.map((product) => (
-          <CardBoxShape key={product._id} product={product}></CardBoxShape>
+          <CardBoxShape
+            key={product._id}
+            product={product}
+            refetch={refetch}
+          ></CardBoxShape>
         ))}
       </div>
     </div>

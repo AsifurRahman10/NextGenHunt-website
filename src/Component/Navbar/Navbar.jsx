@@ -100,15 +100,15 @@ export const Navbar = () => {
                   <li>
                     <Link
                       to={"/"}
-                      class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
                     >
                       Dashboard
                     </Link>
                   </li>
-                  <div class="py-1">
+                  <div className="py-1">
                     <Link
                       onClick={handleSignOut}
-                      class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
                     >
                       Sign out
                     </Link>
