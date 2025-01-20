@@ -10,6 +10,9 @@ export default {
         btnPrimary: '#613cfc',
         bannerPrimary: '#EEEDF2',
       },
+      backgroundImage: {
+        titleBg: "url('./src/assets/titlebg.jpg')"
+      }
     },
   },
   plugins: [
