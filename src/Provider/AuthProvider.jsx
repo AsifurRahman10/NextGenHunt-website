@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 import axios from "axios";
@@ -30,6 +31,11 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  // signout
+  const signout = () => {
+    return signOut(auth);
+  };
+
   // google login
 
   const googleLogin = () => {
@@ -49,15 +55,7 @@ const AuthProvider = ({ children }) => {
   // observer
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser && currentUser.email) {
-        const userInfo = {
-          userData: {
-            email: currentUser,
-          },
-        };
-        axios.post(`${import.meta.env.VITE_DB / userInfo}`).then((res) => {
-          console.log(res);
-        });
+      if (currentUser && currentUser.photoURL) {
         console.log(currentUser);
         setUser(currentUser);
       } else {
@@ -68,7 +66,15 @@ const AuthProvider = ({ children }) => {
 
     return () => unsubscribe();
   }, []);
-  const authInfo = { login, register, updateUser, googleLogin, user, loading };
+  const authInfo = {
+    login,
+    register,
+    updateUser,
+    googleLogin,
+    user,
+    loading,
+    signout,
+  };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

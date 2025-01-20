@@ -19,7 +19,6 @@ export const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     const imageFile = data.image[0];
 
     const formData = new FormData();
@@ -33,6 +32,17 @@ export const Register = () => {
       );
       const image = response.data.url;
       await updateUser(data.name, image);
+      const userData = {
+        email: data.email,
+        name: data.name,
+        image: image,
+        role: "user",
+      };
+      axios
+        .post(`${import.meta.env.VITE_DB}/userInfo`, userData)
+        .then((res) => {
+          console.log(res);
+        });
       navigate("/");
       Swal.fire({
         title: "Account Created Successfully",

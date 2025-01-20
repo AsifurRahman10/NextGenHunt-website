@@ -6,9 +6,13 @@ import { useAuth } from "../../Hooks/useAuth";
 import { IoIosLogOut } from "react-icons/io";
 
 export const Navbar = () => {
-  const [profileDropdown, setProfileDropdown] = useState(false);
+  // const [profileDropdown, setProfileDropdown] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-  const { user } = useAuth();
+  const { user, signout } = useAuth();
+
+  const handleSignOut = () => {
+    signout();
+  };
 
   const navList = (
     <>
@@ -103,7 +107,7 @@ export const Navbar = () => {
                   </li>
                   <div class="py-1">
                     <Link
-                      href="#"
+                      onClick={handleSignOut}
                       class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
                     >
                       Sign out

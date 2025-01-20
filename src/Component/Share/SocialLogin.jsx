@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { useAuth } from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const SocialLogin = () => {
   const { googleLogin } = useAuth();
@@ -8,7 +9,19 @@ export const SocialLogin = () => {
 
   const handleGoogleLogin = async () => {
     try {
-      const res = await googleLogin();
+      const { user } = await googleLogin();
+      console.log(user);
+      const userData = {
+        email: user.email,
+        name: user.displayName,
+        image: user.photoURL,
+        role: "user",
+      };
+      axios
+        .post(`${import.meta.env.VITE_DB}/userInfo`, userData)
+        .then((res) => {
+          console.log(res);
+        });
       navigate("/");
       Swal.fire({
         title: "Login successful.",
