@@ -1,12 +1,37 @@
+import axios from "axios";
 import { BiSolidUpvote } from "react-icons/bi";
 import { CiShoppingTag } from "react-icons/ci";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
+import { useAuth } from "../../Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { Loading } from "../../Component/Share/Loading";
+import { VoteButton } from "../../Component/Share/VoteButton";
 
 export const ProductDetails = () => {
-  const data = useLoaderData();
-  const { image, name, tags, timestamp, upvotes } = data;
-  const handleUpvote = () => {
-    console.log("hello");
+  const { id } = useParams();
+  const {
+    data = {},
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["products", id],
+    queryFn: async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_DB}/product-details/${id}`
+      );
+      return res.data;
+    },
+  });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+  const { user } = useAuth();
+  const { image, name, tags, timestamp, upvotes, _id } = data;
+  const voteData = {
+    name,
+    productId: _id,
+    image,
+    email: user.email,
   };
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto py-20">
@@ -34,13 +59,12 @@ export const ProductDetails = () => {
         </div>
         {/* vote */}
         <div>
-          <button
-            onClick={handleUpvote}
-            className="btn text-white bg-[#613cfc] hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-lg flex items-center gap-2 py-2 px-4 transition-all duration-200"
-          >
-            <BiSolidUpvote className="text-xl" />
-            <span className="text-sm">Total votes: {upvotes}</span>
-          </button>
+          <VoteButton
+            voteData={voteData}
+            refetch={refetch}
+            _id={_id}
+            upvotes={upvotes}
+          ></VoteButton>
         </div>
       </div>
       {/* description */}

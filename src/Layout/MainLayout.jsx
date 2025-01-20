@@ -6,9 +6,9 @@ import { Loading } from "../Component/Share/Loading";
 
 export const MainLayout = () => {
   const { loading } = useAuth();
-  // if (loading) {
-  //   return <Loading></Loading>;
-  // }
+  if (loading) {
+    return <Loading></Loading>;
+  }
   return (
     <div>
       {/* navbar */}

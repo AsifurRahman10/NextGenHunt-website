@@ -1,7 +1,7 @@
 import { FaEye } from "react-icons/fa";
 import loginImg from "../../assets/login.jpg";
 import { SocialLogin } from "../../Component/Share/SocialLogin";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
@@ -11,6 +11,8 @@ export const Login = () => {
   const { login } = useAuth();
   const [showPass, setShowPass] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state;
   const {
     register,
     handleSubmit,
@@ -25,7 +27,11 @@ export const Login = () => {
         text: "Login successful!",
         icon: "success",
       });
-      navigate("/");
+      if (state?.from?.pathname) {
+        navigate(state.from.pathname);
+      } else {
+        navigate("/");
+      }
     } catch (error) {
       console.error("Login failed:", error);
     }

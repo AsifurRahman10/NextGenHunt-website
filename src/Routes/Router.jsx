@@ -4,6 +4,7 @@ import { Home } from "../Pages/Home.jsx/Home";
 import { Login } from "../Pages/Login/Login";
 import { Register } from "../Pages/Register/Register";
 import { ProductDetails } from "../Pages/ProductDetails/ProductDetails";
+import { PrivateRoute } from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -16,9 +17,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/product-details/:id",
-        element: <ProductDetails></ProductDetails>,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_DB}/product-details/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
       },
     ],
   },

@@ -1,6 +1,7 @@
 import { BiSolidUpvote } from "react-icons/bi";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { VoteButton } from "./VoteButton";
 
 export const CardBoxShape = ({ product }) => {
   console.log(product);
@@ -19,9 +20,7 @@ export const CardBoxShape = ({ product }) => {
             ))}
           </p>
           <div className="card-actions">
-            <button className="btn btn-primary bg-transparent text-black">
-              <BiSolidUpvote /> {upvotes}
-            </button>
+            <VoteButton _id={_id}></VoteButton>
           </div>
         </div>
       </div>

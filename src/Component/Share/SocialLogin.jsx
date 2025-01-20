@@ -1,11 +1,13 @@
 import Swal from "sweetalert2";
 import { useAuth } from "../../Hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export const SocialLogin = () => {
   const { googleLogin } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state;
 
   const handleGoogleLogin = async () => {
     try {
@@ -22,7 +24,11 @@ export const SocialLogin = () => {
         .then((res) => {
           console.log(res);
         });
-      navigate("/");
+      if (state?.from?.pathname) {
+        navigate(state.from.pathname);
+      } else {
+        navigate("/");
+      }
       Swal.fire({
         title: "Login successful.",
         icon: "success",
