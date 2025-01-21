@@ -6,18 +6,58 @@ export const Products = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [productCount, setProductCount] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const productPerPage = 6;
+
+  const pageName = Math.ceil(productCount / productPerPage);
+
+  const totalPages = [...Array(pageName).keys()].map((num) => num + 1);
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_DB}/count`).then((res) => {
+      setProductCount(res.data.result);
+    });
+  }, []);
+
   useEffect(() => {
     axios
-      .get(`${import.meta.env.VITE_DB}/all-products/?search=${search}`)
+      .get(
+        `${
+          import.meta.env.VITE_DB
+        }/all-products/?search=${search}&page=${currentPage}&size=${productPerPage}`
+      )
       .then((res) => {
-        console.log(search);
         setAllProducts(res.data);
         setLoading(false);
       });
-  }, [search]);
+  }, [search, currentPage]);
+
+  // handle prev button
+  const handlePrev = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // handle next button
+  const handleNext = () => {
+    if (currentPage < pageName) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   if (loading) {
     return <Loading></Loading>;
   }
+
+  // pagination
+  // 1.get the total number of products
+  // 2.number of item per page = 6
+  // 3.calculate the total number of page
+  // 4.show the page number
+
   return (
     <div className="w-11/12 md:w-9/12 mx-auto my-10">
       <div className="flex items-center justify-between mt-10">
@@ -53,6 +93,35 @@ export const Products = () => {
         {allProducts.map((product) => (
           <ProductCard key={product._id} product={product}></ProductCard>
         ))}
+      </div>
+      <div className="join mt-8">
+        <button
+          disabled={currentPage === 1}
+          onClick={handlePrev}
+          className="btn join-item"
+        >
+          prev
+        </button>
+        {totalPages.map((page, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentPage(page)}
+            className={`join-item btn ${
+              currentPage == page
+                ? "bg-btnPrimary text-white  btn-active"
+                : "bg-transparent text-gray-700"
+            }`}
+          >
+            {page}
+          </button>
+        ))}
+        <button
+          disabled={currentPage == pageName}
+          onClick={handleNext}
+          className="btn join-item"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
