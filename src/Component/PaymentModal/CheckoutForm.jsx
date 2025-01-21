@@ -73,6 +73,7 @@ export const CheckoutForm = ({ user }) => {
         axiosSecure.post("/paymentInfo", paymentData).then((res) => {
           console.log(res.data.insertedId);
           if (res.data.insertedId) {
+            e.target.reset();
             const modal = document.getElementById("my_modal_1");
             modal.close();
             Swal.fire({

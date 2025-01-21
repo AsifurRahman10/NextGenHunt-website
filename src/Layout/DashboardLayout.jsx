@@ -3,6 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import { NavLink, Outlet } from "react-router-dom";
 import { AiOutlineProduct } from "react-icons/ai";
 import { MdLibraryAdd } from "react-icons/md";
+import { IoMenu } from "react-icons/io5";
 
 export const DashboardLayout = () => {
   return (
@@ -12,13 +13,13 @@ export const DashboardLayout = () => {
         {/* Page content here */}
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className="btn ml-4 md:ml-14 mt-6 md:mt-10 drawer-button lg:hidden w-[70px] md:w-[100px] bg-gray-200"
         >
-          Open drawer
+          <IoMenu className="text-2xl md:text-3xl " />
         </label>
         <div className="flex w-full p-4">
           {/* Main content */}
-          <div className="ml-10 mt-10 w-full">
+          <div className="ml-1 md:ml-10 lg:mt-10 w-full mr-2">
             <Outlet></Outlet>
           </div>
         </div>
