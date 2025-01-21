@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../../../Hooks/useAuth";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import { Loading } from "../../../Component/Share/Loading";
+import { PaymentModal } from "../../../Component/PaymentModal/PaymentModal";
 
 export const MyProfile = () => {
   const { user, loading } = useAuth();
@@ -18,7 +19,11 @@ export const MyProfile = () => {
   if (isLoading || loading) {
     return <Loading></Loading>;
   }
-  const { email, name, image, role } = data;
+  const { email, name, image } = data;
+
+  const handleSubscribe = () => {
+    document.getElementById("my_modal_1").showModal();
+  };
 
   return (
     <div className="w-full">
@@ -36,12 +41,16 @@ export const MyProfile = () => {
           </p>
           <div className="flex items-center gap-4">
             <span className="text-gray-600 text-sm">Not subscribed yet?</span>
-            <button className="btn bg-btnPrimary hover:bg-[#273343] text-white font-medium px-4 py-2 rounded-lg transition duration-200 ease-in-out">
-              Subscribe Now
+            <button
+              onClick={handleSubscribe}
+              className="btn bg-btnPrimary hover:bg-[#273343] text-white font-medium px-4 py-2 rounded-lg transition duration-200 ease-in-out"
+            >
+              Subscribe Now at 20$
             </button>
           </div>
         </div>
       </div>
+      <PaymentModal user={user}></PaymentModal>
     </div>
   );
 };
