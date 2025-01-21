@@ -99,7 +99,7 @@ export const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      to={"/"}
+                      to={"/dashboard"}
                       className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
                     >
                       Dashboard

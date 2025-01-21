@@ -6,6 +6,10 @@ import { Register } from "../Pages/Register/Register";
 import { ProductDetails } from "../Pages/ProductDetails/ProductDetails";
 import { PrivateRoute } from "./PrivateRoute";
 import { Products } from "../Pages/Products/Products";
+import { DashboardLayout } from "../Layout/DashboardLayout";
+import { MyProfile } from "../Pages/Dashboard/User/MyProfile";
+import { AddProducts } from "../Pages/Dashboard/User/AddProducts";
+import { MyProducts } from "../Pages/Dashboard/User/MyProducts";
 
 export const router = createBrowserRouter([
   {
@@ -37,5 +41,28 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register></Register>,
+  },
+  // user dashboard
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard/my-profile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "/dashboard/add-products",
+        element: <AddProducts></AddProducts>,
+      },
+      {
+        path: "/dashboard/my-products",
+        element: <MyProducts></MyProducts>,
+      },
+    ],
   },
 ]);
