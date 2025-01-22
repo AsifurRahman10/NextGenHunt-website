@@ -9,6 +9,10 @@ export const Products = () => {
   const [productCount, setProductCount] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
+  console.log(allProducts);
+  console.log(currentPage);
+  console.log(productCount);
+
   const productPerPage = 6;
 
   const pageName = Math.ceil(productCount / productPerPage);
@@ -51,12 +55,6 @@ export const Products = () => {
   if (loading) {
     return <Loading></Loading>;
   }
-
-  // pagination
-  // 1.get the total number of products
-  // 2.number of item per page = 6
-  // 3.calculate the total number of page
-  // 4.show the page number
 
   return (
     <div className="w-11/12 md:w-9/12 mx-auto my-10">

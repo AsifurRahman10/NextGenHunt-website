@@ -1,5 +1,14 @@
 export const ProductCard = ({ product }) => {
-  const { id, image, name, ownerId, tags, timestamp, upvotes, _id } = product;
+  const {
+    image,
+    productName,
+    product_description,
+    externalLinks,
+    allTag,
+    userName,
+    email,
+    userPhoto,
+  } = product;
   return (
     <div className="bg-white rounded-lg p-4 hover:shadow-lg transition-shadow duration-300">
       {/* Image */}
@@ -13,7 +22,7 @@ export const ProductCard = ({ product }) => {
 
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mt-4">
-        {tags.map((item, idx) => (
+        {allTag.map((item, idx) => (
           <div
             key={idx}
             className="badge badge-neutral bg-[#f0f0f2] text-gray-700 border-none rounded-md px-2 py-1 text-sm"
@@ -24,12 +33,12 @@ export const ProductCard = ({ product }) => {
       </div>
 
       {/* Product Name */}
-      <h2 className="font-semibold text-xl text-gray-800 mt-3">{name}</h2>
+      <h2 className="font-semibold text-xl text-gray-800 mt-3">
+        {productName}
+      </h2>
 
       {/* Description */}
-      <p className="text-gray-600 mt-2 text-sm">
-        Aesthetic and easy-to-use habit tracker for Notion.
-      </p>
+      <p className="text-gray-600 mt-2 text-sm">{product_description}</p>
     </div>
   );
 };

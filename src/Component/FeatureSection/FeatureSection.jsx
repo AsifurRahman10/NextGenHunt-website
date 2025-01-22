@@ -22,7 +22,7 @@ export const FeatureSection = () => {
   }
 
   return (
-    <div className="py-10 w-11/12 md:w-9/12 mx-auto">
+    <div className="pt-10 pb-20 w-11/12 md:w-9/12 mx-auto">
       <Title
         title={"Featured Products"}
         para={
@@ -33,13 +33,16 @@ export const FeatureSection = () => {
       ></Title>
 
       {/* card container */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 ">
-        {featureProduct.map((product) => (
-          <CardBoxShape
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {featureProduct.map((product, index) => (
+          <div
             key={product._id}
-            product={product}
-            refetch={refetch}
-          ></CardBoxShape>
+            className={`${
+              index === featureProduct.length - 1 ? "mt-6 lg:col-start-2" : ""
+            }`}
+          >
+            <CardBoxShape product={product} refetch={refetch} />
+          </div>
         ))}
       </div>
     </div>

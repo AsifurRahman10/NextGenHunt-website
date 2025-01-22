@@ -5,7 +5,7 @@ import { useAuth } from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export const VoteButton = ({ _id, refetch, voteData, upvotes }) => {
+export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -31,12 +31,19 @@ export const VoteButton = ({ _id, refetch, voteData, upvotes }) => {
     }
   };
   return (
+    // <button
+
+    //   className="btn text-white bg-[#613cfc] hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-lg flex items-center gap-2 py-2 px-4 transition-all duration-200"
+    // >
+
+    // </button>
     <button
       onClick={() => handleUpvote(_id)}
-      className="btn text-white bg-[#613cfc] hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-lg flex items-center gap-2 py-2 px-4 transition-all duration-200"
+      className="ml-auto flex flex-col items-center justify-center px-3 py-2 bg-gray-200 text-gray-600 rounded-md hover:bg-gray-300 hover:text-gray-900 transition-all duration-300 shadow-sm"
     >
-      <BiSolidUpvote className="text-xl" />
-      <span className="text-sm">Total votes: {upvotes}</span>
+      <BiSolidUpvote className="text-lg mb-1" />{" "}
+      {/* Larger icon with better spacing */}
+      <span className="text-xs font-medium">{upvote}</span> {/* Styled text */}
     </button>
   );
 };

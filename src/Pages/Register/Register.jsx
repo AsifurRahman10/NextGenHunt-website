@@ -7,6 +7,7 @@ import { useAuth } from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { uploadImage } from "../../Api/Utils";
 
 export const Register = () => {
   const [showPass, setShowPass] = useState(false);
@@ -20,17 +21,9 @@ export const Register = () => {
 
   const onSubmit = async (data) => {
     const imageFile = data.image[0];
-
-    const formData = new FormData();
-    formData.append("file", imageFile);
-    formData.append("upload_preset", "test_01");
     try {
       await registerFn(data.email, data.password);
-      const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/dsa8ooidh/image/upload",
-        formData
-      );
-      const image = response.data.url;
+      const image = await uploadImage(imageFile);
       await updateUser(data.name, image);
       const userData = {
         email: data.email,
