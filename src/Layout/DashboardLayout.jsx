@@ -19,7 +19,7 @@ export const DashboardLayout = () => {
         </label>
         <div className="flex w-full p-4">
           {/* Main content */}
-          <div className="ml-1 md:ml-10 lg:mt-10 w-full mr-2">
+          <div className="ml-1 md:mx-10 lg:mt-10 w-full mr-2">
             <Outlet></Outlet>
           </div>
         </div>

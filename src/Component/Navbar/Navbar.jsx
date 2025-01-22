@@ -92,7 +92,7 @@ export const Navbar = () => {
               {openMenu && (
                 <ul
                   tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 w-52 rounded-box p-2 shadow bg-white"
+                  className="menu menu-sm dropdown-content mt-3 w-52 rounded-box p-2 shadow bg-white z-50"
                 >
                   <li className="text-sm  text-gray-700 block px-4 py-2">
                     Hi {user.displayName}!

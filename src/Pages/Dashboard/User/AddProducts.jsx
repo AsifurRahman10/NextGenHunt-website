@@ -88,6 +88,7 @@ export const AddProducts = () => {
       image,
       externalLinks,
       allTag,
+      upvote: 0,
       userName: user.displayName,
       email: user.email,
       userPhoto: user.photoURL,

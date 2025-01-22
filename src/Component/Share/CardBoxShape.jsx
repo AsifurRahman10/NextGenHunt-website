@@ -2,21 +2,10 @@ import { Link } from "react-router-dom";
 import { VoteButton } from "./VoteButton";
 
 export const CardBoxShape = ({ product, refetch }) => {
-  const {
-    image,
-    productName,
-    product_description,
-    externalLinks,
-    allTag,
-    userName,
-    email,
-    userPhoto,
-    _id,
-    upvote,
-  } = product;
+  const { image, productName, product_description, _id, upvote } = product;
 
   const voteData = {
-    name,
+    productName,
     productId: _id,
     image,
   };
@@ -29,7 +18,9 @@ export const CardBoxShape = ({ product, refetch }) => {
 
       {/* Content */}
       <div className="flex-1 ml-4">
-        <h2 className="font-medium text-gray-900 text-sm">{productName}</h2>
+        <Link to={`/product-details/${_id}`}>
+          <h2 className="font-medium text-gray-900 text-sm">{productName}</h2>
+        </Link>
         <p className="text-gray-600 text-xs">
           {product_description.split(" ").slice(0, 25).join(" ")}
           {product_description.split(" ").length > 25 ? "..." : ""}

@@ -23,7 +23,7 @@ export const MyProfile = () => {
 
   // check is the user is subscribed
   const { data: subscribed, isLoading: subLoading } = useQuery({
-    queryKey: [user],
+    queryKey: ["paid"],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `${import.meta.env.VITE_DB}/subscription-check/${user.email}`
@@ -31,6 +31,7 @@ export const MyProfile = () => {
       return res.data;
     },
   });
+  console.log(subscribed);
 
   if (subLoading || isLoading || loading) {
     return <Loading></Loading>;

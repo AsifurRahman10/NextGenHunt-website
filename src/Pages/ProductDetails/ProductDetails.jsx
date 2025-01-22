@@ -43,7 +43,9 @@ export const ProductDetails = () => {
   } = useQuery({
     queryKey: ["reviewsItem"],
     queryFn: async () => {
-      const res = await axios.get(`${import.meta.env.VITE_DB}/all-review`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_DB}/all-review/${id}`
+      );
       return res.data;
     },
   });
@@ -52,7 +54,19 @@ export const ProductDetails = () => {
     return <Loading></Loading>;
   }
 
-  const { image, name, tags, upvotes, _id } = data;
+  const {
+    image,
+    productName,
+    product_description,
+    externalLinks,
+    allTag,
+    userName,
+    email,
+    userPhoto,
+    _id,
+    upvote,
+  } = data;
+  console.log(externalLinks);
 
   const handleReview = async () => {
     const reviewData = {
@@ -90,16 +104,16 @@ export const ProductDetails = () => {
         <div className="flex flex-col md:flex-row items-center lg:gap-4">
           {/* image */}
           <div>
-            <img src={image} className="w-full md:w-16" alt="" />
+            <img src={image} className="w-full lg:w-80" alt="" />
           </div>
           {/* text */}
           <div>
-            <h3 className="text-2xl font-bold mb-2">{name}</h3>
+            <h3 className="text-2xl font-bold mb-2">{productName}</h3>
             <div className="flex items-center gap-2">
               <span className="flex items-center gap-1">
                 Tags: <CiShoppingTag className="text-lg" />
               </span>
-              {tags.map((item, idx) => (
+              {allTag?.map((item, idx) => (
                 <div key={idx} className="badge bg-btnPrimary text-white">
                   {item}
                 </div>
@@ -113,28 +127,22 @@ export const ProductDetails = () => {
             voteData={voteData}
             refetch={refetch}
             _id={_id}
-            upvotes={upvotes}
+            upvote={upvote}
           ></VoteButton>
         </div>
       </div>
       {/* description */}
-      <p className="mt-6">
-        Completely harness compelling paradigms before innovative value.
-        Progressively grow interactive relationships through enterprise
-        e-markets. Interactively simplify flexible users with 24/7
-        architectures. Progressively maintain professional e-business with high
-        standards in outsourcing. Credibly recaptiualize robust schemas for
-        bleeding-edge schemas. Distinctively integrate B2B vortals without
-        strategic mindshare. Progressively re-engineer diverse.
-      </p>
+      <p className="mt-6">{product_description}</p>
       {/* External Link */}
       <p className="mt-4 font-semibold">
         Want to know more?{" "}
-        <Link to="https://google.com" target="_blank">
-          <span className="underline text-blue-500 hover:text-blue-700">
-            Visit their website
-          </span>
-        </Link>
+        {externalLinks.map((item) => (
+          <Link to={item} target="_blank">
+            <span className="underline text-blue-500 hover:text-blue-700">
+              Visit their website
+            </span>
+          </Link>
+        ))}
       </p>
       <div className="divider"></div>
 
@@ -178,9 +186,15 @@ export const ProductDetails = () => {
       <h4 className="my-2 lg:my-4 font-bold">
         See the reviews posted by our community
       </h4>
-      {reviews.map((review) => (
-        <ReviewCard key={review._id} review={review}></ReviewCard>
-      ))}
+      {reviews.length > 0 ? (
+        <>
+          {reviews.map((review) => (
+            <ReviewCard key={review._id} review={review}></ReviewCard>
+          ))}
+        </>
+      ) : (
+        <p>No reviews yet. Be the first to share your thoughts!</p>
+      )}
     </div>
   );
 };
