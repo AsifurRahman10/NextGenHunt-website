@@ -16,6 +16,7 @@ import { ReportedContent } from "../Pages/Dashboard/Moderator/ReportedContent";
 import { StatisticsPage } from "../Pages/Dashboard/Admin/StatisticsPage";
 import { ManageUsers } from "../Pages/Dashboard/Admin/ManageUsers";
 import { ManageCoupons } from "../Pages/Dashboard/Admin/ManageCoupons";
+import { Error } from "../Pages/Error/Error";
 
 export const router = createBrowserRouter([
   {
@@ -99,5 +100,9 @@ export const router = createBrowserRouter([
         element: <ManageCoupons></ManageCoupons>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error />,
   },
 ]);

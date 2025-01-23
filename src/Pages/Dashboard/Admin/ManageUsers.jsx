@@ -1,13 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import { Loading } from "../../../Component/Share/Loading";
-import { useState } from "react";
 import Swal from "sweetalert2";
 
 export const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
-  const [changeRole, setChangeRole] = useState("");
-  console.log(changeRole);
   const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -76,7 +73,7 @@ export const ManageUsers = () => {
                 <td>{item.email}</td>
                 <th>
                   <select
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2.5"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[150px] md:w-full lg:w-1/2 p-2.5"
                     defaultValue={item.role || ""}
                     onChange={(e) => handleRoleChange(e, item._id)}
                   >
