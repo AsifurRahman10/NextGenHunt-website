@@ -6,6 +6,7 @@ import { LuSquarePen } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 export const MyProducts = () => {
   const { user, loading } = useAuth();
@@ -55,6 +56,9 @@ export const MyProducts = () => {
 
   return (
     <div className="mb-10 md:mb-20">
+      <Helmet>
+        <title>My Products - NextGenHunt</title>
+      </Helmet>
       <h3 className="text-3xl font-bold">My Products</h3>
 
       {/* table design */}

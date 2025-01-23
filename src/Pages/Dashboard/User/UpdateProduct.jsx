@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import { uploadImage } from "../../../Api/Utils";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 export const UpdateProduct = () => {
   // const { user, loading } = useAuth();
@@ -31,14 +32,8 @@ export const UpdateProduct = () => {
     });
   }, [id, setUploadedImg]);
 
-  const {
-    productName,
-    image,
-    product_description,
-    userName,
-    email,
-    userPhoto,
-  } = oldData;
+  const { productName, product_description, userName, email, userPhoto } =
+    oldData;
 
   const { register, handleSubmit, setValue } = useForm({
     defaultValues: {
@@ -136,6 +131,9 @@ export const UpdateProduct = () => {
   return (
     <div>
       <h3 className="text-3xl font-bold">Update Product</h3>
+      <Helmet>
+        <title>Update Product - NextGenHunt</title>
+      </Helmet>
       <div className="bg-[#F9f9f9] mt-4">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body p-4">
           <h3 className="text-lg font-semibold">General form</h3>

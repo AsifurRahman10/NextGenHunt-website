@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import { Loading } from "../../../Component/Share/Loading";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 export const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -35,6 +36,9 @@ export const ManageUsers = () => {
   return (
     <div>
       <h3 className="text-3xl font-bold">Manage Users</h3>
+      <Helmet>
+        <title>Manage user - NextGenHunt</title>
+      </Helmet>
 
       {/* table design */}
       <div className="overflow-x-auto mt-8">

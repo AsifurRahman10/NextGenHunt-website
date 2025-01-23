@@ -4,6 +4,7 @@ import { Loading } from "../../../Component/Share/Loading";
 import { Link } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 export const ReportedContent = () => {
   const axiosSecure = useAxiosSecure();
@@ -48,6 +49,9 @@ export const ReportedContent = () => {
   return (
     <div>
       <h3 className="text-3xl font-bold">Reported Contents</h3>
+      <Helmet>
+        <title>Reported Content - NextGenHunt</title>
+      </Helmet>
 
       {/* table design */}
       <div className="overflow-x-auto mt-8">

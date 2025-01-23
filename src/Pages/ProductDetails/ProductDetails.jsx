@@ -12,6 +12,7 @@ import "@smastrom/react-rating/style.css";
 import Swal from "sweetalert2";
 import { ReviewCard } from "../../Component/ReviewCard/ReviewCard";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 export const ProductDetails = () => {
   const { user } = useAuth();
@@ -98,6 +99,9 @@ export const ProductDetails = () => {
   };
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto py-10 lg:py-20">
+      <Helmet>
+        <title>{productName} - NextGenHunt</title>
+      </Helmet>
       <div className="flex items-center flex-col md:flex-row justify-between">
         {/* title part */}
         <div className="flex flex-col md:flex-row items-center lg:gap-4">

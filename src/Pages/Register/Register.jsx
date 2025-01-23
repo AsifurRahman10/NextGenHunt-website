@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { uploadImage } from "../../Api/Utils";
+import { Helmet } from "react-helmet-async";
 
 export const Register = () => {
   const [showPass, setShowPass] = useState(false);
@@ -47,6 +48,9 @@ export const Register = () => {
 
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto flex flex-col-reverse my-10 md:my-20 lg:my-0 lg:flex-row justify-center items-center">
+      <Helmet>
+        <title>Register - NextGenHunt</title>
+      </Helmet>
       {/* image */}
       <div className="flex-1">
         <img

@@ -5,6 +5,7 @@ import { Loading } from "../../../Component/Share/Loading";
 import { PaymentModal } from "../../../Component/PaymentModal/PaymentModal";
 import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 export const MyProfile = () => {
   const { user, loading } = useAuth();
@@ -43,6 +44,9 @@ export const MyProfile = () => {
 
   return (
     <div className="w-full min-h-screen md:min-h-0">
+      <Helmet>
+        <title>{name} - NextGenHunt</title>
+      </Helmet>
       <h2 className="text-4xl font-bold">My Profile</h2>
 
       {/* information */}

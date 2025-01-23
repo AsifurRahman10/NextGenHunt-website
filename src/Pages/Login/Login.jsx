@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 export const Login = () => {
   const { login } = useAuth();
@@ -38,6 +39,9 @@ export const Login = () => {
   };
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto flex flex-col-reverse my-10 md:my-20 lg:my-0 lg:flex-row justify-center items-center">
+      <Helmet>
+        <title>Login - NextGenHunt</title>
+      </Helmet>
       {/* image */}
       <div className="flex-1">
         <img

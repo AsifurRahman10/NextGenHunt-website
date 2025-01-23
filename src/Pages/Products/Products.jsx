@@ -2,16 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductCard } from "../../Component/Share/ProductCard";
 import { Loading } from "../../Component/Share/Loading";
+import { Helmet } from "react-helmet-async";
 export const Products = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [productCount, setProductCount] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-
-  console.log(allProducts);
-  console.log(currentPage);
-  console.log(productCount);
 
   const productPerPage = 6;
 
@@ -58,6 +55,9 @@ export const Products = () => {
 
   return (
     <div className="w-11/12 md:w-9/12 mx-auto my-10">
+      <Helmet>
+        <title>Home - All Products</title>
+      </Helmet>
       <div className="flex items-center justify-between mt-10">
         <h3 className="text-3xl font-bold">Discover the World of Tech Tools</h3>
         <div>

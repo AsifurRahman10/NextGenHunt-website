@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 export const ProductReview = () => {
   const axiosSecure = useAxiosSecure();
@@ -55,6 +56,9 @@ export const ProductReview = () => {
   return (
     <div>
       <h3 className="text-3xl font-bold">Review product</h3>
+      <Helmet>
+        <title>Product Review - NextGenHunt</title>
+      </Helmet>
 
       {/* table design */}
       <div className="overflow-x-auto mt-8">

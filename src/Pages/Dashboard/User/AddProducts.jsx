@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { uploadImage } from "../../../Api/Utils";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 export const AddProducts = () => {
   const [tags, setTags] = useState([]);
@@ -113,6 +114,9 @@ export const AddProducts = () => {
   return (
     <div>
       <h3 className="text-3xl font-bold">Add Product</h3>
+      <Helmet>
+        <title>Add Product - NextGenHunt</title>
+      </Helmet>
       <div className="bg-[#F9f9f9] mt-4">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body p-4">
           <h3 className="text-lg font-semibold">General form</h3>
