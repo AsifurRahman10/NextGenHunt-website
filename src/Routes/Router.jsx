@@ -12,6 +12,7 @@ import { AddProducts } from "../Pages/Dashboard/User/AddProducts";
 import { MyProducts } from "../Pages/Dashboard/User/MyProducts";
 import { UpdateProduct } from "../Pages/Dashboard/User/UpdateProduct";
 import { ProductReview } from "../Pages/Dashboard/Moderator/ProductReview";
+import { ReportedContent } from "../Pages/Dashboard/Moderator/ReportedContent";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/product-review",
         element: <ProductReview></ProductReview>,
+      },
+      {
+        path: "/dashboard/reported-content",
+        element: <ReportedContent></ReportedContent>,
       },
     ],
   },

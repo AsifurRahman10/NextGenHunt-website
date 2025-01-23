@@ -2,16 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import { Loading } from "../../../Component/Share/Loading";
 import { Link } from "react-router-dom";
-import { FaCheck } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
+import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
-export const ProductReview = () => {
+export const ReportedContent = () => {
   const axiosSecure = useAxiosSecure();
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ["product-data"],
+  const { data, isLoading } = useQuery({
+    queryKey: ["products"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/all-products-sorted");
+      const res = await axiosSecure("/reported");
       return res.data;
     },
   });
@@ -19,42 +18,36 @@ export const ProductReview = () => {
     return <Loading></Loading>;
   }
 
-  const handleProductAccept = (id) => {
-    const status = "accepted";
-
-    axiosSecure.patch(`/update-status/${id}`, { status }).then((res) => {
-      if (res.data.modifiedCount) {
-        Swal.fire({
-          title: "Product has been accepted",
-          icon: "success",
-          draggable: true,
-        });
-        refetch();
-      }
-    });
+  const handleDelete = (id) => {
+    try {
+      Swal.fire({
+        title: "Are you sure you want to delete this product?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure.delete(`/product/${id}`).then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your product has been deleted.",
+                icon: "success",
+              });
+              refetch();
+            }
+          });
+        }
+      });
+    } catch (error) {}
   };
 
-  const handleProductRejected = (id) => {
-    const status = "rejected";
-
-    axiosSecure.patch(`/update-status/${id}`, { status }).then((res) => {
-      if (res.data.modifiedCount) {
-        Swal.fire({
-          title: "Product has been accepted",
-          icon: "success",
-          draggable: true,
-        });
-        refetch();
-      }
-    });
-  };
-
-  const handleAddFeature = (id) => {
-    console.log(id);
-  };
   return (
     <div>
-      <h3 className="text-3xl font-bold">Review product</h3>
+      <h3 className="text-3xl font-bold">Reported Contents</h3>
 
       {/* table design */}
       <div className="overflow-x-auto mt-8">
@@ -68,8 +61,6 @@ export const ProductReview = () => {
               <th>Status</th>
               <th>Action</th>
               <th>Action</th>
-              <th>Accept</th>
-              <th>Reject</th>
             </tr>
           </thead>
           <tbody>
@@ -118,31 +109,13 @@ export const ProductReview = () => {
                     </button>
                   </Link>
                 </td>
-                <td>
-                  <button
-                    onClick={() => handleAddFeature(item._id)}
-                    className="btn btn-sm hover:bg-yellow-600 hover:text-white"
-                  >
-                    Make feature
-                  </button>
-                </td>
 
                 <th>
                   <button
-                    onClick={() => handleProductAccept(item._id)}
-                    className="btn btn-ghost bg-green-600 text-white"
-                    disabled={item.status == "accepted"}
+                    onClick={() => handleDelete(item._id)}
+                    className="btn btn-ghost bg-[#B91C1C] text-white"
                   >
-                    <FaCheck className="text-lg" />
-                  </button>
-                </th>
-                <th>
-                  <button
-                    onClick={() => handleProductRejected(item._id)}
-                    className="btn btn-ghost bg-red-600 text-white"
-                    disabled={item.status == "rejected"}
-                  >
-                    <IoClose className="text-lg" />
+                    <MdDelete className="text-lg" />
                   </button>
                 </th>
               </tr>

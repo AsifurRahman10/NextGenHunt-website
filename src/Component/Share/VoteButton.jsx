@@ -4,10 +4,12 @@ import { BiSolidUpvote } from "react-icons/bi";
 import { useAuth } from "../../Hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { IoIosWarning } from "react-icons/io";
+import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 
 export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
-  console.log(_id);
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname.includes("product-details");
@@ -35,14 +37,29 @@ export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
       }
     }
   };
+
+  const handleReport = async (id) => {
+    try {
+      await axiosSecure.patch(`/report/${id}`);
+    } catch (error) {}
+  };
   return path ? (
-    <button
-      onClick={() => handleUpvote(_id)}
-      className="btn text-white bg-[#613cfc] hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-lg flex items-center gap-2 py-2 px-4 transition-all duration-200"
-    >
-      <BiSolidUpvote className="text-xl" />
-      <span className="text-sm">Total votes: {upvote}</span>
-    </button>
+    <div className="flex items-center gap-6">
+      <button
+        onClick={() => handleUpvote(_id)}
+        className="btn text-white bg-[#613cfc] hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-full flex items-center gap-2 py-2 px-4 transition-all duration-200"
+      >
+        <BiSolidUpvote className="text-xl" />
+        <span className="text-sm">Total votes: {upvote}</span>
+      </button>
+      <button
+        onClick={() => handleReport(_id)}
+        className="btn text-black btn-outline hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-full flex items-center gap-2 py-2 px-4 transition-all duration-200"
+      >
+        <IoIosWarning className="text-xl" />
+        <span className="text-sm">Report</span>
+      </button>
+    </div>
   ) : (
     <button
       onClick={() => handleUpvote(_id)}

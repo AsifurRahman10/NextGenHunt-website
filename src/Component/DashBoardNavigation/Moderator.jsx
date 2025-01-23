@@ -18,13 +18,13 @@ export const Moderator = () => {
       </li>
       <li>
         <NavLink
-          to={"/dashboard/add-products"}
+          to={"/dashboard/reported-content"}
           className={({ isActive }) =>
             `${isActive ? "text-[#e7f726] bg-[#444444]" : ""}`
           }
         >
           <AiOutlineProduct className="text-xl mr-1" />
-          Add Product
+          Reported Content
         </NavLink>
       </li>
     </>
