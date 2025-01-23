@@ -11,6 +11,7 @@ import { MyProfile } from "../Pages/Dashboard/User/MyProfile";
 import { AddProducts } from "../Pages/Dashboard/User/AddProducts";
 import { MyProducts } from "../Pages/Dashboard/User/MyProducts";
 import { UpdateProduct } from "../Pages/Dashboard/User/UpdateProduct";
+import { ProductReview } from "../Pages/Dashboard/Moderator/ProductReview";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,7 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // user
       {
         path: "/dashboard/my-profile",
         element: <MyProfile></MyProfile>,
@@ -67,6 +69,12 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/my-products",
         element: <MyProducts></MyProducts>,
+      },
+
+      // Moderator
+      {
+        path: "/dashboard/product-review",
+        element: <ProductReview></ProductReview>,
       },
     ],
   },

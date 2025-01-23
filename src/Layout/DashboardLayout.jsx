@@ -1,9 +1,8 @@
 import logo from "../assets/logo.png";
-import { CgProfile } from "react-icons/cg";
 import { NavLink, Outlet } from "react-router-dom";
-import { AiOutlineProduct } from "react-icons/ai";
-import { MdLibraryAdd } from "react-icons/md";
 import { IoMenu } from "react-icons/io5";
+import { User } from "../Component/DashBoardNavigation/User";
+import { Moderator } from "../Component/DashBoardNavigation/Moderator";
 
 export const DashboardLayout = () => {
   return (
@@ -34,38 +33,11 @@ export const DashboardLayout = () => {
           <img src={logo} className="mb-6" alt="" />
 
           {/* Sidebar content here */}
-          <li>
-            <NavLink
-              to={"/dashboard/my-profile"}
-              className={({ isActive }) =>
-                `${isActive ? "text-[#e7f726] bg-[#444444]" : ""}`
-              }
-            >
-              <CgProfile className="text-xl mr-1" /> My Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"/dashboard/add-products"}
-              className={({ isActive }) =>
-                `${isActive ? "text-[#e7f726] bg-[#444444]" : ""}`
-              }
-            >
-              <AiOutlineProduct className="text-xl mr-1" />
-              Add Product
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to={"/dashboard/my-products"}
-              className={({ isActive }) =>
-                `${isActive ? "text-[#e7f726] bg-[#444444]" : ""}`
-              }
-            >
-              <MdLibraryAdd className="text-xl mr-1" />
-              My Products
-            </NavLink>
-          </li>
+          {/* user content */}
+          <User></User>
+
+          {/* moderator */}
+          <Moderator></Moderator>
         </ul>
       </div>
     </div>
