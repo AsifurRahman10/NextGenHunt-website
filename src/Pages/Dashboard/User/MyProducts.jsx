@@ -4,11 +4,17 @@ import { useAuth } from "../../../Hooks/useAuth";
 import { Loading } from "../../../Component/Share/Loading";
 import { LuSquarePen } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const MyProducts = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data = [], isLoading } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["my-products"],
     queryFn: async () => {
       const res = await axiosSecure(`/products/${user.email}`);
@@ -18,6 +24,35 @@ export const MyProducts = () => {
   if (loading || isLoading) {
     return <Loading />;
   }
+
+  const handleDelete = (id) => {
+    console.log(id);
+    try {
+      Swal.fire({
+        title: "Are you sure you want to delete this product?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure.delete(`/product/${id}`).then((res) => {
+            if (res.data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your product has been deleted.",
+                icon: "success",
+              });
+              refetch();
+            }
+          });
+        }
+      });
+    } catch (error) {}
+  };
+
   return (
     <div className="mb-10 md:mb-20">
       <h3 className="text-3xl font-bold">My Products</h3>
@@ -32,6 +67,7 @@ export const MyProducts = () => {
               <th>Product Image</th>
               <th>Product Name</th>
               <th>Total Vote</th>
+              <th>Status</th>
               <th>Action</th>
               <th>Action</th>
             </tr>
@@ -59,12 +95,22 @@ export const MyProducts = () => {
                 <td>{item.productName}</td>
                 <td>{item.upvote}</td>
                 <th>
-                  <button className="btn btn-ghost bg-btnPrimary text-white">
-                    <LuSquarePen className="text-lg" />
-                  </button>
+                  <div className="badge bg-orange-400 text-white p-2">
+                    {item.status === "pending" && "Pending"}
+                  </div>
                 </th>
                 <th>
-                  <button className="btn btn-ghost bg-[#B91C1C] text-white">
+                  <Link to={`/dashboard/update-products/${item._id}`}>
+                    <button className="btn btn-ghost bg-btnPrimary text-white">
+                      <LuSquarePen className="text-lg" />
+                    </button>
+                  </Link>
+                </th>
+                <th>
+                  <button
+                    onClick={() => handleDelete(item._id)}
+                    className="btn btn-ghost bg-[#B91C1C] text-white"
+                  >
                     <MdDelete className="text-lg" />
                   </button>
                 </th>

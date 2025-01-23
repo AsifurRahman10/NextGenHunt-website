@@ -31,7 +31,6 @@ export const MyProfile = () => {
       return res.data;
     },
   });
-  console.log(subscribed);
 
   if (subLoading || isLoading || loading) {
     return <Loading></Loading>;

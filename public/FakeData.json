@@ -3,135 +3,195 @@
     "productName": "ChatGPT Pro",
     "product_description": "ChatGPT Pro is a cutting-edge AI-powered chatbot designed to assist users in various tasks. From answering queries and providing insights to creating content and enhancing productivity, this advanced AI model has been optimized for real-time performance. With faster processing and a broader knowledge base, ChatGPT Pro is perfect for businesses and individuals looking to enhance their efficiency. Whether used in customer support, virtual assistants, or creative writing, this tool offers unparalleled versatility.",
     "image": "https://i.ibb.co.com/LQt3TKb/chatgpt-pro.webp",
-    "externalLinks": [],
-    "allTag": ["AI", "Chatbot", "Productivity"],
+    "externalLinks": [{ "id": "12", "text": "https://chat.openai.com/pro" }],
+    "allTag": [
+      { "id": "1", "text": "AI" },
+      { "id": "2", "text": "Chatbot" },
+      { "id": "3", "text": "Productivity" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 20
+    "upvote": 20,
+    "status": "pending"
   },
   {
     "productName": "Figma Design Suite",
     "product_description": "Figma is a browser-based design tool that allows teams to collaborate in real time on interface and experience design. With its easy-to-use interface and robust set of features, Figma helps design teams create stunning websites, mobile applications, and user interfaces. The ability to work on the same design simultaneously, make instant changes, and share feedback in real-time makes Figma the go-to tool for modern UI/UX design.",
     "image": "https://i.ibb.co.com/xHWXtVP/the-free-no-code-saas-website-ui-kit-for-framer-figma-thumb.webp",
-    "externalLinks": ["https://www.figma.com"],
-    "allTag": ["Design", "UI/UX", "Collaboration"],
+    "externalLinks": [{ "id": "1", "text": "https://www.figma.com" }],
+    "allTag": [
+      { "id": "1", "text": "Design" },
+      { "id": "2", "text": "UI/UX" },
+      { "id": "3", "text": "Collaboration" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 10
+    "upvote": 10,
+    "status": "pending"
   },
   {
     "productName": "Slack",
     "product_description": "Slack is a popular communication and collaboration tool used by teams to stay connected, share files, and organize work. With features like channels for team communication, direct messaging for personal conversations, and integrations with hundreds of third-party apps, Slack has become a go-to platform for businesses and remote teams. It helps reduce the clutter of emails, centralize information, and streamline workflows, making it easy for teams to stay productive and focused.",
     "image": "https://i.ibb.co.com/mS37Q3M/img-slack-ai-demo-2x.jpg",
-    "externalLinks": ["https://slack.com"],
-    "allTag": ["Teamwork", "Collaboration", "Productivity"],
+    "externalLinks": [{ "id": "2", "text": "https://slack.com" }],
+    "allTag": [
+      { "id": "1", "text": "Teamwork" },
+      { "id": "2", "text": "Collaboration" },
+      { "id": "3", "text": "Productivity" }
+    ],
+
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 30
+    "upvote": 30,
+    "status": "pending"
   },
   {
     "productName": "Trello",
     "product_description": "Trello is a visual project management tool that helps teams organize their tasks, workflows, and projects in an intuitive, flexible, and collaborative environment. With its drag-and-drop interface, Trello makes it easy to create boards for various projects, add lists and cards for individual tasks, and assign team members to ensure clear accountability. Perfect for managing marketing campaigns, software development, or personal projects, Trello helps you stay organized and on track.",
     "image": "https://i.ibb.co.com/N3TmN7L/Trello-Board-Calendar-2x.png",
-    "externalLinks": ["https://trello.com"],
-    "allTag": ["Project Management", "Teamwork"],
+    "externalLinks": [{ "id": "3", "text": "https://trello.com" }],
+    "allTag": [
+      { "id": "1", "text": "Project Management" },
+      { "id": "2", "text": "Teamwork" }
+    ],
+
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 5
+    "upvote": 5,
+    "status": "pending"
   },
   {
     "productName": "Notion",
     "product_description": "Notion is an all-in-one workspace for note-taking, task management, and collaboration. It provides an easy-to-use interface for individuals and teams to organize projects, track progress, and store information. Whether you’re managing a to-do list, creating a wiki for your team, or building a complex project database, Notion offers the flexibility to meet your needs. With its powerful tools and templates, it helps boost productivity and streamline collaboration.",
     "image": "https://i.ibb.co.com/44WvqqH/maxresdefault.jpg",
-    "externalLinks": ["https://www.notion.so"],
-    "allTag": ["Productivity", "Workspace", "Organization"],
+    "externalLinks": [{ "id": "4", "text": "https://www.notion.so" }],
+    "allTag": [
+      { "id": "1", "text": "Productivity" },
+      { "id": "2", "text": "Workspace" },
+      { "id": "3", "text": "Organization" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 42
+    "upvote": 42,
+    "status": "pending"
   },
   {
     "productName": "GitHub",
     "product_description": "GitHub is the most popular platform for version control and collaborative software development. It allows developers to host code, track issues, manage pull requests, and review changes with teammates in real-time. GitHub is widely used in open-source communities and supports continuous integration/continuous delivery (CI/CD) workflows. With millions of users contributing to repositories worldwide, GitHub has become an essential tool for software development teams, big and small.",
     "image": "https://i.ibb.co.com/FBJg5Vn/social-2deb6d7d43e7.jpg",
-    "externalLinks": ["https://github.com"],
-    "allTag": ["Development", "Git", "Open Source"],
+    "externalLinks": [{ "id": "5", "text": "https://github.com" }],
+    "allTag": [
+      { "id": "1", "text": "Development" },
+      { "id": "2", "text": "Git" },
+      { "id": "3", "text": "Open Source" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 120
+    "upvote": 120,
+    "status": "pending"
   },
   {
     "productName": "Docker",
     "product_description": "Docker is a platform that enables developers to package applications and their dependencies into portable, consistent containers that can be run on any machine. It simplifies the process of building, testing, and deploying applications, ensuring they work the same way in development, testing, and production environments. Docker has become an essential tool for DevOps teams, enabling efficient collaboration between development and operations teams.",
     "image": "https://i.ibb.co.com/w7nXgtL/docker-horizontal-sq.png",
-    "externalLinks": ["https://www.docker.com"],
-    "allTag": ["DevOps", "Containerization", "Software"],
+    "externalLinks": [{ "id": "6", "text": "https://github.com" }],
+    "allTag": [
+      { "id": "1", "text": "DevOps" },
+      { "id": "2", "text": "Containerization" },
+      { "id": "3", "text": "Software" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 8
+    "upvote": 8,
+    "status": "pending"
   },
   {
     "productName": "Zoom",
     "product_description": "Zoom is a cloud-based video conferencing platform that allows individuals and teams to connect and collaborate remotely. It offers features such as screen sharing, virtual backgrounds, and integration with productivity tools to enhance remote work. Whether you're hosting a virtual meeting, webinar, or collaborative team session, Zoom is the go-to tool for seamless video communication. Its reliability and ease of use have made it a favorite among remote workers and businesses worldwide.",
     "image": "https://i.ibb.co.com/DL4nXYm/63ececefe3d915ad89ad421b-YGf-Yb3x-Seu-FSstn-Sg-ZA2-Kb-DCGTh-D0x-Yi-GTt-RLf-O186o-Y-s19-G8f5-Hc-NEmc.png",
-    "externalLinks": ["https://zoom.us"],
-    "allTag": ["Video Conferencing", "Remote Work"],
+    "externalLinks": [{ "id": "7", "text": "https://zoom.us" }],
+    "allTag": [
+      { "id": "1", "text": "Video Conferencing" },
+      { "id": "2", "text": "Remote Work" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 36
+    "upvote": 36,
+    "status": "pending"
   },
   {
     "productName": "Airtable",
     "product_description": "Airtable is a versatile cloud-based platform that combines the features of a database and a spreadsheet. It allows teams to organize and collaborate on projects in a visually appealing and easy-to-use interface. With the ability to create customized workflows, track tasks, and manage data, Airtable is perfect for project management, CRM, and content planning. The platform integrates with various third-party tools, making it an ideal choice for teams looking to streamline their processes.",
     "image": "https://i.ibb.co.com/N9rrn5m/first-board.jpg",
-    "externalLinks": ["https://airtable.com"],
-    "allTag": ["Project Management", "Database", "Collaboration"],
+    "externalLinks": [{ "id": "8", "text": "https://airtable.com" }],
+    "allTag": [
+      { "id": "1", "text": "Project Management" },
+      { "id": "2", "text": "Database" },
+      { "id": "3", "text": "Collaboration" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 12
+    "upvote": 12,
+    "status": "pending"
   },
   {
     "_id": "6790c61b630bf984f683153c",
     "productName": "Salesforce",
     "product_description": "Salesforce is a cloud-based software platform used for customer relationship management (CRM).",
     "image": "https://i.ibb.co.com/PhHw761/salesforce-sales-dashboard.png",
-    "externalLinks": ["https://www.salesforce.com"],
-    "allTag": ["CRM", "Cloud Software", "Business"],
+    "externalLinks": [{ "id": "9", "text": "https://www.salesforce.com" }],
+    "allTag": [
+      { "id": "1", "text": "CRM" },
+      { "id": "2", "text": "Cloud Software" },
+      { "id": "3", "text": "Business" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 16
+    "upvote": 16,
+    "status": "pending"
   },
   {
     "_id": "6790c61b630bf984f683153f",
     "productName": "ClickUp",
     "product_description": "ClickUp is a versatile project management tool that combines task tracking, project management, and document sharing in a single platform.",
     "image": "https://i.ibb.co.com/1fxdsHy/click.webp",
-    "externalLinks": ["https://www.clickup.com"],
-    "allTag": ["Task Management", "Project Management", "Collaboration"],
+    "externalLinks": [{ "id": "10", "text": "https://www.clickup.com" }],
+    "allTag": [
+      { "id": "1", "text": "Task Management" },
+      { "id": "2", "text": "Project Management" },
+      { "id": "3", "text": "Collaboration" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 12
+    "upvote": 12,
+    "status": "pending"
   },
   {
     "_id": "6790c61b630bf984f6831540",
     "productName": "Monday.com",
     "product_description": "Monday.com is a team collaboration and work management tool that helps teams plan, track, and deliver work on time.",
     "image": "https://i.ibb.co.com/1fxdsHy/click.webp",
-    "externalLinks": ["https://monday.com"],
-    "allTag": ["Collaboration", "Project Management", "Teamwork"],
+    "externalLinks": [{ "id": "11", "text": "https://monday.com" }],
+    "allTag": [
+      { "id": "1", "text": "Collaboration" },
+      { "id": "2", "text": "Project Management" },
+      { "id": "3", "text": "Teamwork" }
+    ],
     "userName": "Asifur Rahman",
     "email": "zahinshomik@gmail.com",
     "userPhoto": "https://lh3.googleusercontent.com/a/ACg8ocIDbBsTgExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-    "upvote": 0
+    "upvote": 0,
+    "status": "pending"
   }
 ]

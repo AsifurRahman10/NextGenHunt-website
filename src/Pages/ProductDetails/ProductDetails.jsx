@@ -66,7 +66,6 @@ export const ProductDetails = () => {
     _id,
     upvote,
   } = data;
-  console.log(externalLinks);
 
   const handleReview = async () => {
     const reviewData = {
@@ -115,7 +114,7 @@ export const ProductDetails = () => {
               </span>
               {allTag?.map((item, idx) => (
                 <div key={idx} className="badge bg-btnPrimary text-white">
-                  {item}
+                  {item.text}
                 </div>
               ))}
             </div>
@@ -174,10 +173,10 @@ export const ProductDetails = () => {
         </button>
       </div>
       <div className="flex items-center gap-2 justify-end my-4 lg:my-2">
-        <h4 className=" text-gray-500">Posting as {user.displayName}</h4>
+        <h4 className=" text-gray-500">Posting as {userName}</h4>
         <div className="avatar">
           <div className="w-12 rounded-full">
-            <img src={user.photoURL} alt="" />
+            <img src={userPhoto} alt="" />
           </div>
         </div>
       </div>

@@ -1,20 +1,50 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { WithContext as ReactTags } from "react-tag-input";
+import uploadImg from "../../../assets/uploadImg.jpg";
 import { useAuth } from "../../../Hooks/useAuth";
 import { Loading } from "../../../Component/Share/Loading";
-import uploadImg from "../../../assets/uploadImg.jpg";
-import { useForm } from "react-hook-form";
-import { uploadImage } from "../../../Api/Utils";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
+import { uploadImage } from "../../../Api/Utils";
 import Swal from "sweetalert2";
 
-export const AddProducts = () => {
-  const [tags, setTags] = useState([]);
+export const UpdateProduct = () => {
+  // const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const [externalLink, setExternalLink] = useState([]);
-  const { user, loading } = useAuth();
-  const [uploadedImg, setUploadedImg] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
+  const [externalLink, setExternalLink] = useState([]);
+  const [uploadedImg, setUploadedImg] = useState(null);
+  const [oldData, setOldData] = useState([]);
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    axiosSecure(`/product-details/${id}`).then((res) => {
+      setOldData(res.data);
+      setTags(res.data.allTag);
+      setExternalLink(res.data.externalLinks);
+      setUploadedImg(res.data.image);
+      setValue("productName", res.data.productName);
+      setValue("product_description", res.data.product_description);
+    });
+  }, [id, setUploadedImg]);
+
+  const {
+    productName,
+    image,
+    product_description,
+    userName,
+    email,
+    userPhoto,
+  } = oldData;
+
+  const { register, handleSubmit, setValue } = useForm({
+    defaultValues: {
+      productName: productName || "",
+    },
+  });
   // handle tags
   const handleDelete = (index) => {
     setTags(tags.filter((tag, i) => i !== index));
@@ -51,6 +81,7 @@ export const AddProducts = () => {
     }
   };
 
+  // suggestion
   const suggestions = [
     { id: "Web Apps", text: "Web Apps" },
     { id: "AI Tools", text: "AI Tools" },
@@ -72,47 +103,39 @@ export const AddProducts = () => {
     { id: "EdTech", text: "EdTech" },
     { id: "HealthTech", text: "HealthTech" },
   ];
-
-  // handle form
-  const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
-    const imageFile = data.productImage[0];
-    const image = await uploadImage(imageFile);
-    const { productImage, ...newData } = data;
-    const ProductData = {
-      ...newData,
-      image,
-      externalLinks: externalLink,
-      allTag: tags,
-      upvote: 0,
-      userName: user.displayName,
-      email: user.email,
-      userPhoto: user.photoURL,
+    let image;
+    if (data.productImage && data.productImage.length > 0) {
+      const imageFile = data.productImage[0];
+      image = await uploadImage(imageFile);
+    } else {
+      image = oldData.image;
+    }
+
+    const updatedData = {
+      productName: data.productName,
+      product_description: data.product_description,
+      image: image,
+      externalLink,
+      tags,
+      email: oldData.email,
+      userPhoto: oldData.userPhoto,
+      userName: oldData.userName,
       timestamp: new Date(),
-      status: "pending",
     };
     try {
-      // sent the data to db
-      await axiosSecure.post("/add-products", ProductData);
+      await axiosSecure.patch(`/update-product/${id}`, updatedData);
+      navigate("/dashboard/my-products");
       Swal.fire({
-        title: "Success!",
-        text: "You product has been added successfully",
+        title: "Successful",
+        text: "You product has been updated successfully",
         icon: "success",
       });
-      reset();
-      setUploadedImg(null);
-      setExternalLink([]);
-      setTags([]);
     } catch (error) {}
   };
-
-  if (loading) {
-    return <Loading></Loading>;
-  }
-
   return (
     <div>
-      <h3 className="text-3xl font-bold">Add Product</h3>
+      <h3 className="text-3xl font-bold">Update Product</h3>
       <div className="bg-[#F9f9f9] mt-4">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body p-4">
           <h3 className="text-lg font-semibold">General form</h3>
@@ -125,7 +148,7 @@ export const AddProducts = () => {
                 </label>
                 <input
                   type="text"
-                  {...register("productName")}
+                  {...register("productName", { required: true })}
                   placeholder="Product Name"
                   className="input input-bordered bg-[#efefef] border-none"
                   required
@@ -139,6 +162,7 @@ export const AddProducts = () => {
                   </span>
                 </label>
                 <textarea
+                  defaultValue={product_description}
                   {...register("product_description")}
                   className="bg-[#efefef] textarea"
                   placeholder="Product description"
@@ -217,17 +241,18 @@ export const AddProducts = () => {
                   <span className="label-text font-medium">Product photo</span>
                 </label>
                 <img
-                  src={uploadedImg ? uploadedImg : uploadImg}
+                  src={uploadedImg}
                   alt="Preview"
                   style={{ width: "200px", height: "auto" }}
                 />
+                <p className="mt-4">Change photo</p>
                 <input
                   name="productImage"
                   type="file"
                   accept="image/*"
                   {...register("productImage")}
                   onChange={handleImageChange}
-                  className="file-input w-full bg-[#efefef] mt-6"
+                  className="file-input w-full bg-[#efefef] mt-2"
                 />
               </div>
 
@@ -241,7 +266,7 @@ export const AddProducts = () => {
                 </label>
                 <input
                   disabled
-                  defaultValue={user?.displayName}
+                  defaultValue={userName}
                   type="text"
                   placeholder="Owner Name"
                   className="input input-bordered bg-[#efefef] border-none"
@@ -254,7 +279,7 @@ export const AddProducts = () => {
                 </label>
                 <div className="avatar">
                   <div className="w-24 rounded-full">
-                    <img className="" src={user?.photoURL} alt="" />
+                    <img className="" src={userPhoto} alt="" />
                   </div>
                 </div>
               </div>
@@ -263,7 +288,7 @@ export const AddProducts = () => {
                   <span className="label-text font-medium">Owner Email</span>
                 </label>
                 <input
-                  defaultValue={user?.email}
+                  defaultValue={email}
                   type="text"
                   placeholder="Owner Name"
                   className="input input-bordered bg-[#efefef] border-none"
