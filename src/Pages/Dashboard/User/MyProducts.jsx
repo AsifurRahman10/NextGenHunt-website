@@ -95,8 +95,20 @@ export const MyProducts = () => {
                 <td>{item.productName}</td>
                 <td>{item.upvote}</td>
                 <th>
-                  <div className="badge bg-orange-400 text-white p-2">
+                  <div
+                    className={`badge p-2 text-white ${
+                      item.status === "pending"
+                        ? "bg-orange-400"
+                        : item.status === "accepted"
+                        ? "bg-green-400"
+                        : item.status === "rejected"
+                        ? "bg-red-400"
+                        : "bg-gray-400"
+                    }`}
+                  >
                     {item.status === "pending" && "Pending"}
+                    {item.status === "accepted" && "Accepted"}
+                    {item.status === "rejected" && "Rejected"}
                   </div>
                 </th>
                 <th>

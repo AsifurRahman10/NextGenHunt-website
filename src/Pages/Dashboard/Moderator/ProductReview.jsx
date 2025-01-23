@@ -2,15 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import { Loading } from "../../../Component/Share/Loading";
 import { Link } from "react-router-dom";
-import { LuSquarePen } from "react-icons/lu";
-import { MdDelete } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
-import { RxCross2 } from "react-icons/rx";
 import { IoClose } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 export const ProductReview = () => {
   const axiosSecure = useAxiosSecure();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["product-data"],
     queryFn: async () => {
       const res = await axiosSecure.get("/all-products-sorted");
@@ -20,6 +18,36 @@ export const ProductReview = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
+
+  const handleProductAccept = (id) => {
+    const status = "accepted";
+
+    axiosSecure.patch(`/update-status/${id}`, { status }).then((res) => {
+      if (res.data.modifiedCount) {
+        Swal.fire({
+          title: "Product has been accepted",
+          icon: "success",
+          draggable: true,
+        });
+        refetch();
+      }
+    });
+  };
+
+  const handleProductRejected = (id) => {
+    const status = "rejected";
+
+    axiosSecure.patch(`/update-status/${id}`, { status }).then((res) => {
+      if (res.data.modifiedCount) {
+        Swal.fire({
+          title: "Product has been accepted",
+          icon: "success",
+          draggable: true,
+        });
+        refetch();
+      }
+    });
+  };
   return (
     <div>
       <h3 className="text-3xl font-bold">Review product</h3>
@@ -34,6 +62,7 @@ export const ProductReview = () => {
               <th>Product Image</th>
               <th>Product Name</th>
               <th>Status</th>
+              <th>Action</th>
               <th>Action</th>
               <th>Accept</th>
               <th>Reject</th>
@@ -61,25 +90,50 @@ export const ProductReview = () => {
                 </td>
                 <td>{item.productName}</td>
                 <th>
-                  <div className="badge bg-orange-400 text-white p-2">
+                  <div
+                    className={`badge p-2 text-white ${
+                      item.status === "pending"
+                        ? "bg-orange-400"
+                        : item.status === "accepted"
+                        ? "bg-green-400"
+                        : item.status === "rejected"
+                        ? "bg-red-400"
+                        : "bg-gray-400"
+                    }`}
+                  >
                     {item.status === "pending" && "Pending"}
+                    {item.status === "accepted" && "Accepted"}
+                    {item.status === "rejected" && "Rejected"}
                   </div>
                 </th>
+
                 <td>
-                  <button className="btn btn-sm">View Details</button>
+                  <Link to={`/product-details/${item._id}`}>
+                    <button className="btn btn-sm hover:bg-blue-600 hover:text-white">
+                      View Details
+                    </button>
+                  </Link>
+                </td>
+                <td>
+                  <button className="btn btn-sm hover:bg-yellow-600 hover:text-white">
+                    Make feature
+                  </button>
                 </td>
 
                 <th>
-                  <Link to={`/dashboard/update-products/${item._id}`}>
-                    <button className="btn btn-ghost bg-btnPrimary text-white">
-                      <FaCheck className="text-lg" />
-                    </button>
-                  </Link>
+                  <button
+                    onClick={() => handleProductAccept(item._id)}
+                    className="btn btn-ghost bg-green-600 text-white"
+                    disabled={item.status == "accepted"}
+                  >
+                    <FaCheck className="text-lg" />
+                  </button>
                 </th>
                 <th>
                   <button
-                    onClick={() => handleDelete(item._id)}
-                    className="btn btn-ghost bg-[#B91C1C] text-white"
+                    onClick={() => handleProductRejected(item._id)}
+                    className="btn btn-ghost bg-red-600 text-white"
+                    disabled={item.status == "rejected"}
                   >
                     <IoClose className="text-lg" />
                   </button>
