@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { User } from "../Component/DashBoardNavigation/User";
 import { Moderator } from "../Component/DashBoardNavigation/Moderator";
+import { Admin } from "../Component/DashBoardNavigation/Admin";
 
 export const DashboardLayout = () => {
   return (
@@ -38,6 +39,9 @@ export const DashboardLayout = () => {
 
           {/* moderator */}
           <Moderator></Moderator>
+
+          {/* admin */}
+          <Admin></Admin>
         </ul>
       </div>
     </div>

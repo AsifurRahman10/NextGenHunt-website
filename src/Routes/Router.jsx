@@ -13,6 +13,9 @@ import { MyProducts } from "../Pages/Dashboard/User/MyProducts";
 import { UpdateProduct } from "../Pages/Dashboard/User/UpdateProduct";
 import { ProductReview } from "../Pages/Dashboard/Moderator/ProductReview";
 import { ReportedContent } from "../Pages/Dashboard/Moderator/ReportedContent";
+import { StatisticsPage } from "../Pages/Dashboard/Admin/StatisticsPage";
+import { ManageUsers } from "../Pages/Dashboard/Admin/ManageUsers";
+import { ManageCoupons } from "../Pages/Dashboard/Admin/ManageCoupons";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +83,20 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/reported-content",
         element: <ReportedContent></ReportedContent>,
+      },
+
+      // admin
+      {
+        path: "/dashboard/statistics-page",
+        element: <StatisticsPage></StatisticsPage>,
+      },
+      {
+        path: "/dashboard/manage-users",
+        element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "/dashboard/manage-coupons",
+        element: <ManageCoupons></ManageCoupons>,
       },
     ],
   },
