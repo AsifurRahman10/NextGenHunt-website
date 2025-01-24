@@ -6,12 +6,38 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import { Loading } from "../../../Component/Share/Loading";
+import moment from "moment";
+import { Link } from "react-router-dom";
+import { LuSquarePen } from "react-icons/lu";
+import { MdDelete } from "react-icons/md";
+import { AddCouponModal } from "../../../Component/Modal/AddCouponModal";
 
 export const ManageCoupons = () => {
   const [startDate, setStartDate] = useState(new Date());
+  const [updateId, setUpdateId] = useState("");
   const axiosSecure = useAxiosSecure();
 
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["coupons"],
+    queryFn: async () => {
+      const res = await axiosSecure("/all-coupons");
+      return res.data;
+    },
+  });
+
   const { register, handleSubmit, reset } = useForm();
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  const handleUpdate = (id) => {
+    document.getElementById("my_modal_2").showModal();
+    setUpdateId(id);
+  };
+
   const onSubmit = (data) => {
     const couponData = { ...data, expireDate: startDate };
 
@@ -54,55 +80,37 @@ export const ManageCoupons = () => {
               <th>Expiry date</th>
               <th>Coupon description</th>
               <th>Discount amount</th>
-              <th>Action</th>
-              <th>Action</th>
+              <th>Edit Token</th>
+              <th>Delete Token</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            {/* {data.map((item, idx) => (
+            {data.map((item, idx) => (
               <tr
                 key={item._id}
                 className="bg-white border-b hover:bg-gray-50 transition-all"
               >
                 <th className="lg:pl-8 font-medium text-gray-900">{idx + 1}</th>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={item.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
-                    </div>
+                <td>{item.couponCode}</td>
+                <th> {moment(item.expireDate).format("DD-MM-YYYY")}</th>
+                <td className="relative group">
+                  <span className="block max-w-[150px] truncate cursor-pointer">
+                    {item.couponDescription}
+                  </span>
+                  <div className="absolute left-0 top-full z-10 hidden w-64 p-2 text-sm text-white bg-gray-800 rounded-md shadow-lg group-hover:block">
+                    {item.couponDescription}
                   </div>
                 </td>
-                <td>{item.productName}</td>
-                <td>{item.upvote}</td>
+                <td>$ {item.discountAmount}</td>
+
                 <th>
-                  <div
-                    className={`badge p-2 text-white ${
-                      item.status === "pending"
-                        ? "bg-orange-400"
-                        : item.status === "accepted"
-                        ? "bg-green-400"
-                        : item.status === "rejected"
-                        ? "bg-red-400"
-                        : "bg-gray-400"
-                    }`}
+                  <button
+                    onClick={() => handleUpdate(item._id)}
+                    className="btn btn-ghost bg-btnPrimary text-white"
                   >
-                    {item.status === "pending" && "Pending"}
-                    {item.status === "accepted" && "Accepted"}
-                    {item.status === "rejected" && "Rejected"}
-                  </div>
-                </th>
-                <th>
-                  <Link to={`/dashboard/update-products/${item._id}`}>
-                    <button className="btn btn-ghost bg-btnPrimary text-white">
-                      <LuSquarePen className="text-lg" />
-                    </button>
-                  </Link>
+                    <LuSquarePen className="text-lg" />
+                  </button>
                 </th>
                 <th>
                   <button
@@ -113,10 +121,11 @@ export const ManageCoupons = () => {
                   </button>
                 </th>
               </tr>
-            ))} */}
+            ))}
           </tbody>
         </table>
       </div>
+      {/* add coupon modal */}
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
@@ -186,6 +195,10 @@ export const ManageCoupons = () => {
           </form>
         </div>
       </dialog>
+
+      {/* update coupon modal */}
+      {/* add coupon modal */}
+      <AddCouponModal refetch={refetch} updateId={updateId} />
     </div>
   );
 };
