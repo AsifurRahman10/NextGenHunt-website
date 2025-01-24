@@ -30,6 +30,7 @@ export const StatisticsPage = () => {
       return res.data;
     },
   });
+  console.log(data);
 
   const resultArray = Object.keys(data).map((key) => ({
     name: key,
@@ -76,13 +77,13 @@ export const StatisticsPage = () => {
   }
   return (
     <div>
-      <h3 className="text-3xl font-bold">Admin Dashboard</h3>
+      <h3 className="text-3xl font-bold mt-4">Admin Dashboard</h3>
       <Helmet>
         <title>Admin Dashboard - NextGenHunt</title>
       </Helmet>
 
       {/* box */}
-      <div className="flex gap-6 mt-6">
+      <div className="flex flex-col lg:flex-row gap-6 mt-6">
         {/* revenue */}
         <div className="bg-white p-6 rounded-xl flex-1">
           <div className="flex items-center gap-6 justify-between">
@@ -102,7 +103,7 @@ export const StatisticsPage = () => {
           <div className="flex items-center gap-6 justify-between">
             <div className="">
               <h4 className="text-2xl font-medium mb-4">Total Products</h4>
-              <p className="text-4xl font-bold ">{data?.totalProducts}</p>
+              <p className="text-4xl font-bold ">{data["Total Product"]}</p>
             </div>
             <div>
               <BsCartCheck className="text-7xl text-btnPrimary" />
@@ -114,7 +115,7 @@ export const StatisticsPage = () => {
           <div className="flex items-center gap-6 justify-between">
             <div className="">
               <h4 className="text-2xl font-medium mb-4">Total User</h4>
-              <p className="text-4xl font-bold ">{data?.totalUser}</p>
+              <p className="text-4xl font-bold ">{data["Total User"]}</p>
             </div>
             <div>
               <TbUsersGroup className="text-7xl text-btnPrimary" />
@@ -136,7 +137,7 @@ export const StatisticsPage = () => {
       </div>
 
       {/* cart */}
-      <div className="w-1/2 h-[400px] bg-white mt-6 p-4 shadow-lg rounded-lg">
+      <div className="w-full lg:w-1/2 h-[300px] md:h-[400px] bg-white mt-6 p-4 shadow-lg rounded-lg">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400}>
             <Pie
