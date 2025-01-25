@@ -1,11 +1,17 @@
 import logo from "../assets/logo.png";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { User } from "../Component/DashBoardNavigation/User";
 import { Moderator } from "../Component/DashBoardNavigation/Moderator";
 import { Admin } from "../Component/DashBoardNavigation/Admin";
+import { CgProfile } from "react-icons/cg";
+import { AiOutlineProduct } from "react-icons/ai";
+import { MdLibraryAdd, MdLogout } from "react-icons/md";
+import { IoIosHome } from "react-icons/io";
+import { useAuth } from "../Hooks/useAuth";
 
 export const DashboardLayout = () => {
+  const { logout } = useAuth();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -35,13 +41,67 @@ export const DashboardLayout = () => {
 
           {/* Sidebar content here */}
           {/* user content */}
-          <User></User>
+          {/* <User></User> */}
+          <li>
+            <NavLink
+              to="/dashboard/my-profile"
+              className={({ isActive }) =>
+                `flex items-center ${
+                  isActive ? "text-[#e7f726] bg-[#444444]" : ""
+                } hover:text-white hover:bg-[#3a3a3a]`
+              }
+            >
+              <CgProfile className="text-xl mr-2" /> My Profile
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/add-products"
+              className={({ isActive }) =>
+                `flex items-center ${
+                  isActive ? "text-[#e7f726] bg-[#444444]" : ""
+                } hover:text-white hover:bg-[#3a3a3a]`
+              }
+            >
+              <AiOutlineProduct className="text-xl mr-2" />
+              Add Product
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/my-products"
+              className={({ isActive }) =>
+                `flex items-center ${
+                  isActive ? "text-[#e7f726] bg-[#444444]" : ""
+                } hover:text-white hover:bg-[#3a3a3a]`
+              }
+            >
+              <MdLibraryAdd className="text-xl mr-2" />
+              My Products
+            </NavLink>
+          </li>
 
           {/* moderator */}
-          <Moderator></Moderator>
+          {/* <Moderator></Moderator> */}
 
           {/* admin */}
           <Admin></Admin>
+
+          <div className="mt-auto mb-10 ml-4">
+            <Link
+              to={"/"}
+              className=" hover:text-[#e7f726] flex items-center gap-2"
+            >
+              {" "}
+              <IoIosHome className="text-xl" /> Home
+            </Link>
+            <Link
+              onClick={() => logout()}
+              className="flex items-center hover:text-[#e7f726] mt-2"
+            >
+              <MdLogout className="text-xl mr-2" /> Logout
+            </Link>
+          </div>
         </ul>
       </div>
     </div>

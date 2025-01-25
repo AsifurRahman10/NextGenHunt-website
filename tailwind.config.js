@@ -11,7 +11,8 @@ export default {
         bannerPrimary: '#EEEDF2',
       },
       backgroundImage: {
-        titleBg: "url('./src/assets/titlebg.jpg')"
+        titleBg: "url('./src/assets/titlebg.jpg')",
+        couponBg: "url('./src/assets/couponBg.jpg')",
       }
     },
   },

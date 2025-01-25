@@ -1,7 +1,6 @@
 import { CgProfile } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
 import { AiOutlineProduct } from "react-icons/ai";
-import { MdLibraryAdd } from "react-icons/md";
 
 export const Moderator = () => {
   return (

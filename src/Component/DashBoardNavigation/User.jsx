@@ -5,39 +5,6 @@ import { MdLibraryAdd } from "react-icons/md";
 
 export const User = () => {
   return (
-    <>
-      <li>
-        <NavLink
-          to={"/dashboard/my-profile"}
-          className={({ isActive }) =>
-            `${isActive ? "text-[#e7f726] bg-[#444444]" : ""}`
-          }
-        >
-          <CgProfile className="text-xl mr-1" /> My Profile
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={"/dashboard/add-products"}
-          className={({ isActive }) =>
-            `${isActive ? "text-[#e7f726] bg-[#444444]" : ""}`
-          }
-        >
-          <AiOutlineProduct className="text-xl mr-1" />
-          Add Product
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to={"/dashboard/my-products"}
-          className={({ isActive }) =>
-            `${isActive ? "text-[#e7f726] bg-[#444444]" : ""}`
-          }
-        >
-          <MdLibraryAdd className="text-xl mr-1" />
-          My Products
-        </NavLink>
-      </li>
-    </>
+    <ul className="menu bg-[#2C2C2C] text-[#8b8b8b] min-h-full w-80 p-4 font-medium text-lg"></ul>
   );
 };

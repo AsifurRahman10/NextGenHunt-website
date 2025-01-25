@@ -51,6 +51,7 @@ export const ManageCoupons = () => {
           icon: "success",
         });
         reset();
+        refetch();
       }
     });
   };
