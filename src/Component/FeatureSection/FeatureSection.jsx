@@ -3,6 +3,7 @@ import { CardBoxShape } from "../Share/CardBoxShape";
 import { Title } from "../Share/Title";
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "../Share/Loading";
+import { CardForFeature } from "../Share/CardForFeature";
 
 export const FeatureSection = () => {
   const {
@@ -16,6 +17,7 @@ export const FeatureSection = () => {
       return res.data;
     },
   });
+  const featurePage = true;
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -41,7 +43,11 @@ export const FeatureSection = () => {
               index === featureProduct.length - 1 ? "mt-6 lg:col-start-2" : ""
             }`}
           >
-            <CardBoxShape product={product} refetch={refetch} />
+            <CardForFeature
+              featurePage={featurePage}
+              product={product}
+              refetch={refetch}
+            />
           </div>
         ))}
       </div>

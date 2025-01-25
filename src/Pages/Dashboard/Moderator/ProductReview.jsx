@@ -58,6 +58,11 @@ export const ProductReview = () => {
     };
     axiosSecure.post("/feature", productData).then((res) => {
       if (res.data.insertedId) {
+        Swal.fire({
+          title: "Successful",
+          text: "Product has been added to feature section",
+          icon: "success",
+        });
       }
     });
   };

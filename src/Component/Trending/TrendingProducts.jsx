@@ -18,6 +18,8 @@ export const TrendingProducts = () => {
     },
   });
 
+  console.log(trendingProduct);
+
   if (isLoading) {
     return <Loading></Loading>;
   }

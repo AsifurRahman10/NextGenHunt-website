@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Title = ({ title, para, align, btn }) => {
   return (
     <div
@@ -15,9 +17,11 @@ export const Title = ({ title, para, align, btn }) => {
           <p className="font-medium text-gray-600">{para}</p>
         </div>
         <div className={`${btn} pt-6`}>
-          <button className="btn bg-transparent border-btnPrimary border-2 hover:bg-btnPrimary hover:text-white">
-            Explore All Products
-          </button>
+          <Link to={"/products"}>
+            <button className="btn bg-transparent border-btnPrimary border-2 hover:bg-btnPrimary hover:text-white">
+              Explore All Products
+            </button>
+          </Link>
         </div>
       </div>
     </div>

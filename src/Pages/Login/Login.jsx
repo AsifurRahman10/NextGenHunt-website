@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 export const Login = () => {
   const { login } = useAuth();
   const [showPass, setShowPass] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
@@ -21,6 +22,7 @@ export const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setError("");
     try {
       await login(data.email, data.password);
       Swal.fire({
@@ -34,7 +36,8 @@ export const Login = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Login failed:", error.message);
+      setError(error.message);
     }
   };
   return (
@@ -92,6 +95,11 @@ export const Login = () => {
             >
               <FaEye />
             </span>
+            {error && (
+              <p className="text-red-500 mt-4">
+                {error.slice(error.indexOf("(") + 1, error.indexOf(")"))}
+              </p>
+            )}
             {errors.password && (
               <p className="text-red-500 mt-4">{errors.password.message}</p>
             )}

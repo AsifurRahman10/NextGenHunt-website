@@ -83,6 +83,7 @@ export const CheckoutForm = ({
         axiosSecure.post("/paymentInfo", paymentData).then((res) => {
           console.log(res.data.insertedId);
           if (res.data.insertedId) {
+            axiosSecure.patch(`/upgrade-user/${user?.email}`);
             e.target.reset();
             const modal = document.getElementById("my_modal_1");
             modal.close();

@@ -104,7 +104,24 @@ export const AddProducts = () => {
       setUploadedImg(null);
       setExternalLink([]);
       setTags([]);
-    } catch (error) {}
+    } catch (error) {
+      if (error.status === 409) {
+        Swal.fire({
+          icon: "warning",
+          title: "Limit Exceeded",
+          text: "You have exceeded your post limit as a free user. Upgrade to premium for unlimited post access.",
+          footer:
+            '<a href="/pricing">Click here to learn more about upgrading</a>',
+          confirmButtonText: "Upgrade Now",
+          showCancelButton: true,
+          cancelButtonText: "Not Now",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/dashboard/my-profile";
+          }
+        });
+      }
+    }
   };
 
   if (loading) {
