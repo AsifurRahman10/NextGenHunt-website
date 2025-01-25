@@ -72,7 +72,7 @@ export const Navbar = () => {
 
         {/* Navbar Center */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 ">{navList}</ul>
+          <ul className="menu menu-horizontal px-1">{navList}</ul>
         </div>
 
         {/* Navbar End */}

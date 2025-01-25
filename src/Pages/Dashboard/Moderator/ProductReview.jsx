@@ -52,6 +52,14 @@ export const ProductReview = () => {
 
   const handleAddFeature = (id) => {
     console.log(id);
+    const productData = {
+      productId: id,
+      timestamp: new Date(),
+    };
+    axiosSecure.post("/feature", productData).then((res) => {
+      if (res.data.insertedId) {
+      }
+    });
   };
   return (
     <div>

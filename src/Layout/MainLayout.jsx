@@ -11,7 +11,7 @@ export const MainLayout = () => {
     return <Loading></Loading>;
   }
   return (
-    <div>
+    <div className="bg-white">
       {/* navbar */}
       <Navbar></Navbar>
       {/* outlet */}

@@ -31,7 +31,7 @@ export const ProductCard = ({ product }) => {
               key={idx}
               className="badge badge-neutral bg-[#f0f0f2] text-gray-700 border-none rounded-md px-2 py-1 text-sm"
             >
-              {item}
+              {item.text}
             </div>
           ))}
         </div>

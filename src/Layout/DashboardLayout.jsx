@@ -1,17 +1,32 @@
 import logo from "../assets/logo.png";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
-import { User } from "../Component/DashBoardNavigation/User";
-import { Moderator } from "../Component/DashBoardNavigation/Moderator";
-import { Admin } from "../Component/DashBoardNavigation/Admin";
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineProduct } from "react-icons/ai";
 import { MdLibraryAdd, MdLogout } from "react-icons/md";
 import { IoIosHome } from "react-icons/io";
 import { useAuth } from "../Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import { useAxiosSecure } from "../Hooks/useAxiosSecure";
+import { Loading } from "../Component/Share/Loading";
+import { User } from "../Component/DashboardNavLink/User";
+import { Moderator } from "../Component/DashboardNavLink/Moderator";
+import { Admin } from "../Component/DashboardNavLink/Admin";
 
 export const DashboardLayout = () => {
-  const { logout } = useAuth();
+  const { signout, user, loading } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const { data, isLoading } = useQuery({
+    queryKey: ["user-role", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure(`/user-role/${user.email}`);
+      return res.data;
+    },
+  });
+  console.log(data);
+  if (isLoading || loading) {
+    return <Loading />;
+  }
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -37,66 +52,26 @@ export const DashboardLayout = () => {
           className="drawer-overlay"
         ></label>
         <ul className="menu bg-[#2C2C2C] text-[#8b8b8b] min-h-full w-80 p-4 font-medium text-lg">
-          <img src={logo} className="mb-6" alt="" />
-
-          {/* Sidebar content here */}
-          {/* user content */}
-          {/* <User></User> */}
           <li>
-            <NavLink
-              to="/dashboard/my-profile"
-              className={({ isActive }) =>
-                `flex items-center ${
-                  isActive ? "text-[#e7f726] bg-[#444444]" : ""
-                } hover:text-white hover:bg-[#3a3a3a]`
-              }
-            >
-              <CgProfile className="text-xl mr-2" /> My Profile
-            </NavLink>
+            <img src={logo} className="mb-6" alt="Logo" />
           </li>
-          <li>
-            <NavLink
-              to="/dashboard/add-products"
-              className={({ isActive }) =>
-                `flex items-center ${
-                  isActive ? "text-[#e7f726] bg-[#444444]" : ""
-                } hover:text-white hover:bg-[#3a3a3a]`
-              }
-            >
-              <AiOutlineProduct className="text-xl mr-2" />
-              Add Product
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/my-products"
-              className={({ isActive }) =>
-                `flex items-center ${
-                  isActive ? "text-[#e7f726] bg-[#444444]" : ""
-                } hover:text-white hover:bg-[#3a3a3a]`
-              }
-            >
-              <MdLibraryAdd className="text-xl mr-2" />
-              My Products
-            </NavLink>
-          </li>
+          {/* for user   */}
+          {data.userRole == "user" && <User></User>}
 
-          {/* moderator */}
-          {/* <Moderator></Moderator> */}
+          {/* Moderator */}
+          {data.userRole == "moderator" && <Moderator></Moderator>}
 
-          {/* admin */}
-          <Admin></Admin>
-
+          {/* Admin */}
+          {data.userRole == "admin" && <Admin></Admin>}
           <div className="mt-auto mb-10 ml-4">
             <Link
-              to={"/"}
-              className=" hover:text-[#e7f726] flex items-center gap-2"
+              to="/"
+              className="hover:text-[#e7f726] flex items-center gap-2"
             >
-              {" "}
               <IoIosHome className="text-xl" /> Home
             </Link>
             <Link
-              onClick={() => logout()}
+              onClick={() => signout()}
               className="flex items-center hover:text-[#e7f726] mt-2"
             >
               <MdLogout className="text-xl mr-2" /> Logout

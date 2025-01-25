@@ -140,7 +140,7 @@ export const ProductDetails = () => {
       <p className="mt-4 font-semibold">
         Want to know more?{" "}
         {externalLinks.map((item) => (
-          <Link to={item} target="_blank">
+          <Link to={item.text} key={item.id} target="_blank">
             <span className="underline text-blue-500 hover:text-blue-700">
               Visit their website
             </span>

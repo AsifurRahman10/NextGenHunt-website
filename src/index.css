@@ -8,4 +8,10 @@ body {
   font-family: "Be Vietnam Pro", serif;
 }
 
+.active {
+  color: #613cfc !important;
+  font-weight: bold;
+  background: none !important;
+}
+
 /* custom css for rating */

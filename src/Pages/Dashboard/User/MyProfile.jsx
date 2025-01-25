@@ -51,7 +51,7 @@ export const MyProfile = () => {
   return (
     <div className="w-full min-h-screen md:min-h-0">
       <Helmet>
-        <title>{name} - NextGenHunt</title>
+        <title>My profile - NextGenHunt</title>
       </Helmet>
       <h2 className="text-4xl font-bold">My Profile</h2>
 
