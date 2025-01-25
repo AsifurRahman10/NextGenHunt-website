@@ -17,6 +17,10 @@ import { StatisticsPage } from "../Pages/Dashboard/Admin/StatisticsPage";
 import { ManageUsers } from "../Pages/Dashboard/Admin/ManageUsers";
 import { ManageCoupons } from "../Pages/Dashboard/Admin/ManageCoupons";
 import { Error } from "../Pages/Error/Error";
+import { UserRouter } from "./UserRoute";
+import { ModeratorRouter } from "./ModeratorRoute";
+import { Moderator } from "../Component/DashboardNavLink/Moderator";
+import { AdminRouter } from "./AdminRouter";
 
 export const router = createBrowserRouter([
   {
@@ -61,43 +65,79 @@ export const router = createBrowserRouter([
       // user
       {
         path: "/dashboard/my-profile",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <UserRouter>
+            <MyProfile></MyProfile>
+          </UserRouter>
+        ),
       },
       {
         path: "/dashboard/add-products",
-        element: <AddProducts></AddProducts>,
+        element: (
+          <UserRouter>
+            <AddProducts></AddProducts>
+          </UserRouter>
+        ),
       },
       {
         path: "/dashboard/update-products/:id",
-        element: <UpdateProduct></UpdateProduct>,
+        element: (
+          <UserRouter>
+            <UpdateProduct></UpdateProduct>
+          </UserRouter>
+        ),
       },
       {
         path: "/dashboard/my-products",
-        element: <MyProducts></MyProducts>,
+        element: (
+          <UserRouter>
+            <MyProducts></MyProducts>
+          </UserRouter>
+        ),
       },
 
       // Moderator
       {
         path: "/dashboard/product-review",
-        element: <ProductReview></ProductReview>,
+        element: (
+          <ModeratorRouter>
+            <ProductReview></ProductReview>
+          </ModeratorRouter>
+        ),
       },
       {
         path: "/dashboard/reported-content",
-        element: <ReportedContent></ReportedContent>,
+        element: (
+          <ModeratorRouter>
+            <ReportedContent></ReportedContent>
+          </ModeratorRouter>
+        ),
       },
 
       // admin
       {
         path: "/dashboard/statistics-page",
-        element: <StatisticsPage></StatisticsPage>,
+        element: (
+          <AdminRouter>
+            <StatisticsPage></StatisticsPage>
+          </AdminRouter>
+        ),
       },
       {
         path: "/dashboard/manage-users",
-        element: <ManageUsers></ManageUsers>,
+        element: (
+          <AdminRouter>
+            <ManageUsers></ManageUsers>
+          </AdminRouter>
+        ),
       },
       {
         path: "/dashboard/manage-coupons",
-        element: <ManageCoupons></ManageCoupons>,
+        element: (
+          <AdminRouter>
+            <ManageCoupons></ManageCoupons>
+          </AdminRouter>
+        ),
       },
     ],
   },
