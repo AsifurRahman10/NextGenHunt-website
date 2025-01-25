@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet-async";
 
 export const Register = () => {
   const [showPass, setShowPass] = useState(false);
-  const { register: registerFn, updateUser } = useAuth();
+  const { register: registerFn, updateUser, setLoading, user } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -31,19 +31,19 @@ export const Register = () => {
         name: data.name,
         image: image,
         role: "user",
+        userType: "free",
       };
-      axios
-        .post(`${import.meta.env.VITE_DB}/userInfo`, userData)
-        .then((res) => {
-          console.log(res);
-        });
+      await axios.post(`${import.meta.env.VITE_DB}/userInfo`, userData);
       navigate("/");
       Swal.fire({
         title: "Account Created Successfully",
         text: "Your account has been created successfully",
         icon: "success",
       });
-    } catch (error) {}
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

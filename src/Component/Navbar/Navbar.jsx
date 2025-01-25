@@ -4,6 +4,7 @@ import logo from "../../assets/logo.png";
 import { FaUnlockAlt } from "react-icons/fa";
 import { useAuth } from "../../Hooks/useAuth";
 import { IoIosLogOut } from "react-icons/io";
+import { Loading } from "../Share/Loading";
 
 export const Navbar = () => {
   // const [profileDropdown, setProfileDropdown] = useState(false);

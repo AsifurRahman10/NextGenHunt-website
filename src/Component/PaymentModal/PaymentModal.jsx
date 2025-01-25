@@ -2,14 +2,16 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { CheckoutForm } from "./CheckoutForm";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const stripePromise = loadStripe(`${import.meta.env.VITE_Stripe_key}`);
-export const PaymentModal = ({ user, refetch }) => {
+export const PaymentModal = ({ user, refetch, setError, error }) => {
   const axiosSecure = useAxiosSecure();
   const [validCoupon, setValidCoupon] = useState({});
-  const [error, setError] = useState("");
-  console.log(validCoupon);
+
+  useEffect(() => {
+    setError("");
+  }, []);
   const handleDiscount = (e) => {
     e.preventDefault();
     setError("");

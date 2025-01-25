@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet-async";
 export const MyProfile = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [error, setError] = useState("");
 
   // user info data
   const { data, isLoading } = useQuery({
@@ -44,6 +45,7 @@ export const MyProfile = () => {
 
   const handleSubscribe = () => {
     document.getElementById("my_modal_1").showModal();
+    setError("");
   };
 
   return (
@@ -81,7 +83,12 @@ export const MyProfile = () => {
           )}
         </div>
       </div>
-      <PaymentModal refetch={refetch} user={user}></PaymentModal>
+      <PaymentModal
+        error={error}
+        setError={setError}
+        refetch={refetch}
+        user={user}
+      ></PaymentModal>
     </div>
   );
 };
