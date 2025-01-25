@@ -23,7 +23,11 @@ export const MyProfile = () => {
   });
 
   // check is the user is subscribed
-  const { data: subscribed, isLoading: subLoading } = useQuery({
+  const {
+    data: subscribed,
+    isLoading: subLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["paid"],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -77,7 +81,7 @@ export const MyProfile = () => {
           )}
         </div>
       </div>
-      <PaymentModal user={user}></PaymentModal>
+      <PaymentModal refetch={refetch} user={user}></PaymentModal>
     </div>
   );
 };

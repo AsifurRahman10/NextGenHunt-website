@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-export const CheckoutForm = ({ user }) => {
+export const CheckoutForm = ({
+  user,
+  validCoupon,
+  setValidCoupon,
+  refetch,
+}) => {
+  console.log(validCoupon);
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState("");
@@ -67,8 +73,12 @@ export const CheckoutForm = ({ user }) => {
           transactionId,
           date: new Date(),
           status: "paid",
-          price: 20,
+          price:
+            validCoupon && !isNaN(parseInt(validCoupon.discountAmount))
+              ? 20 - parseInt(validCoupon.discountAmount)
+              : 20,
         };
+        console.log(paymentData);
 
         axiosSecure.post("/paymentInfo", paymentData).then((res) => {
           console.log(res.data.insertedId);
@@ -76,6 +86,8 @@ export const CheckoutForm = ({ user }) => {
             e.target.reset();
             const modal = document.getElementById("my_modal_1");
             modal.close();
+            setValidCoupon({});
+            refetch();
             Swal.fire({
               title: "Payment Successful!",
               text: `Transaction ID: ${transactionId}`, // Use the transactionId directly
@@ -117,7 +129,11 @@ export const CheckoutForm = ({ user }) => {
         type="submit"
         disabled={!stripe || !clientSecret}
       >
-        Pay 20$
+        Pay{" "}
+        {validCoupon && !isNaN(parseInt(validCoupon.discountAmount))
+          ? 20 - parseInt(validCoupon.discountAmount)
+          : 20}
+        $
       </button>
     </form>
   );
