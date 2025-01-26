@@ -4,9 +4,10 @@ import logo from "../../assets/logo.png";
 import { FaUnlockAlt } from "react-icons/fa";
 import { useAuth } from "../../Hooks/useAuth";
 import "./Navbar.css";
+import useUserType from "../../Hooks/useUserType";
 
 export const Navbar = () => {
-  // const [profileDropdown, setProfileDropdown] = useState(false);
+  const [userType, isTypeLoading] = useUserType();
   const [openMenu, setOpenMenu] = useState(false);
   const { user, signout } = useAuth();
 
@@ -98,12 +99,36 @@ export const Navbar = () => {
                     Hi {user.displayName}!
                   </li>
                   <li>
-                    <Link
+                    {userType === "user" && (
+                      <Link
+                        to={"/dashboard/my-profile"}
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      >
+                        Dashboard
+                      </Link>
+                    )}
+                    {userType === "moderator" && (
+                      <Link
+                        to={"/dashboard/product-review"}
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      >
+                        Dashboard
+                      </Link>
+                    )}
+                    {userType === "admin" && (
+                      <Link
+                        to={"/dashboard/statistics-page"}
+                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                      >
+                        Dashboard
+                      </Link>
+                    )}
+                    {/* <Link
                       to={"/dashboard"}
                       className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
                     >
                       Dashboard
-                    </Link>
+                    </Link> */}
                   </li>
                   <div className="py-1">
                     <Link
