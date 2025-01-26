@@ -27,7 +27,6 @@ export const MyProducts = () => {
   }
 
   const handleDelete = (id) => {
-    console.log(id);
     try {
       Swal.fire({
         title: "Are you sure you want to delete this product?",

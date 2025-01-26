@@ -11,7 +11,7 @@ import { Loading } from "../../../Component/Share/Loading";
 import moment from "moment";
 import { LuSquarePen } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
-import { AddCouponModal } from "../../../Component/Modal/AddCouponModal";
+import { UpdateCouponModal } from "../../../Component/Modal/AddCouponModal";
 
 export const ManageCoupons = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -187,7 +187,7 @@ export const ManageCoupons = () => {
                   onChange={(date) => setStartDate(date)}
                 />
                 <span>
-                  <BsCalendar2Date className="absolute top-[15px] left-48" />
+                  <BsCalendar2Date className="absolute top-[13px] left-44" />
                 </span>
               </div>
             </div>
@@ -224,7 +224,7 @@ export const ManageCoupons = () => {
 
       {/* update coupon modal */}
       {/* add coupon modal */}
-      <AddCouponModal refetch={refetch} updateId={updateId} />
+      <UpdateCouponModal refetch={refetch} updateId={updateId} />
     </div>
   );
 };

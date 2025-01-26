@@ -5,6 +5,7 @@ import { TrendingProducts } from "../../Component/Trending/TrendingProducts";
 import { CouponSlider } from "../../Component/CouponSlider.jsx/CouponSlider";
 
 export const Home = () => {
+  console.log("hello");
   return (
     <div>
       <Helmet>

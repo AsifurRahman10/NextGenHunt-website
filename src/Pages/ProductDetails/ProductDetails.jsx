@@ -27,7 +27,7 @@ export const ProductDetails = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["products", id],
+    queryKey: ["products"],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `${import.meta.env.VITE_DB}/product-details/${id}`
@@ -44,7 +44,7 @@ export const ProductDetails = () => {
   } = useQuery({
     queryKey: ["reviewsItem"],
     queryFn: async () => {
-      const res = await axios.get(
+      const res = await axiosSecure.get(
         `${import.meta.env.VITE_DB}/all-review/${id}`
       );
       return res.data;
@@ -61,9 +61,6 @@ export const ProductDetails = () => {
     product_description,
     externalLinks,
     allTag,
-    userName,
-    email,
-    userPhoto,
     _id,
     upvote,
   } = data;
@@ -77,7 +74,10 @@ export const ProductDetails = () => {
       productId: _id,
     };
     try {
-      await axios.post(`${import.meta.env.VITE_DB}/post-review`, reviewData);
+      await axiosSecure.post(
+        `${import.meta.env.VITE_DB}/post-review`,
+        reviewData
+      );
       setReview("");
       setRating(0);
       refetchReview();
@@ -100,14 +100,17 @@ export const ProductDetails = () => {
   return (
     <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto py-10 lg:py-20">
       <Helmet>
-        <title>{productName} - NextGenHunt</title>
+        <title>
+          {data?.productName ? data?.productName : "Product details"} -
+          NextGenHunt
+        </title>
       </Helmet>
-      <div className="flex items-center flex-col md:flex-row justify-between">
+      <div className="flex md:items-center gap-2 md:gap-8 lg:gap-0 flex-col lg:flex-row justify-between">
         {/* title part */}
-        <div className="flex flex-col md:flex-row items-center lg:gap-4">
+        <div className="flex flex-col md:flex-row md:items-center gap-4">
           {/* image */}
           <div>
-            <img src={image} className="w-full lg:w-80" alt="" />
+            <img src={image} className="w-full lg:w-80 rounded-lg" alt="" />
           </div>
           {/* text */}
           <div>
@@ -139,7 +142,7 @@ export const ProductDetails = () => {
       {/* External Link */}
       <p className="mt-4 font-semibold">
         Want to know more?{" "}
-        {externalLinks.map((item) => (
+        {externalLinks?.map((item) => (
           <Link to={item.text} key={item.id} target="_blank">
             <span className="underline text-blue-500 hover:text-blue-700">
               Visit their website
@@ -177,10 +180,10 @@ export const ProductDetails = () => {
         </button>
       </div>
       <div className="flex items-center gap-2 justify-end my-4 lg:my-2">
-        <h4 className=" text-gray-500">Posting as {userName}</h4>
+        <h4 className=" text-gray-500">Posting as {user.displayName}</h4>
         <div className="avatar">
           <div className="w-12 rounded-full">
-            <img src={userPhoto} alt="" />
+            <img src={user.photoURL} alt="" />
           </div>
         </div>
       </div>

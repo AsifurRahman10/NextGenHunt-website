@@ -12,7 +12,6 @@ export const SocialLogin = () => {
   const handleGoogleLogin = async () => {
     try {
       const { user } = await googleLogin();
-      console.log(user);
       const userData = {
         email: user.email,
         name: user.displayName,

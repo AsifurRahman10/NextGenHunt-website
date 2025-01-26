@@ -8,6 +8,7 @@ import { uploadImage } from "../../../Api/Utils";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 export const AddProducts = () => {
   const [tags, setTags] = useState([]);
@@ -15,6 +16,7 @@ export const AddProducts = () => {
   const [externalLink, setExternalLink] = useState([]);
   const { user, loading } = useAuth();
   const [uploadedImg, setUploadedImg] = useState(null);
+  const navigate = useNavigate();
 
   // handle tags
   const handleDelete = (index) => {
@@ -77,6 +79,28 @@ export const AddProducts = () => {
   // handle form
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
+    console.log(data);
+    console.log(tags, externalLink);
+    if (tags.length <= 0) {
+      return Swal.fire({
+        icon: "error",
+        text: "You must provide at least one tag.",
+      });
+    }
+
+    if (externalLink.length <= 0) {
+      return Swal.fire({
+        icon: "error",
+        text: "You must provide at least one external link.",
+      });
+    }
+
+    if (data.productImage.length <= 0) {
+      return Swal.fire({
+        icon: "error",
+        text: "You must upload product image.",
+      });
+    }
     const imageFile = data.productImage[0];
     const image = await uploadImage(imageFile);
     const { productImage, ...newData } = data;
@@ -100,6 +124,7 @@ export const AddProducts = () => {
         text: "You product has been added successfully",
         icon: "success",
       });
+      navigate("/dashboard/my-products");
       reset();
       setUploadedImg(null);
       setExternalLink([]);
@@ -110,8 +135,6 @@ export const AddProducts = () => {
           icon: "warning",
           title: "Limit Exceeded",
           text: "You have exceeded your post limit as a free user. Upgrade to premium for unlimited post access.",
-          footer:
-            '<a href="/pricing">Click here to learn more about upgrading</a>',
           confirmButtonText: "Upgrade Now",
           showCancelButton: true,
           cancelButtonText: "Not Now",

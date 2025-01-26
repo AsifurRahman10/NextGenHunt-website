@@ -49,7 +49,7 @@ export const MyProfile = () => {
   };
 
   return (
-    <div className="w-full min-h-screen md:min-h-0">
+    <div className="w-full min-h-screen">
       <Helmet>
         <title>My profile - NextGenHunt</title>
       </Helmet>
@@ -58,7 +58,11 @@ export const MyProfile = () => {
       {/* information */}
       <div className="mt-6 md:mt-10 flex gap-6 flex-col md:flex-row">
         <div>
-          <img src={image} className="w-[250px] mx-auto md:mr-auto" alt="" />
+          <img
+            src={image}
+            className="w-full md:w-[250px] mx-auto md:mr-auto"
+            alt=""
+          />
         </div>
         <div className="pt-2">
           <h3 className="text-3xl text-gray-800 font-semibold mb-4">{name}</h3>

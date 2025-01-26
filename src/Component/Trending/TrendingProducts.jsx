@@ -24,7 +24,7 @@ export const TrendingProducts = () => {
     return <Loading></Loading>;
   }
   return (
-    <div className="bg-bannerPrimary py-10">
+    <div className="bg-bannerPrimary pt-10 md:pt-10 pb-20">
       <Title
         title={"Trending Products"}
         para={
@@ -33,7 +33,7 @@ export const TrendingProducts = () => {
         align={"left"}
         btn={"block"}
       ></Title>
-      <div className="w-11/12 lg:w-9/12 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 pt-10 gap-6">
+      <div className="w-11/12 md:w-9/12 lg:w-9/12 mx-auto grid grid-cols-1 lg:grid-cols-3 pt-10 gap-6">
         {trendingProduct.map((product) => (
           <CardBoxShape
             key={product._id}

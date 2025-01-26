@@ -30,7 +30,7 @@ export const DashboardLayout = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col bg-[#f6f6f6]">
+      <div className="drawer-content flex flex-col bg-[#f6f6f6] ">
         {/* Page content here */}
         <label
           htmlFor="my-drawer-2"
@@ -40,7 +40,7 @@ export const DashboardLayout = () => {
         </label>
         <div className="flex w-full p-4">
           {/* Main content */}
-          <div className="ml-1 md:mx-10 lg:mt-10 w-full mr-2">
+          <div className="ml-1 md:pl-10 md:pr-5 lg:mt-10 w-full mr-2 min-h-screen">
             <Outlet></Outlet>
           </div>
         </div>
@@ -66,7 +66,7 @@ export const DashboardLayout = () => {
           <div className="mt-auto mb-10 ml-4">
             <Link
               to="/"
-              className="hover:text-[#e7f726] flex items-center gap-2"
+              className="hover:text-[#e7f726] flex items-center gap-2 mt-4"
             >
               <IoIosHome className="text-xl" /> Home
             </Link>

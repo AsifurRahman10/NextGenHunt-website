@@ -8,7 +8,11 @@ import { Helmet } from "react-helmet-async";
 
 export const ReportedContent = () => {
   const axiosSecure = useAxiosSecure();
-  const { data, isLoading } = useQuery({
+  const {
+    data = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const res = await axiosSecure("/reported");
@@ -69,61 +73,71 @@ export const ReportedContent = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {data.map((item, idx) => (
-              <tr
-                key={item._id}
-                className="bg-white border-b hover:bg-gray-50 transition-all"
-              >
-                <th className="lg:pl-8 font-medium text-gray-900">{idx + 1}</th>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={item.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
+            {data.length > 0 ? (
+              data.map((item, idx) => (
+                <tr
+                  key={item._id}
+                  className="bg-white border-b hover:bg-gray-50 transition-all"
+                >
+                  <th className="lg:pl-8 font-medium text-gray-900">
+                    {idx + 1}
+                  </th>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img
+                            src={item?.image}
+                            alt="Avatar Tailwind CSS Component"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>{item.productName}</td>
-                <th>
-                  <div
-                    className={`badge p-2 text-white ${
-                      item.status === "pending"
-                        ? "bg-orange-400"
-                        : item.status === "accepted"
-                        ? "bg-green-400"
-                        : item.status === "rejected"
-                        ? "bg-red-400"
-                        : "bg-gray-400"
-                    }`}
-                  >
-                    {item.status === "pending" && "Pending"}
-                    {item.status === "accepted" && "Accepted"}
-                    {item.status === "rejected" && "Rejected"}
-                  </div>
-                </th>
+                  </td>
+                  <td>{item?.productName}</td>
+                  <th>
+                    <div
+                      className={`badge p-2 text-white ${
+                        item?.status === "pending"
+                          ? "bg-orange-400"
+                          : item.status === "accepted"
+                          ? "bg-green-400"
+                          : item.status === "rejected"
+                          ? "bg-red-400"
+                          : "bg-gray-400"
+                      }`}
+                    >
+                      {item?.status === "pending" && "Pending"}
+                      {item?.status === "accepted" && "Accepted"}
+                      {item?.status === "rejected" && "Rejected"}
+                    </div>
+                  </th>
 
-                <td>
-                  <Link to={`/product-details/${item._id}`}>
-                    <button className="btn btn-sm hover:bg-blue-600 hover:text-white">
-                      View Details
+                  <td>
+                    <Link to={`/product-details/${item._id}`}>
+                      <button className="btn btn-sm hover:bg-blue-600 hover:text-white">
+                        View Details
+                      </button>
+                    </Link>
+                  </td>
+
+                  <th>
+                    <button
+                      onClick={() => handleDelete(item?._id)}
+                      className="btn btn-ghost bg-[#B91C1C] text-white"
+                    >
+                      <MdDelete className="text-lg" />
                     </button>
-                  </Link>
+                  </th>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="text-center text-gray-500">
+                  No data available
                 </td>
-
-                <th>
-                  <button
-                    onClick={() => handleDelete(item._id)}
-                    className="btn btn-ghost bg-[#B91C1C] text-white"
-                  >
-                    <MdDelete className="text-lg" />
-                  </button>
-                </th>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

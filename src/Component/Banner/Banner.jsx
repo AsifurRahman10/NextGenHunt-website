@@ -3,7 +3,7 @@ import bannerImg from "../../assets/bannerimg.png";
 export const Banner = () => {
   return (
     <div className=" bg-bannerPrimary min-h-screen">
-      <div className="flex justify-center items-center w-11/12 lg:w-9/12 mx-auto gap-6 pt-10 flex-col lg:flex-row">
+      <div className="flex justify-center items-center w-11/12 lg:w-9/12 mx-auto gap-6 py-10 lg:py-0 pt-10 flex-col lg:flex-row">
         {/* text div */}
         <div className="flex-1 space-y-4 lg:space-y-6">
           <h2 className="text-4xl md:text-6xl font-semibold">

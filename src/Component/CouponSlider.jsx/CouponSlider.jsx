@@ -22,7 +22,7 @@ export const CouponSlider = () => {
     });
   }, []);
   return (
-    <div className="w-full lg:w-8/12 mx-auto h-[200px] md:h-[250px] lg:h-[300px]">
+    <div className="w-full  lg:w-8/12 mx-auto h-[200px] md:h-[250px] lg:h-[400px]">
       <Swiper
         navigation={true}
         modules={[Navigation, Autoplay]}
@@ -31,7 +31,7 @@ export const CouponSlider = () => {
         {validCoupons.map((item) => (
           <SwiperSlide key={item._id}>
             <img className="bg-cover" src={bgImg} alt="" />
-            <div className="absolute w-full rounded-lg shadow-lg p-6 md:p-8 hover:shadow-xl transition-shadow h-[300px] mt-16 md:left-20 lg:left-32 bg-white/65 md:bg-transparent lg:bg-transparent">
+            <div className="absolute w-full rounded-lg shadow-lg p-6 md:p-8 hover:shadow-xl transition-shadow h-[300px] lg:h-[350px] mt-16 md:left-0 bg-white/65 md:bg-transparent lg:bg-transparent">
               <p className="text-gray-600 text-sm md:text-base md:mb-4 mt-3 md:mt-0 ">
                 {item.couponDescription.slice(0, 80)}...
               </p>
@@ -44,11 +44,7 @@ export const CouponSlider = () => {
               </h1>
               <p className="text-gray-500 text-sm md:text-base">
                 <span className="font-medium text-gray-700">Expires on:</span>{" "}
-                {new Date(item.expireDate).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+                {moment(item.expireDate).format("MMMM D, YYYY")}
               </p>
             </div>
           </SwiperSlide>

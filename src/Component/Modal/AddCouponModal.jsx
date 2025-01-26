@@ -5,7 +5,7 @@ import { BsCalendar2Date } from "react-icons/bs";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-export const AddCouponModal = ({ updateId, refetch }) => {
+export const UpdateCouponModal = ({ updateId, refetch }) => {
   const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
   const [existingCoupon, setExistingCoupon] = useState({});
@@ -61,7 +61,7 @@ export const AddCouponModal = ({ updateId, refetch }) => {
               defaultValue={existingCoupon?.couponCode}
             />
           </div>
-          {/* Coupon code */}
+          {/* Coupon date */}
           <div className="form-control mt-2">
             <label className="label">
               <span className="label-text">Expire date</span>
@@ -73,7 +73,7 @@ export const AddCouponModal = ({ updateId, refetch }) => {
                 onChange={(date) => setStartDate(date)}
               />
               <span>
-                <BsCalendar2Date className="absolute top-[15px] left-48" />
+                <BsCalendar2Date className="absolute top-[13px] left-44" />
               </span>
             </div>
           </div>

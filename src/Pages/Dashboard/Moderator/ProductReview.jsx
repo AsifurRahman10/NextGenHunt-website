@@ -41,8 +41,8 @@ export const ProductReview = () => {
     axiosSecure.patch(`/update-status/${id}`, { status }).then((res) => {
       if (res.data.modifiedCount) {
         Swal.fire({
-          title: "Product has been accepted",
-          icon: "success",
+          title: "Product has been rejected",
+          icon: "error",
           draggable: true,
         });
         refetch();
@@ -67,7 +67,7 @@ export const ProductReview = () => {
     });
   };
   return (
-    <div>
+    <div className="">
       <h3 className="text-3xl font-bold">Review product</h3>
       <Helmet>
         <title>Product Review - NextGenHunt</title>
@@ -96,7 +96,9 @@ export const ProductReview = () => {
                 key={item._id}
                 className="bg-white border-b hover:bg-gray-50 transition-all"
               >
-                <th className="lg:pl-8 font-medium text-gray-900">{idx + 1}</th>
+                <th className="pl-4 lg:pl-8 font-medium text-gray-900">
+                  {idx + 1}
+                </th>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">

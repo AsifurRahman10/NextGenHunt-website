@@ -7,7 +7,6 @@ const axiosSecure = axios.create({ baseURL: import.meta.env.VITE_DB });
 export const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { signout } = useAuth();
-  // send request with interceptor
   axiosSecure.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("token");

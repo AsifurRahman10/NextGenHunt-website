@@ -3,18 +3,22 @@ import axios from "axios";
 import { ProductCard } from "../../Component/Share/ProductCard";
 import { Loading } from "../../Component/Share/Loading";
 import { Helmet } from "react-helmet-async";
+import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 export const Products = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [productCount, setProductCount] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const axiosSecure = useAxiosSecure();
+  console.log(productCount);
 
   const productPerPage = 6;
 
   const pageName = Math.ceil(productCount / productPerPage);
 
   const totalPages = [...Array(pageName).keys()].map((num) => num + 1);
+  console.log(totalPages);
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_DB}/count`).then((res) => {
@@ -23,7 +27,7 @@ export const Products = () => {
   }, []);
 
   useEffect(() => {
-    axios
+    axiosSecure
       .get(
         `${
           import.meta.env.VITE_DB
@@ -54,7 +58,7 @@ export const Products = () => {
   }
 
   return (
-    <div className="w-11/12 md:w-9/12 mx-auto my-10">
+    <div className="w-11/12 lg:w-9/12 mx-auto my-10">
       <Helmet>
         <title>Home - All Products</title>
       </Helmet>

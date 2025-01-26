@@ -19,10 +19,13 @@ export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
       return navigate("/login");
     }
     try {
-      const res = await axios.patch(`${import.meta.env.VITE_DB}/vote/${id}`, {
-        ...voteData,
-        email: user?.email,
-      });
+      const res = await axiosSecure.patch(
+        `${import.meta.env.VITE_DB}/vote/${id}`,
+        {
+          ...voteData,
+          email: user?.email,
+        }
+      );
       console.log(res);
       refetch();
     } catch (error) {
@@ -41,10 +44,15 @@ export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
   const handleReport = async (id) => {
     try {
       await axiosSecure.patch(`/report/${id}`);
+      Swal.fire({
+        icon: "error",
+        title: "Reported",
+        text: "You report has been sent to moderator for review.",
+      });
     } catch (error) {}
   };
   return path ? (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-6 md:ml-2">
       <button
         onClick={() => handleUpvote(_id)}
         className="btn text-white bg-[#613cfc] hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-full flex items-center gap-2 py-2 px-4 transition-all duration-200"
