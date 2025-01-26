@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.email) {
         setUser(currentUser);
-        const userInfo = currentUser?.email;
+        const userInfo = { email: currentUser?.email };
         setLoading(false);
         axios.post(`${import.meta.env.VITE_DB}/jwt`, userInfo).then((res) => {
           if (res?.data?.token) {

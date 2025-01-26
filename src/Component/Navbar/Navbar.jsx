@@ -3,8 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { FaUnlockAlt } from "react-icons/fa";
 import { useAuth } from "../../Hooks/useAuth";
-import { IoIosLogOut } from "react-icons/io";
-import { Loading } from "../Share/Loading";
+import "./Navbar.css";
 
 export const Navbar = () => {
   // const [profileDropdown, setProfileDropdown] = useState(false);
@@ -17,10 +16,10 @@ export const Navbar = () => {
 
   const navList = (
     <>
-      <li className="">
+      <li className="nav-col">
         <NavLink to="/">Home</NavLink>
       </li>
-      <li className="">
+      <li className="nav-col">
         <NavLink to="/products">Products</NavLink>
       </li>
     </>
