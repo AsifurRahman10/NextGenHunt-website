@@ -1,9 +1,9 @@
 import axios from "axios";
-import { CardBoxShape } from "../Share/CardBoxShape";
 import { Title } from "../Share/Title";
 import { useQuery } from "@tanstack/react-query";
 import { Loading } from "../Share/Loading";
 import { CardForFeature } from "../Share/CardForFeature";
+import { motion } from "motion/react";
 
 export const FeatureSection = () => {
   const {
@@ -37,7 +37,14 @@ export const FeatureSection = () => {
       {/* card container */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {featureProduct.map((product, index) => (
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: index * 0.2,
+            }}
             key={product._id}
             className={`${
               index === featureProduct.length - 1 ? "mt-6 lg:col-start-2" : ""
@@ -48,7 +55,7 @@ export const FeatureSection = () => {
               product={product}
               refetch={refetch}
             />
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

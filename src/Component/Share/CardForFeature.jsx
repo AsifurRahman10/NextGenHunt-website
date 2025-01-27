@@ -4,14 +4,13 @@ import { VoteButton } from "./VoteButton";
 export const CardForFeature = ({ product, refetch }) => {
   const { image, productName, product_description, productId, upvote, allTag } =
     product;
-  console.log(allTag);
   const voteData = {
     productName,
     productId: productId,
     image,
   };
   return (
-    <div className="border-gray-200 bg-white shadow-md rounded-lg p-4 border ">
+    <div className="border-gray-200 bg-white shadow-md rounded-lg p-4 border h-full">
       <div className="flex items-center ">
         {/* Icon */}
         <div className="flex items-center justify-center bg-black p-2 rounded-md">

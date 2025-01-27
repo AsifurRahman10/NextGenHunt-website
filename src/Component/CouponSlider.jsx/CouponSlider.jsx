@@ -15,7 +15,6 @@ export const CouponSlider = () => {
   const validCoupons = couponData.filter((coupon) => {
     return moment(coupon.expireDate).isAfter(moment(), "day");
   });
-  console.log(validCoupons);
   useEffect(() => {
     axiosSecure.get("/all-coupons").then((res) => {
       setCouponData(res.data);

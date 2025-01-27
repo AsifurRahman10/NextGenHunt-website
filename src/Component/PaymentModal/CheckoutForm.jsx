@@ -10,7 +10,6 @@ export const CheckoutForm = ({
   setValidCoupon,
   refetch,
 }) => {
-  console.log(validCoupon);
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState("");
@@ -42,10 +41,8 @@ export const CheckoutForm = ({
       card,
     });
     if (error) {
-      console.log(error);
       setError(error.message);
     } else {
-      console.log(paymentMethod);
     }
 
     // create payment intent
@@ -78,10 +75,8 @@ export const CheckoutForm = ({
               ? 20 - parseInt(validCoupon.discountAmount)
               : 20,
         };
-        console.log(paymentData);
 
         axiosSecure.post("/paymentInfo", paymentData).then((res) => {
-          console.log(res.data.insertedId);
           if (res.data.insertedId) {
             axiosSecure.patch(`/upgrade-user/${user?.email}`);
             e.target.reset();

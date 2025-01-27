@@ -14,7 +14,6 @@ const useUserType = () => {
       return res.data?.userRole;
     },
   });
-  console.log(userType);
   return [userType, isTypeLoading];
 };
 

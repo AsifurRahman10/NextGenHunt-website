@@ -30,7 +30,6 @@ export const StatisticsPage = () => {
       return res.data;
     },
   });
-  console.log(data);
 
   const resultArray = Object.keys(data).map((key) => ({
     name: key,

@@ -20,9 +20,7 @@ export const SocialLogin = () => {
       };
       axios
         .post(`${import.meta.env.VITE_DB}/userInfo`, userData)
-        .then((res) => {
-          console.log(res);
-        });
+        .then((res) => {});
       if (state?.from?.pathname) {
         navigate(state.from.pathname);
       } else {
@@ -33,9 +31,7 @@ export const SocialLogin = () => {
         icon: "success",
         draggable: true,
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <>

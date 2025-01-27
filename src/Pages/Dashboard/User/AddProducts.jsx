@@ -79,8 +79,6 @@ export const AddProducts = () => {
   // handle form
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
-    console.log(tags, externalLink);
     if (tags.length <= 0) {
       return Swal.fire({
         icon: "error",

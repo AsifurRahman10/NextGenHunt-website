@@ -4,21 +4,20 @@ import { ProductCard } from "../../Component/Share/ProductCard";
 import { Loading } from "../../Component/Share/Loading";
 import { Helmet } from "react-helmet-async";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
+import { motion } from "motion/react";
 export const Products = () => {
   const [allProducts, setAllProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [productCount, setProductCount] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const axiosSecure = useAxiosSecure();
-  console.log(productCount);
 
   const productPerPage = 6;
 
   const pageName = Math.ceil(productCount / productPerPage);
 
   const totalPages = [...Array(pageName).keys()].map((num) => num + 1);
-  console.log(totalPages);
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_DB}/count`).then((res) => {
@@ -92,8 +91,19 @@ export const Products = () => {
       <div className="divider"></div>
       {/* card */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-10 lg:gap-16 mt-4">
-        {allProducts.map((product) => (
-          <ProductCard key={product._id} product={product}></ProductCard>
+        {allProducts.map((product, index) => (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: index * 0.2,
+            }}
+            key={product._id}
+          >
+            <ProductCard product={product}></ProductCard>
+          </motion.div>
         ))}
       </div>
       <div className="join mt-8">

@@ -6,7 +6,6 @@ import useUserType from "../Hooks/useUserType";
 export const ModeratorRouter = ({ children }) => {
   const { user, loading } = useAuth();
   const [userType, isTypeLoading] = useUserType();
-  console.log(userType);
   const location = useLocation();
   if (loading || isTypeLoading) {
     return <Loading />;

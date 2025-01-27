@@ -299,7 +299,7 @@ export const UpdateProduct = () => {
 
           <div className="form-control mt-6">
             <button className="btn btn-primary block w-1/2 mx-auto text-white">
-              Add Product
+              Update Product
             </button>
           </div>
         </form>

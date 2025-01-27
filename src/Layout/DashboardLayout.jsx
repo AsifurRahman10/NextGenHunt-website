@@ -23,7 +23,6 @@ export const DashboardLayout = () => {
       return res.data;
     },
   });
-  console.log(data);
   if (isLoading || loading) {
     return <Loading />;
   }

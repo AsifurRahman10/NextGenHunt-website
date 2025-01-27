@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { Axios } from "axios";
 import { CiShoppingTag, CiStar } from "react-icons/ci";
 import { Link, useParams } from "react-router-dom";
 import { useAuth } from "../../Hooks/useAuth";
@@ -27,7 +27,7 @@ export const ProductDetails = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", id],
     queryFn: async () => {
       const res = await axiosSecure.get(
         `${import.meta.env.VITE_DB}/product-details/${id}`
@@ -85,9 +85,7 @@ export const ProductDetails = () => {
         text: "You review has been posted!",
         icon: "success",
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   // data for vote

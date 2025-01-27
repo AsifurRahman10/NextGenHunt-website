@@ -41,9 +41,7 @@ export const Register = () => {
         icon: "success",
       });
       setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

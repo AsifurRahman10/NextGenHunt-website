@@ -36,7 +36,6 @@ export const Login = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error("Login failed:", error.message);
       setError(error.message);
     }
   };

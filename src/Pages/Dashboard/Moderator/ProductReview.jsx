@@ -51,7 +51,6 @@ export const ProductReview = () => {
   };
 
   const handleAddFeature = (id) => {
-    console.log(id);
     const productData = {
       productId: id,
       timestamp: new Date(),

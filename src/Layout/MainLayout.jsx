@@ -6,7 +6,6 @@ import { Loading } from "../Component/Share/Loading";
 
 export const MainLayout = () => {
   const { loading } = useAuth();
-  console.log(loading);
   if (loading) {
     return <Loading></Loading>;
   }

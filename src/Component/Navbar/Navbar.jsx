@@ -7,7 +7,7 @@ import "./Navbar.css";
 import useUserType from "../../Hooks/useUserType";
 
 export const Navbar = () => {
-  const [userType, isTypeLoading] = useUserType();
+  const [userType] = useUserType();
   const [openMenu, setOpenMenu] = useState(false);
   const { user, signout } = useAuth();
 

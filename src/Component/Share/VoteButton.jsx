@@ -6,15 +6,24 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { IoIosWarning } from "react-icons/io";
 import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
+import useUserType from "../../Hooks/useUserType";
 
 export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
   const { user } = useAuth();
+  const [userType] = useUserType();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
   const path = location.pathname.includes("product-details");
 
   const handleUpvote = async (id) => {
+    if (userType !== "user") {
+      return Swal.fire({
+        icon: "error",
+        title: "Only user can vote",
+        timer: 1500,
+      });
+    }
     if (!user) {
       return navigate("/login");
     }
@@ -26,10 +35,8 @@ export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
           email: user?.email,
         }
       );
-      console.log(res);
       refetch();
     } catch (error) {
-      console.log(error);
       if (error.status === 409) {
         Swal.fire({
           icon: "error",
@@ -42,6 +49,13 @@ export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
   };
 
   const handleReport = async (id) => {
+    if (userType !== "user") {
+      return Swal.fire({
+        icon: "error",
+        title: "Only user can report",
+        timer: 1500,
+      });
+    }
     try {
       await axiosSecure.patch(`/report/${id}`);
       Swal.fire({
