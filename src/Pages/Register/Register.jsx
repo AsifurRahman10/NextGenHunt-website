@@ -13,6 +13,7 @@ import { Helmet } from "react-helmet-async";
 export const Register = () => {
   const [showPass, setShowPass] = useState(false);
   const { register: registerFn, updateUser, setLoading, user } = useAuth();
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const {
     register,
@@ -21,6 +22,7 @@ export const Register = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setError("");
     const imageFile = data.image[0];
     try {
       await registerFn(data.email, data.password);
@@ -41,7 +43,10 @@ export const Register = () => {
         icon: "success",
       });
       setLoading(false);
-    } catch (error) {}
+    } catch (error) {
+      const errorText = error.message.slice(15).replace(/[()]/g, "");
+      setError(errorText);
+    }
   };
 
   return (
@@ -126,6 +131,7 @@ export const Register = () => {
             {errors.password && (
               <p className="text-red-500 mt-4">{errors.password.message}</p>
             )}
+            {error && <p className="text-red-500 mt-4">{error}</p>}
             <div className="form-control mt-2 ">
               <button className="btn bg-btnPrimary text-white rounded-full">
                 Register
