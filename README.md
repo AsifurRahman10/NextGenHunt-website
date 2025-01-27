@@ -40,7 +40,7 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 
 ### User
 
-- **My Profile**: View profile details. Free accounts can upgrade to premium via card payment.
+- **My Profile**: View profile details. Free accounts can upgrade to premium via card payment and notify using nodemailer.
 - **Add Product**: Submit a new product using a detailed form (premium users only).
 - **My Products**: View all submitted products along with their status. Users can update or delete products. (Free users can submit only one product).
 - **Voting & Reporting**: Can vote for and report products.
@@ -81,6 +81,7 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 - Axios
 - SweetAlert2
 - Firebase Authentication
+- nodemailer
 
 ### Backend
 
