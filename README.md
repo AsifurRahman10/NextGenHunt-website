@@ -110,24 +110,20 @@ cd NextGenHunt-website
 
 ### 2. Install Dependencies
 
-```
 Frontend
 Navigate to the frontend folder and install the required dependencies:
 
 ```
-
 cd frontend
 npm install
-
 ```
+
 Backend
 Navigate to the backend folder and install the required dependencies:
 
 ```
-
 cd backend
 npm install
-
 ```
 
 ### 3. Setup Environment Variables
@@ -172,20 +168,16 @@ Frontend
 In the frontend folder, run:
 
 ```
-
 bash
 npm run dev
+```
+
 Backend
 In the backend folder, run:
 
 ```
-
-```
-
 bash
 npm start
-
 ```
 
 The frontend will be available at http://localhost:3000, and the backend will be available at http://localhost:5000 (or the port you set).
-```
