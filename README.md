@@ -113,11 +113,21 @@ cd NextGenHunt-website
 ```
 Frontend
 Navigate to the frontend folder and install the required dependencies:
+
 ```
+
+cd frontend
+npm install
 
 ```
 Backend
 Navigate to the backend folder and install the required dependencies:
+
+```
+
+cd backend
+npm install
+
 ```
 
 ### 3. Setup Environment Variables
@@ -131,6 +141,7 @@ Backend:
 Create a .env file in the backend folder with the following variables and set up accordingly:
 
 ```
+
 VITE_FIREBASE_API_KEY=your-firebase-api-key
 VITE_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
 VITE_FIREBASE_PROJECT_ID=your-firebase-project-id
@@ -139,16 +150,19 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=your-firebase-messaging-sender-id
 VITE_FIREBASE_APP_ID=your-firebase-app-id
 VITE_STRIPE_KEY=your-stripe-api-key
 VITE_DB_URL=your-database-url
+
 ```
 
 Backend
 In the backend folder, create a .env file and add the following variables:
 
 ```
+
 DB_HOST=your-database-host
 DB_USER=your-database-user
 DB_PASSWORD=your-database-password
 DB_NAME=your-database-name
+
 ```
 
 ### 4. Running the Project
@@ -158,15 +172,20 @@ Frontend
 In the frontend folder, run:
 
 ```
+
 bash
 npm run dev
 Backend
 In the backend folder, run:
+
 ```
 
 ```
+
 bash
 npm start
+
 ```
 
 The frontend will be available at http://localhost:3000, and the backend will be available at http://localhost:5000 (or the port you set).
+```
