@@ -1,5 +1,7 @@
 # NextGen Hunt
 
+![Alt text](https://i.ibb.co.com/Qv5L73VC/nextgtch.png)
+
 **Live Site**: [NextGen Hunt](https://spectacular-praline-76df24.netlify.app/)  
 **Server Side**: [NextGen Hunt Server](https://nextgenhunt-server.vercel.app/)
 
