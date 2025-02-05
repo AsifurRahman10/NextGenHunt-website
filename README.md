@@ -96,3 +96,66 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 - React Icons
 - TanStack React Query
 - Moment.js
+
+## Running the Project Locally
+
+To run this project locally, follow these steps:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/AsifurRahman10/NextGenHunt-website.git
+cd NextGenHunt-website
+2. Install Dependencies
+Frontend:
+Navigate to the frontend folder and install dependencies:
+
+bash
+Copy
+Edit
+cd frontend
+npm install
+Backend:
+Navigate to the backend folder and install dependencies:
+
+bash
+Copy
+Edit
+cd backend
+npm install
+3. Setup Environment Variables
+You need to create a .env file for both the frontend and backend with the necessary environment variables:
+
+Frontend:
+Firebase credentials
+API keys for any other integrations (if needed)
+Backend:
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key
+EMAIL_USER=your_email@example.com
+EMAIL_PASS=your_email_password
+4. Run the Backend
+Start the backend server:
+
+bash
+Copy
+Edit
+cd backend
+npm start
+This will start the server on http://localhost:5000.
+
+5. Run the Frontend
+Start the frontend application:
+
+bash
+Copy
+Edit
+cd frontend
+npm start
+This will start the React app on http://localhost:3000.
+
+6. Access the Application
+Open your browser and go to http://localhost:3000 to see the app running locally.
+```
