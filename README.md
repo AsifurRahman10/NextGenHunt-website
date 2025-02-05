@@ -106,72 +106,13 @@ To run this project locally, follow these steps:
 ```bash
 git clone https://github.com/AsifurRahman10/NextGenHunt-website.git
 cd NextGenHunt-website
-2. Install Dependencies
+
+
+```
+
+### 2. Install Dependencies
+
+```
 Frontend
 Navigate to the frontend folder and install the required dependencies:
-
-bash
-Copy
-Edit
-cd frontend
-npm install
-Backend
-Navigate to the backend folder and install the required dependencies:
-
-bash
-Copy
-Edit
-cd backend
-npm install
-3. Setup Environment Variables
-You need to create a .env file for both the frontend and backend with the necessary environment variables.
-
-Frontend:
-Firebase credentials
-API keys for any other integrations (if needed)
-Backend:
-Create a .env file in the backend folder with the following variables:
-
-ini
-Copy
-Edit
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-STRIPE_SECRET_KEY=your_stripe_secret_key
-EMAIL_USER=your_email@example.com
-EMAIL_PASS=your_email_password
-4. Run the Backend
-Start the backend server by running the following command:
-
-bash
-Copy
-Edit
-cd backend
-npm start
-This will start the server on http://localhost:5000.
-
-5. Run the Frontend
-Start the frontend application by running:
-
-bash
-Copy
-Edit
-cd frontend
-npm start
-This will start the React app on http://localhost:3000.
-
-6. Access the Application
-Open your browser and go to http://localhost:3000 to see the app running locally.
-
-vbnet
-Copy
-Edit
-
-### Key Changes:
-- Each section (like "Frontend" and "Backend") is clearly labeled with headings.
-- Subsections and instructions are neatly arranged under each main heading.
-- Step-by-step flow is maintained to ensure clarity.
-
-This format will be much clearer and easier to follow for anyone using the `README.md`. Let me know if t
 ```
