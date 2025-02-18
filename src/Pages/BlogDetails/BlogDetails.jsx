@@ -4,91 +4,114 @@ import { ReviewCard } from "../../Component/ReviewCard/ReviewCard";
 import { HiMiniPaperAirplane } from "react-icons/hi2";
 import { useAuth } from "../../Hooks/useAuth";
 import { FaCommentDots } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
+import { Loading } from "../../Component/Share/Loading";
+import moment from "moment";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { CommentCard } from "../../Component/CommentCard/CommentCard";
 
 export default function BlogDetails() {
   const { user } = useAuth();
-  const product = {
-    // image: img,
-    productName: "Awesome Product",
-    product_description:
-      "This is an amazing product that solves all your problems with ease.",
-    externalLinks: [
-      {
-        id: "7",
-        text: "https://zoom.us",
-      },
-    ],
-    allTag: [
-      {
-        id: "1",
-        text: "Development",
-      },
-      {
-        id: "2",
-        text: "Git",
-      },
-      {
-        id: "3",
-        text: "Open Source",
-      },
-    ],
-    userName: "JohnDoe",
-    email: "johndoe@example.com",
-    userPhoto: "https://example.com/user.jpg",
-    _id: "1234567890abcdef",
+  const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
+  const [comment, setComment] = useState("");
+
+  // get product details
+  const {
+    data: blogData = {},
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["products", id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `${import.meta.env.VITE_DB}/blog/${id}`
+      );
+      return res.data;
+    },
+  });
+
+  // get product review
+  const {
+    data: commentData = [],
+    isLoading: commentLoading,
+    refetch: refetchComment,
+  } = useQuery({
+    queryKey: ["reviewsItem"],
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `${import.meta.env.VITE_DB}/all-comment/${id}`
+      );
+      return res.data;
+    },
+  });
+
+  const {
+    _id,
+    blogName,
+    image,
+    externalLinks,
+    allTag,
+    blogDetails,
+    userName,
+    email,
+    userPhoto,
+    timestamp,
+    status,
+  } = blogData;
+  if (isLoading || commentLoading) {
+    return <Loading></Loading>;
+  }
+
+  const handleComment = async () => {
+    const commentData = {
+      name: user?.displayName,
+      photo: user?.photoURL,
+      comment,
+      productId: _id,
+    };
+    try {
+      await axiosSecure.post(
+        `${import.meta.env.VITE_DB}/add-comment`,
+        commentData
+      );
+      setComment("");
+      refetchComment();
+      Swal.fire({
+        text: "You comment has been posted!",
+        icon: "success",
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const reviews = [
-    {
-      _id: "68c56e0754c1d6154949b651",
-      name: "John Doe",
-      photo:
-        "https://lh3.googleusercontent.com/a/ACg8ocJxYZtTkExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-      review: "This product is amazing! It exceeded my expectations.",
-      rating: 5,
-      productId: "6892ef78740cf995g794gb3g",
-    },
-    {
-      _id: "79d67f1865d2e7265a5ac762",
-      name: "Jane Smith",
-      photo:
-        "https://lh3.googleusercontent.com/a/ACg8ocKyXZtTkExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-      review: "Good product, but it could be improved in a few areas.",
-      rating: 4,
-      productId: "6791df67630bf984f683fa2f",
-    },
-    {
-      _id: "89e78g2976e3f8376b6bd873",
-      name: "Alice Johnson",
-      photo:
-        "https://lh3.googleusercontent.com/a/ACg8ocLzZtTkExHvbaWB2W9kuUW7IZKuas-Bes1oxEmZsWXxj0GNukr=s96-c",
-      review: "Not bad, but I expected better quality for the price.",
-      rating: 3,
-      productId: "6892ef78740cf995g794gb3g",
-    },
-  ];
-
   return (
-    <div className="w-11/12 lg:w-9/12 mx-auto pt-6 pb-10">
+    <div className="w-11/12 lg:w-9/12 mx-auto pt-2 lg:pt-6 pb-10">
       {/* author description */}
       <div className="flex items-center text-[15px] gap-1 mt-[1.25rem] justify-center">
-        <h5 className="text-btnPrimary font-semibold">Author name</h5>
-        <p className="space-x-1 text-gray-600">
-          <span>on</span> Publish date
+        <h5 className="text-btnPrimary font-semibold">{userName}</h5>
+        <p className="space-x-1 text-gray-600 text-lg">
+          <span>on</span> {moment(timestamp).format("MMMM D, YYYY")}
         </p>
       </div>
       {/* title */}
-      <h3 className="text-5xl font-bold my-4 text-center text-black">
-        Business Travel Tools for the Digital Age productName
+      <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold my-2 lg:my-4 text-center text-black lg:w-10/12 mx-auto">
+        {blogName}
       </h3>
       {/* tags */}
       <div className="flex flex-wrap gap-2 mt-4 justify-center">
-        {product?.allTag.map((item, idx) => (
+        {allTag?.map((item, idx) => (
           <div
             key={idx}
             className="badge badge-neutral font-semibold  text-gray-600 border-none rounded-md px-2 py-1 text-sm bg-[#f0f0f2]"
           >
-            {item?.text}
+            {item}
           </div>
         ))}
       </div>
@@ -97,46 +120,31 @@ export default function BlogDetails() {
 
       <img
         src={image}
-        className="rounded-lg mt-8 h-[700px] w-full object-cover"
+        className="rounded-lg mt-8 lg:h-[700px] w-full object-cover"
         alt=""
       />
-      <p className="mt-6 text-lg text-gray-800">
-        Dive deep into the world of technology with our in-depth software blog
-        posts. Each article provides comprehensive insights into the latest
-        tools, emerging trends, and industry innovations. Whether it's AI
-        advancements, groundbreaking startups, or software development best
-        practices, we cover it all. Key highlights of our blog posts: ✅
-        Detailed Analysis – Explore in-depth reviews and technical breakdowns.
-        ✅ Industry Trends – Stay updated on the latest shifts in software and
-        technology. ✅ Expert Opinions – Gain insights from tech professionals
-        and industry leaders. ✅ Community Discussions <br /> – Engage with
-        other readers, share your thoughts, and ask questions. Stay ahead in the
-        tech space by exploring our latest blogs! 🚀 practices, we cover it all.
-        Key highlights of our blog posts: ✅ Detailed Analysis – Explore
-        in-depth reviews and technical breakdowns. ✅ Industry Trends – Stay
-        updated on the latest shifts in software and technology. ✅ Expert
-        Opinions – Gain insights from tech professionals and industry leaders.
-        ✅ Community Discussions – Engage with other readers, share your
-        thoughts, and ask questions. Stay ahead in the tech space by exploring
-        our latest blogs! 🚀
-      </p>
-
+      <ReactQuill
+        value={blogDetails}
+        readOnly={true}
+        theme="bubble"
+        className="custom-quill"
+      />
       {/* comment section */}
 
-      <div className="divider"></div>
+      <div className="divider mt-0"></div>
 
       {/* Post a review */}
       <h2 className="text-2xl font-bold mb-4">Leave a comment</h2>
       <div className="relative">
         <textarea
-          // value={review}
-          // onChange={(e) => setReview(e.target.value)}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
           className="textarea textarea-bordered w-full mt-4"
           placeholder="Share your comment"
           rows={6}
         ></textarea>
         <button
-          // onClick={handleReview}
+          onClick={handleComment}
           className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4"
         >
           <FaCommentDots className="text-lg" />
@@ -153,11 +161,13 @@ export default function BlogDetails() {
       </div>
 
       {/* Show reviews */}
-      <h4 className="my-2 lg:my-4 font-bold">View Comments (3)</h4>
-      {reviews.length > 0 ? (
+      <h4 className="my-2 lg:my-4 font-bold">
+        View Comments {commentData.length}
+      </h4>
+      {commentData.length > 0 ? (
         <>
-          {reviews.map((review) => (
-            <ReviewCard key={review._id} review={review}></ReviewCard>
+          {commentData.map((comment) => (
+            <CommentCard key={comment._id} comment={comment} />
           ))}
         </>
       ) : (
