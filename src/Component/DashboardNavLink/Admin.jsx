@@ -36,6 +36,15 @@ export const Admin = () => {
           Manage Coupons
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/dashboard/add-blog"
+          className="hover:text-white hover:bg-[#3a3a3a]"
+        >
+          <AiOutlineProduct className="text-xl mr-1" />
+          Manage Coupons
+        </NavLink>
+      </li>
     </>
   );
 };

@@ -23,6 +23,7 @@ import { Moderator } from "../Component/DashboardNavLink/Moderator";
 import { AdminRouter } from "./AdminRouter";
 import Blogs from "../Pages/Blogs/Blogs";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
+import AddBlog from "../Pages/Dashboard/Admin/AddBlog";
 
 export const router = createBrowserRouter([
   {
@@ -150,6 +151,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRouter>
             <ManageCoupons></ManageCoupons>
+          </AdminRouter>
+        ),
+      },
+      {
+        path: "/dashboard/add-blog",
+        element: (
+          <AdminRouter>
+            <AddBlog />
           </AdminRouter>
         ),
       },

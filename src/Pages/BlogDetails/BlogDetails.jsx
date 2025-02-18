@@ -2,8 +2,11 @@ import { Rating } from "@smastrom/react-rating";
 import image from "../../assets/couponBg.jpg";
 import { ReviewCard } from "../../Component/ReviewCard/ReviewCard";
 import { HiMiniPaperAirplane } from "react-icons/hi2";
+import { useAuth } from "../../Hooks/useAuth";
+import { FaCommentDots } from "react-icons/fa";
 
 export default function BlogDetails() {
+  const { user } = useAuth();
   const product = {
     // image: img,
     productName: "Awesome Product",
@@ -66,7 +69,7 @@ export default function BlogDetails() {
   ];
 
   return (
-    <div className="w-11/12 lg:w-9/12 mx-auto py-10">
+    <div className="w-11/12 lg:w-9/12 mx-auto pt-6 pb-10">
       {/* author description */}
       <div className="flex items-center text-[15px] gap-1 mt-[1.25rem] justify-center">
         <h5 className="text-btnPrimary font-semibold">Author name</h5>
@@ -129,30 +132,28 @@ export default function BlogDetails() {
           // value={review}
           // onChange={(e) => setReview(e.target.value)}
           className="textarea textarea-bordered w-full mt-4"
-          placeholder="Share your thoughts about this product"
+          placeholder="Share your comment"
           rows={6}
         ></textarea>
         <button
           // onClick={handleReview}
           className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4"
         >
-          <HiMiniPaperAirplane className="text-lg" />
-          Post
+          <FaCommentDots className="text-lg" />
+          Comment
         </button>
       </div>
       <div className="flex items-center gap-2 justify-end my-4 lg:my-2">
-        {/* <h4 className=" text-gray-500">Posting as {user.displayName}</h4> */}
+        <h4 className=" text-gray-500">Posting as {user.displayName}</h4>
         <div className="avatar">
           <div className="w-12 rounded-full">
-            {/* <img src={user.photoURL} alt="" /> */}
+            <img src={user.photoURL} alt="" />
           </div>
         </div>
       </div>
 
       {/* Show reviews */}
-      <h4 className="my-2 lg:my-4 font-bold">
-        See the reviews posted by our community
-      </h4>
+      <h4 className="my-2 lg:my-4 font-bold">View Comments (3)</h4>
       {reviews.length > 0 ? (
         <>
           {reviews.map((review) => (
