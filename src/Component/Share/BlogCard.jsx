@@ -1,7 +1,6 @@
-import { split } from "postcss/lib/list";
 import { Link } from "react-router-dom";
 
-export const ProductCard = ({ product }) => {
+export default function BlogCard({ blog }) {
   const {
     image,
     productName,
@@ -12,10 +11,10 @@ export const ProductCard = ({ product }) => {
     email,
     userPhoto,
     _id,
-  } = product;
+  } = blog;
   return (
-    <Link to={`/product-details/${_id}`}>
-      <div className="bg-white rounded-lg h-full flex flex-col p-4 hover:shadow-lg transition-shadow duration-300">
+    <Link to={`/blog-details/${_id}`}>
+      <div className="bg-white rounded-lg h-full flex flex-col p-4 hover:shadow-lg transition-shadow duration-300 relative">
         {/* Image */}
         <div className="overflow-hidden rounded-md">
           <img
@@ -26,16 +25,30 @@ export const ProductCard = ({ product }) => {
         </div>
 
         {/* Tags */}
-        <div className={`flex flex-wrap gap-2 mt-4`}>
+        <div
+          className={`${
+            location
+              ? "absolute top-8 flex flex-wrap gap-2 left-6"
+              : "flex flex-wrap gap-2 mt-4"
+          }`}
+        >
           {allTag.map((item, idx) => (
             <div
               key={idx}
-              className={`badge badge-neutral font-semibold bg-[#f0f0f2] text-gray-600 border-none rounded-md px-2 py-1 text-sm`}
+              className="badge badge-neutral font-semibold  text-gray-600 border-none rounded-md px-2 py-1 text-sm bg-[#ffffff]"
             >
               {item?.text}
             </div>
           ))}
         </div>
+        {location && (
+          <div className="flex items-center text-[15px] gap-1 mt-[1.25rem]">
+            <h5 className="text-btnPrimary font-semibold">Author name</h5>
+            <p className="space-x-1 text-gray-600">
+              <span>on</span> Publish date
+            </p>
+          </div>
+        )}
 
         {/* Product Name */}
         <h2 className="font-bold text-[1.5rem] text-gray-800 my-2">
@@ -49,4 +62,4 @@ export const ProductCard = ({ product }) => {
       </div>
     </Link>
   );
-};
+}

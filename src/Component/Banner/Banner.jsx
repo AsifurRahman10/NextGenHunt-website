@@ -9,7 +9,7 @@ import { easeInOut, spring } from "motion";
 
 export const Banner = () => {
   return (
-    <div className="bg-bannerPrimary min-h-screen pt-0 lg:pt-20 relative overflow-hidden">
+    <div className="bg-bannerPrimary min-h-[calc(100vh-96px)] pt-0 lg:pt-20 relative overflow-hidden">
       <div className="flex justify-center items-center w-11/12 lg:w-9/12 mx-auto gap-6 py-10 lg:py-0 pt-10 flex-col lg:flex-row relative z-10">
         {/* text div */}
         <div className="flex-1 space-y-4 lg:space-y-6">

@@ -23,12 +23,15 @@ export const Navbar = () => {
       <li className="nav-col">
         <NavLink to="/products">Products</NavLink>
       </li>
+      <li className="nav-col">
+        <NavLink to="/blogs">Blogs</NavLink>
+      </li>
     </>
   );
 
   return (
     <nav className="shadow-md bg-[#FFFFFF]">
-      <div className="navbar w-11/12 lg:w-9/12 mx-auto">
+      <div className="navbar w-11/12 lg:w-9/12 mx-auto py-0">
         {/* Navbar Start */}
         <div className="navbar-start">
           {/* Dropdown for Mobile */}
@@ -58,7 +61,7 @@ export const Navbar = () => {
             {openMenu && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 w-52 rounded-box p-2 shadow bg-[#FFFFFF]"
+                className="menu menu-sm dropdown-content mt-3 w-52 rounded-box p-2 shadow bg-[#FFFFFF] "
               >
                 {navList}
               </ul>
@@ -143,9 +146,19 @@ export const Navbar = () => {
             </div>
           ) : (
             <Link to={"/login"}>
-              <button className="btn bg-btnPrimary text-white font-medium px-4 lg:px-8">
-                <FaUnlockAlt /> Login
+              <button class="relative group cursor-pointer text-sky-50  overflow-hidden h-10 w-36 rounded-md bg-btnPrimary p-2 flex justify-center items-center font-extrabold">
+                <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#5030ce]"></div>
+                <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#452ab0]"></div>
+                <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#37228b]"></div>
+                <div class="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#2b1a6c]"></div>
+                <p class="z-10 flex justify-center items-center gap-2 font-semibold">
+                  <FaUnlockAlt /> Login
+                </p>
               </button>
+
+              {/* <button className="btn bg-btnPrimary text-white font-medium px-4 lg:px-8">
+                <FaUnlockAlt /> Login
+              </button> */}
             </Link>
           )}
         </div>

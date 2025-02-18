@@ -50,6 +50,7 @@ export const ProductDetails = () => {
       return res.data;
     },
   });
+  console.log(reviews);
 
   if (isLoading || reviewsLoading) {
     return <Loading></Loading>;

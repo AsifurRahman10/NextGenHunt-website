@@ -21,6 +21,8 @@ import { UserRouter } from "./UserRoute";
 import { ModeratorRouter } from "./ModeratorRoute";
 import { Moderator } from "../Component/DashboardNavLink/Moderator";
 import { AdminRouter } from "./AdminRouter";
+import Blogs from "../Pages/Blogs/Blogs";
+import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +42,18 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ProductDetails></ProductDetails>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/blog-details/:id",
+        element: (
+          <PrivateRoute>
+            <BlogDetails />
           </PrivateRoute>
         ),
       },
