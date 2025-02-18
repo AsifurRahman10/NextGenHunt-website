@@ -7,7 +7,6 @@ import { useAxiosSecure } from "../../Hooks/useAxiosSecure";
 import { motion } from "motion/react";
 export const Products = () => {
   const [allProducts, setAllProducts] = useState([]);
-  console.log(allProducts);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [productCount, setProductCount] = useState("");

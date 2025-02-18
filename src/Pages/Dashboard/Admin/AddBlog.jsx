@@ -4,10 +4,10 @@ import { useAuth } from "../../../Hooks/useAuth";
 import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import uploadImg from "../../../assets/uploadImg.jpg";
 import { MdOutlineFileUpload } from "react-icons/md";
 import Swal from "sweetalert2";
 import { uploadImage } from "../../../Api/Utils";
+import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
 
 export default function AddBlog() {
   const { register, handleSubmit, reset, setValue: updateValue } = useForm();
@@ -16,6 +16,7 @@ export default function AddBlog() {
   const [externalLink, setExternalLink] = useState([]);
   const [value, setValue] = useState("");
   const [uploadedImg, setUploadedImg] = useState(null);
+  const axiosSecure = useAxiosSecure();
 
   // handle tags
   const handleDelete = (index) => {
@@ -49,7 +50,7 @@ export default function AddBlog() {
     if (file) {
       const filePreviewUrl = URL.createObjectURL(file);
       setUploadedImg(filePreviewUrl);
-      updateValue("productImage", file);
+      updateValue("blogImage", file);
     }
   };
   const onSubmit = async (data) => {
@@ -67,19 +68,19 @@ export default function AddBlog() {
       });
     }
 
-    if (data.productImage.length <= 0) {
+    if (!data.blogImage || data.blogImage.length === 0) {
       return Swal.fire({
         icon: "error",
-        text: "You must upload product image.",
+        text: "You must upload blog image.",
       });
     }
-    const imageFile = data.productImage[0];
-    console.log(imageFile);
+    const imageFile = data.blogImage;
     const image = await uploadImage(imageFile);
-    const { productImage, ...newData } = data;
-    const ProductData = {
+    const { blogImage, ...newData } = data;
+    const blogData = {
       ...newData,
       image,
+      blogDetails: value,
       externalLinks: externalLink,
       allTag: tags,
       userName: user.displayName,
@@ -88,6 +89,20 @@ export default function AddBlog() {
       timestamp: new Date(),
       status: "approved",
     };
+    try {
+      await axiosSecure.post("/add-blog", blogData);
+      Swal.fire({
+        title: "Success!",
+        text: "You blog has been added published",
+        icon: "success",
+      });
+      reset();
+      setUploadedImg(null);
+      setExternalLink([]);
+      setTags([]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -99,20 +114,20 @@ export default function AddBlog() {
           <h3 className="text-lg font-semibold">General form</h3>
           <div className="flex gap-6 flex-col lg:flex-row">
             <div className="flex-1">
-              {/* product name */}
+              {/* blog name */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-medium">Blog title</span>
                 </label>
                 <input
                   type="text"
-                  {...register("productName")}
+                  {...register("blogName")}
                   placeholder="blog title"
                   className="input input-bordered bg-[#efefef] border-none"
                   required
                 />
               </div>
-              {/* product description */}
+              {/* blog description */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-medium">
@@ -220,19 +235,18 @@ export default function AddBlog() {
                   )}
                   <input
                     id="dropzone-file"
-                    name="productImage"
+                    name="blogImage"
                     type="file"
                     accept="image/*"
-                    {...register("productImage")}
+                    onChange={handleImageChange}
+                    // {...register("blogImage")}
                     className="hidden"
                   />
                 </label>
               </div>
 
-              {/* product owner info */}
-              <h3 className="text-lg font-semibold mt-10">
-                Product Owner Info
-              </h3>
+              {/* blog owner info */}
+              <h3 className="text-lg font-semibold mt-10">blog Owner Info</h3>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text font-medium">Owner Name</span>
@@ -274,7 +288,7 @@ export default function AddBlog() {
 
           <div className="form-control mt-6">
             <button className="btn btn-primary block w-1/2 mx-auto text-white">
-              Add Product
+              Add blog
             </button>
           </div>
         </form>

@@ -1,37 +1,45 @@
+import { useEffect, useState } from "react";
 import BlogCard from "../../Component/Share/BlogCard";
 import img from "../../assets/couponBg.jpg";
+import axios from "axios";
 
 export default function Blogs() {
-  const blog = {
-    image: img,
-    productName: "Awesome Product",
-    product_description:
-      "This is an amazing product that solves all your problems with ease.",
-    externalLinks: [
-      {
-        id: "7",
-        text: "https://zoom.us",
-      },
-    ],
-    allTag: [
-      {
-        id: "1",
-        text: "Development",
-      },
-      {
-        id: "2",
-        text: "Git",
-      },
-      {
-        id: "3",
-        text: "Open Source",
-      },
-    ],
-    userName: "JohnDoe",
-    email: "johndoe@example.com",
-    userPhoto: "https://example.com/user.jpg",
-    _id: "1234567890abcdef",
-  };
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_DB}/blogs`).then((res) => {
+      setBlogs(res.data);
+    });
+  }, []);
+  // const blog = {
+  //   image: img,
+  //   productName: "Awesome Product",
+  //   product_description:
+  //     "This is an amazing product that solves all your problems with ease.",
+  //   externalLinks: [
+  //     {
+  //       id: "7",
+  //       text: "https://zoom.us",
+  //     },
+  //   ],
+  //   allTag: [
+  //     {
+  //       id: "1",
+  //       text: "Development",
+  //     },
+  //     {
+  //       id: "2",
+  //       text: "Git",
+  //     },
+  //     {
+  //       id: "3",
+  //       text: "Open Source",
+  //     },
+  //   ],
+  //   userName: "JohnDoe",
+  //   email: "johndoe@example.com",
+  //   userPhoto: "https://example.com/user.jpg",
+  //   _id: "1234567890abcdef",
+  // };
   return (
     <div className="w-11/12 lg:w-9/12 mx-auto">
       {/* title part */}
@@ -47,9 +55,10 @@ export default function Blogs() {
         </p>
       </div>
 
-      {/* show blogs part */}
-      <div className="grid grid-cols-3 gap-6">
-        <BlogCard blog={blog} />
+      <div className="grid grid-cols-3 gap-6 pb-10">
+        {blogs.map((blog) => (
+          <BlogCard key={blog._id} blog={blog} />
+        ))}
       </div>
     </div>
   );
