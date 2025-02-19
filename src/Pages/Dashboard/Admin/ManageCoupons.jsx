@@ -90,7 +90,7 @@ export const ManageCoupons = () => {
 
       <button
         onClick={() => document.getElementById("my_modal_3").showModal()}
-        className="block ml-auto btn bg-btnPrimary text-white  mt-8 mb-4"
+        className="block ml-auto mb-4 btn bg-transparent border-btnPrimary border-2 hover:bg-btnPrimary hover:text-white"
       >
         Add Coupon
       </button>

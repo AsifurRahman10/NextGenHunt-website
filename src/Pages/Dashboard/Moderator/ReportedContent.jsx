@@ -115,7 +115,7 @@ export const ReportedContent = () => {
 
                   <td>
                     <Link to={`/product-details/${item._id}`}>
-                      <button className="btn btn-sm hover:bg-blue-600 hover:text-white">
+                      <button className="btn btn-sm hover:bg-btnPrimary hover:text-white">
                         View Details
                       </button>
                     </Link>

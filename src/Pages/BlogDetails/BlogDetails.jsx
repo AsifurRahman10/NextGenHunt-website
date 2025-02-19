@@ -145,7 +145,7 @@ export default function BlogDetails() {
         ></textarea>
         <button
           onClick={handleComment}
-          className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4"
+          className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4  hover:bg-btnPrimary hover:text-white hover:border-none"
         >
           <FaCommentDots className="text-lg" />
           Comment

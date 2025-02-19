@@ -171,7 +171,7 @@ export const ProductDetails = () => {
         ></textarea>
         <button
           onClick={handleReview}
-          className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4"
+          className="btn btn-outline border-btnPrimary px-8 absolute bottom-4 left-4 hover:bg-btnPrimary hover:text-white hover:border-none"
         >
           <HiMiniPaperAirplane className="text-lg" />
           Post

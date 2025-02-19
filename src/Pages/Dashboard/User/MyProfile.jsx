@@ -41,7 +41,6 @@ export const MyProfile = () => {
   if (subLoading || isLoading || loading) {
     return <Loading></Loading>;
   }
-  // const { email, name, image } = data;
 
   const handleSubscribe = () => {
     document.getElementById("my_modal_1").showModal();
@@ -138,15 +137,21 @@ export const MyProfile = () => {
                 <span className="text-[#8cb365]">Verified</span>
               </p>
             ) : (
-              <div className="flex items-center gap-4">
+              <div
+                onClick={handleSubscribe}
+                className="flex items-center gap-4"
+              >
                 <span className="text-gray-600 text-sm">
                   Not subscribed yet?
                 </span>
-                <button
-                  onClick={handleSubscribe}
-                  className="btn bg-btnPrimary hover:bg-[#273343] text-white font-medium px-4 py-2 rounded-lg transition duration-200 ease-in-out"
-                >
-                  Subscribe Now at 20$
+                <button className="relative group cursor-pointer text-sky-50  overflow-hidden h-10 w-60 rounded-md bg-btnPrimary p-2 flex justify-center items-center font-extrabold">
+                  <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#5030ce]"></div>
+                  <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#452ab0]"></div>
+                  <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#37228b]"></div>
+                  <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#2b1a6c]"></div>
+                  <p className="z-10 flex justify-center items-center gap-2 font-semibold">
+                    Subscribe Now at 20$
+                  </p>
                 </button>
               </div>
             )}
