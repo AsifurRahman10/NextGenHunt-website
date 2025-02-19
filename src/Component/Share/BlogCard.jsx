@@ -14,8 +14,7 @@ export default function BlogCard({ blog }) {
     _id,
     timestamp,
   } = blog;
-  console.log(blog);
-  console.log(allTag);
+  const stripHtmlTags = (html) => html.replace(/<[^>]*>/g, "");
   return (
     <Link to={`/blog-details/${_id}`}>
       <div className="bg-white rounded-lg h-full flex flex-col p-4 hover:shadow-lg transition-shadow duration-300 relative ">
@@ -53,7 +52,9 @@ export default function BlogCard({ blog }) {
 
         {/* Description */}
         <p className="text-lg text-gray-600">
-          {blogDetails.split(" ").splice(1, 20).join(" ") + "..."}
+          {stripHtmlTags(
+            blogDetails.split(" ").splice(1, 20).join(" ") + "..."
+          )}
         </p>
       </div>
     </Link>

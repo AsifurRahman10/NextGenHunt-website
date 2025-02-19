@@ -24,7 +24,7 @@ export const FeatureSection = () => {
   }
 
   return (
-    <div className="pt-10 pb-20 w-11/12 md:w-9/12 mx-auto">
+    <div className="pt-5 lg:pt-10 pb-10 lg:pb-20 w-11/12 md:w-9/12 mx-auto">
       <Title
         title={"Featured Products"}
         para={

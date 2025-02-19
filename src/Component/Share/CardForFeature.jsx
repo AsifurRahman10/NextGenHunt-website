@@ -10,32 +10,33 @@ export const CardForFeature = ({ product, refetch }) => {
     image,
   };
   return (
-    <div className="border-gray-200 bg-white shadow-md rounded-lg p-4 border h-full">
-      <div className="flex items-center ">
-        {/* Icon */}
-        <div className="flex items-center justify-center bg-black p-2 rounded-md">
-          <img src={image} alt="Icon" className="w-8 h-8 object-contain" />
-        </div>
+    <Link to={`/product-details/${productId}`}>
+      <div className="border-gray-200 bg-white shadow-md rounded-lg p-4 border h-full">
+        <div className="flex items-center ">
+          {/* Icon */}
+          <div className="flex items-center justify-center bg-black p-2 rounded-md">
+            <img src={image} alt="Icon" className="w-8 h-8 object-contain" />
+          </div>
 
-        {/* Content */}
-        <div className="flex-1 ml-4">
-          <Link to={`/product-details/${productId}`}>
+          {/* Content */}
+          <div className="flex-1 ml-4">
             <h2 className="font-medium text-gray-900 text-sm">{productName}</h2>
-          </Link>
-          <p className="text-gray-600 text-xs">
-            {product_description.split(" ").slice(0, 25).join(" ")}
-            {product_description.split(" ").length > 25 ? "..." : ""}
-          </p>
-        </div>
 
-        {/* Favorite Icon */}
-        <VoteButton
-          _id={productId}
-          refetch={refetch}
-          voteData={voteData}
-          upvote={upvote}
-        ></VoteButton>
+            <p className="text-gray-600 text-xs">
+              {product_description.split(" ").slice(0, 25).join(" ")}
+              {product_description.split(" ").length > 25 ? "..." : ""}
+            </p>
+          </div>
+
+          {/* Favorite Icon */}
+          <VoteButton
+            _id={productId}
+            refetch={refetch}
+            voteData={voteData}
+            upvote={upvote}
+          ></VoteButton>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };

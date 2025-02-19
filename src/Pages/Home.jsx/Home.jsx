@@ -3,6 +3,7 @@ import { Banner } from "../../Component/Banner/Banner";
 import { FeatureSection } from "../../Component/FeatureSection/FeatureSection";
 import { TrendingProducts } from "../../Component/Trending/TrendingProducts";
 import { CouponSlider } from "../../Component/CouponSlider.jsx/CouponSlider";
+import { LatestBlog } from "../../Component/LatestBlog/LatestBlog";
 
 export const Home = () => {
   return (
@@ -13,6 +14,7 @@ export const Home = () => {
       <Banner></Banner>
       <FeatureSection></FeatureSection>
       <TrendingProducts></TrendingProducts>
+      <LatestBlog />
       <CouponSlider />
     </div>
   );

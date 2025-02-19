@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export const Title = ({ title, para, align, btn }) => {
   return (
     <div
-      className={`my-10 w-11/12 lg:w-9/12 mx-auto text-center ${
+      className={`my-5 lg:my-10 w-11/12 lg:w-9/12 mx-auto text-center ${
         align === "left"
           ? "lg:text-left"
           : align === "right"
