@@ -162,6 +162,14 @@ export const router = createBrowserRouter([
           </AdminRouter>
         ),
       },
+      {
+        path: "/dashboard/admin-profile",
+        element: (
+          <AdminRouter>
+            <MyProfile />
+          </AdminRouter>
+        ),
+      },
     ],
   },
   {

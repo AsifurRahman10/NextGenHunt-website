@@ -128,12 +128,20 @@ export const Navbar = () => {
                       </Link>
                     )}
                     {userType === "admin" && (
-                      <Link
-                        to={"/dashboard/statistics-page"}
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Dashboard
-                      </Link>
+                      <>
+                        <Link
+                          to={"/dashboard/statistics-page"}
+                          className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                        >
+                          Dashboard
+                        </Link>
+                        <Link
+                          to="/dashboard/admin-profile"
+                          className="text-sm hover:bg-gray-100 text-gray-700 px-4 py-2 flex"
+                        >
+                          My Profile
+                        </Link>
+                      </>
                     )}
                   </li>
                   <div className="py-1">

@@ -10,6 +10,14 @@ export const Admin = () => {
     <>
       <li>
         <NavLink
+          to="/dashboard/admin-profile"
+          className="hover:text-white hover:bg-[#3a3a3a]"
+        >
+          <CgProfile className="text-xl mr-1" /> My Profile
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/dashboard/statistics-page"
           className="hover:text-white hover:bg-[#3a3a3a]"
         >
