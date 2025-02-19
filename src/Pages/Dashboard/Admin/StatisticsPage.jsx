@@ -6,19 +6,23 @@ import { MdPendingActions } from "react-icons/md";
 import { TbUsersGroup } from "react-icons/tb";
 import { Loading } from "../../../Component/Share/Loading";
 import { useAxiosSecure } from "../../../Hooks/useAxiosSecure";
-
-import React, { PureComponent } from "react";
 import {
   PieChart,
   Pie,
-  Sector,
   Cell,
   ResponsiveContainer,
   Legend,
+  BarChart,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Bar,
 } from "recharts";
+import { useAuth } from "../../../Hooks/useAuth";
 
 export const StatisticsPage = () => {
   const axiosSecure = useAxiosSecure();
+  const { user, Loading: userLoading } = useAuth();
   const {
     data = {},
     isLoading,
@@ -71,99 +75,112 @@ export const StatisticsPage = () => {
     );
   };
 
-  if (isLoading) {
+  if (isLoading || userLoading) {
     return <Loading />;
   }
   return (
     <div>
-      <h3 className="text-3xl font-bold mt-4">Admin Dashboard</h3>
+      <h3 className="text-xl font-bold mt-4 text-gray-700">Admin Dashboard</h3>
+      <h2 className="text-3xl font-semibold mt-2">
+        Welcome back, {user?.displayName}
+      </h2>
       <Helmet>
         <title>Admin Dashboard - NextGenHunt</title>
       </Helmet>
 
       {/* box */}
-      <div className="flex flex-col lg:flex-row gap-6 mt-6">
-        {/* revenue */}
-        <div className="bg-white p-6 rounded-xl flex-1">
-          <div className="flex items-center gap-6 justify-between">
-            <div className="">
-              <h4 className="text-2xl font-medium mb-4">Total revenue</h4>
-              <p className="text-4xl font-bold ">
-                $ {data?.totalMoney?.totalMoney}
-              </p>
-            </div>
-            <div>
-              <CiWallet className="text-7xl text-btnPrimary" />
-            </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 sm:grid-cols-4">
+        {/* Total Revenue */}
+        <div className="flex items-center bg-white rounded-sm overflow-hidden ">
+          <div className="p-4 bg-green-400">
+            <CiWallet className="h-12 w-12 text-white" />
+          </div>
+          <div className="px-4 text-gray-700">
+            <h3 className="text-sm tracking-wider">Total Revenue</h3>
+            <p className="text-3xl">${data?.totalMoney?.totalMoney}</p>
           </div>
         </div>
-        {/* products */}
-        <div className="bg-white p-6 rounded-xl flex-1">
-          <div className="flex items-center gap-6 justify-between">
-            <div className="">
-              <h4 className="text-2xl font-medium mb-4">Total Products</h4>
-              <p className="text-4xl font-bold ">{data["Total Product"]}</p>
-            </div>
-            <div>
-              <BsCartCheck className="text-7xl text-btnPrimary" />
-            </div>
+
+        {/* Total Products */}
+        <div className="flex items-center bg-white rounded-sm overflow-hidden ">
+          <div className="p-4 bg-blue-400">
+            <BsCartCheck className="h-12 w-12 text-white" />
+          </div>
+          <div className="px-4 text-gray-700">
+            <h3 className="text-sm tracking-wider">Total Products</h3>
+            <p className="text-3xl">{data["Total Product"]}</p>
           </div>
         </div>
-        {/* user */}
-        <div className="bg-white p-6 rounded-xl flex-1">
-          <div className="flex items-center gap-6 justify-between">
-            <div className="">
-              <h4 className="text-2xl font-medium mb-4">Total User</h4>
-              <p className="text-4xl font-bold ">{data["Total User"]}</p>
-            </div>
-            <div>
-              <TbUsersGroup className="text-7xl text-btnPrimary" />
-            </div>
+
+        {/* Total Users */}
+        <div className="flex items-center bg-white rounded-sm overflow-hidden ">
+          <div className="p-4 bg-indigo-400">
+            <TbUsersGroup className="h-12 w-12 text-white" />
+          </div>
+          <div className="px-4 text-gray-700">
+            <h3 className="text-sm tracking-wider">Total Users</h3>
+            <p className="text-3xl">{data["Total User"]}</p>
           </div>
         </div>
-        {/* pending product */}
-        <div className="bg-white p-6 rounded-xl flex-1">
-          <div className="flex items-center gap-6 justify-between">
-            <div className="">
-              <h4 className="text-2xl font-medium mb-4">Pending Products</h4>
-              <p className="text-4xl font-bold ">{data.pendingProducts}</p>
-            </div>
-            <div>
-              <MdPendingActions className="text-7xl text-btnPrimary" />
-            </div>
+
+        {/* Pending Products */}
+        <div className="flex items-center bg-white rounded-sm overflow-hidden ">
+          <div className="p-4 bg-red-400">
+            <MdPendingActions className="h-12 w-12 text-white" />
+          </div>
+          <div className="px-4 text-gray-700">
+            <h3 className="text-sm tracking-wider">Pending Products</h3>
+            <p className="text-3xl">{data.pendingProducts}</p>
           </div>
         </div>
       </div>
 
-      {/* cart */}
-      <div className="w-full lg:w-1/2 h-[300px] md:h-[400px] bg-white mt-6 p-4 shadow-lg rounded-lg">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart width={400} height={400}>
-            <Pie
+      <div className="flex gap-6 flex-col lg:flex-row">
+        {/* cart */}
+        <div className="w-full lg:w-1/2 h-[300px] md:h-[400px] bg-white mt-6 p-4 shadow-lg">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart width={400} height={400}>
+              <Pie
+                data={chartData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={renderCustomizedLabel}
+                outerRadius={80}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {chartData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Legend
+                verticalAlign="bottom"
+                height={36}
+                align="center"
+                iconType="circle"
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        {/* bar */}
+        <div className="w-full lg:w-1/2 h-[300px] md:h-[400px] bg-white mt-6 p-4 shadow-lg">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
               data={chartData}
-              cx="50%"
-              cy="50%"
-              labelLine={false}
-              label={renderCustomizedLabel}
-              outerRadius={80}
-              fill="#8884d8"
-              dataKey="value"
+              margin={{ top: 10, right: 30, left: 0, bottom: 10 }}
             >
-              {chartData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Legend
-              verticalAlign="bottom"
-              height={36}
-              align="center"
-              iconType="circle"
-            />
-          </PieChart>
-        </ResponsiveContainer>
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend verticalAlign="bottom" height={36} align="center" />
+              <Bar dataKey="value" fill="#8884d8" barSize={50} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
