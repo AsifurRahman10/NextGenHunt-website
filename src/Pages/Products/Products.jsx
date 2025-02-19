@@ -11,6 +11,7 @@ export const Products = () => {
   const [search, setSearch] = useState("");
   const [productCount, setProductCount] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [sorting, setSorting] = useState("");
   const axiosSecure = useAxiosSecure();
 
   const productPerPage = 6;
@@ -30,13 +31,13 @@ export const Products = () => {
       .get(
         `${
           import.meta.env.VITE_DB
-        }/all-products/?search=${search}&page=${currentPage}&size=${productPerPage}`
+        }/all-products/?search=${search}&page=${currentPage}&size=${productPerPage}&sort=${sorting}`
       )
       .then((res) => {
         setAllProducts(res.data);
         setLoading(false);
       });
-  }, [search, currentPage]);
+  }, [search, currentPage, sorting]);
 
   // handle prev button
   const handlePrev = () => {
@@ -61,10 +62,12 @@ export const Products = () => {
       <Helmet>
         <title>Home - All Products</title>
       </Helmet>
-      <div className="flex items-center justify-between mt-10">
-        <h3 className="text-3xl font-bold">Discover the World of Tech Tools</h3>
-        <div>
-          <form>
+      <div className="flex items-center flex-col md:flex-row gap-4 justify-between mt-10">
+        <h3 className="text-2xl lg:text-3xl font-bold">
+          Discover the World of Tech Tools
+        </h3>
+        <div className="flex items-center gap-2 md:gap-4">
+          <form className="w-full">
             <label className="input input-bordered flex items-center gap-2">
               <input
                 onChange={(e) => setSearch(e.target.value)}
@@ -86,6 +89,18 @@ export const Products = () => {
               </svg>
             </label>
           </form>
+          <>
+            <select
+              onChange={(e) => setSorting(e.target.value)}
+              className="select select-bordered w-11/12 md:w-full"
+            >
+              <option disabled selected>
+                Sort by
+              </option>
+              <option value={"vote"}>Most upvote</option>
+              <option value={"title"}>A - Z</option>
+            </select>
+          </>
         </div>
       </div>
       <div className="divider"></div>
