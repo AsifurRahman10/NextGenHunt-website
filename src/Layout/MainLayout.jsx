@@ -14,7 +14,7 @@ export const MainLayout = () => {
       {/* navbar */}
       <Navbar></Navbar>
       {/* outlet */}
-      <section className="pt-[76px]">
+      <section className="pt-[65px]">
         <Outlet></Outlet>
       </section>
       {/* footer */}

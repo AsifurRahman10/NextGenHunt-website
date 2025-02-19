@@ -36,13 +36,6 @@ export const CardForFeature = ({ product, refetch }) => {
           upvote={upvote}
         ></VoteButton>
       </div>
-      <div className="ml-14 mt-2">
-        {allTag.map((item, idx) => (
-          <div key={idx} className="badge bg-btnPrimary text-white">
-            {item.text}
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
