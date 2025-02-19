@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 
-export const Title = ({ title, para, align, btn }) => {
+export const Title = ({ title, para, align, btn, section }) => {
   return (
     <div
-      className={`my-5 lg:my-10 w-11/12 lg:w-9/12 mx-auto text-center ${
+      className={`my-5 ${
+        section ? "lg:mt-10 lg:mb-0" : "lg:my-10"
+      } w-11/12 lg:w-9/12 mx-auto text-center ${
         align === "left"
           ? "lg:text-left"
           : align === "right"
@@ -11,7 +13,11 @@ export const Title = ({ title, para, align, btn }) => {
           : "lg:text-center"
       }`}
     >
-      <div className="flex items-center justify-between flex-col lg:flex-row">
+      <div
+        className={`flex items-center flex-col lg:flex-row ${
+          btn == "hidden" ? "justify-center" : "justify-between"
+        }`}
+      >
         <div>
           <h2 className="text-3xl font-bold mb-4">{title}</h2>
           <p className="font-medium text-gray-600">{para}</p>

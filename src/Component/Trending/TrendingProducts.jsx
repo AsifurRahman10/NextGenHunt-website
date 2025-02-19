@@ -31,7 +31,7 @@ export const TrendingProducts = () => {
         align={"left"}
         btn={"block"}
       ></Title>
-      <div className="w-11/12 md:w-9/12 lg:w-9/12 mx-auto grid grid-cols-1 lg:grid-cols-3 pt-5 lg:pt-10 gap-6">
+      <div className="w-11/12 md:w-9/12 lg:w-9/12 mx-auto grid grid-cols-1 lg:grid-cols-3 pt-4 gap-6">
         {trendingProduct.map((product, index) => (
           <motion.div
             key={product._id}

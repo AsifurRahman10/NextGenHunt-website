@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-  font-family: "Be Vietnam Pro", serif;
+  font-family: "Be Vietnam Pro", serif !important;
 }
 
 .custom-quill .ql-editor {

@@ -21,7 +21,7 @@ export const CouponSlider = () => {
     });
   }, []);
   return (
-    <div className="w-full  lg:w-8/12 mx-auto h-[250px] lg:h-[400px]">
+    <div className="w-full mx-auto h-[250px] lg:h-[400px]">
       <Swiper
         navigation={true}
         modules={[Navigation, Autoplay]}
@@ -31,7 +31,7 @@ export const CouponSlider = () => {
           <SwiperSlide key={item._id}>
             <img className="bg-cover" src={bgImg} alt="" />
             <div className="absolute w-full rounded-lg shadow-lg p-6 md:p-8 hover:shadow-xl transition-shadow h-[350px] mt-16 md:left-0 bg-white/65 md:bg-transparent lg:bg-transparent">
-              <p className="text-gray-600 text-sm md:text-base md:mb-4 mt-3 md:mt-0 ">
+              <p className="text-gray-600 text-sm md:text-base md:mb-4 mt-3 pt-8 md:pt-5 lg:pt-0 md:mt-0 ">
                 {item.couponDescription.slice(0, 80)}...
               </p>
               <h3 className="text-xl md:text-3xl font-bold text-blue-600 mb-2">

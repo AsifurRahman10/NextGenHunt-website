@@ -4,6 +4,9 @@ import { FeatureSection } from "../../Component/FeatureSection/FeatureSection";
 import { TrendingProducts } from "../../Component/Trending/TrendingProducts";
 import { CouponSlider } from "../../Component/CouponSlider.jsx/CouponSlider";
 import { LatestBlog } from "../../Component/LatestBlog/LatestBlog";
+import NewsLetter from "../../Component/NewsLetter.jsx/NewsLetter";
+import { FAQSection } from "../../Component/FAQ/FAQSection";
+import Testimonial from "../../Component/Testimonial/Testimonial";
 
 export const Home = () => {
   return (
@@ -15,7 +18,10 @@ export const Home = () => {
       <FeatureSection></FeatureSection>
       <TrendingProducts></TrendingProducts>
       <LatestBlog />
+      <FAQSection />
+      <Testimonial />
       <CouponSlider />
+      <NewsLetter />
     </div>
   );
 };
