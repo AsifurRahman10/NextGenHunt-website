@@ -6,10 +6,12 @@ import square from "../../assets/hero-square.png";
 import square2 from "../../assets/hero-square-2.png";
 import triangle from "../../assets/hero-triangle.png";
 import { easeInOut, spring } from "motion";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Banner = () => {
   return (
-    <div className="bg-bannerPrimary min-h-[calc(100vh-96px)] pt-0 lg:pt-20 relative overflow-hidden">
+    <div className="bg-bannerPrimary min-h-[calc(100vh-78px)] pt-0 lg:pt-20 relative overflow-hidden">
       <div className="flex justify-center items-center w-11/12 lg:w-9/12 mx-auto gap-6 py-10 lg:py-0 pt-10 flex-col lg:flex-row relative z-10">
         {/* text div */}
         <div className="flex-1 space-y-4 lg:space-y-6">
@@ -26,7 +28,12 @@ export const Banner = () => {
           {/* search */}
           <div className="flex gap-3 lg:gap-6 items-center">
             <label className="input input-bordered flex items-center gap-2 w-9/12">
-              <input type="text" className="grow" placeholder="Search" />
+              <input
+                // onChange={handleChange}
+                type="text"
+                className="grow"
+                placeholder="Search"
+              />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
@@ -40,9 +47,11 @@ export const Banner = () => {
                 />
               </svg>
             </label>
-            <button className="btn bg-btnPrimary text-white font-medium w-1/4">
-              Search
-            </button>
+            <Link to={"/products"} className="">
+              <button className="btn bg-btnPrimary text-white font-medium w-full px-8">
+                Search
+              </button>
+            </Link>
           </div>
         </div>
 

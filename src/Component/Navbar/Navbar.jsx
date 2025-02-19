@@ -5,6 +5,7 @@ import { FaUnlockAlt } from "react-icons/fa";
 import { useAuth } from "../../Hooks/useAuth";
 import "./Navbar.css";
 import useUserType from "../../Hooks/useUserType";
+import { CgProfile } from "react-icons/cg";
 
 export const Navbar = () => {
   const [userType] = useUserType();
@@ -30,7 +31,7 @@ export const Navbar = () => {
   );
 
   return (
-    <nav className="shadow-md bg-[#FFFFFF]">
+    <nav className="shadow-md bg-[#FFFFFF] fixed z-50 w-full">
       <div className="navbar w-11/12 lg:w-9/12 mx-auto py-0">
         {/* Navbar Start */}
         <div className="navbar-start">
@@ -103,12 +104,20 @@ export const Navbar = () => {
                   </li>
                   <li>
                     {userType === "user" && (
-                      <Link
-                        to={"/dashboard/my-profile"}
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Dashboard
-                      </Link>
+                      <>
+                        <Link
+                          to={"/dashboard/my-profile"}
+                          className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
+                        >
+                          Dashboard
+                        </Link>
+                        <Link
+                          to="/dashboard/my-profile"
+                          className="text-sm hover:bg-gray-100 text-gray-700 px-4 py-2 flex"
+                        >
+                          My Profile
+                        </Link>
+                      </>
                     )}
                     {userType === "moderator" && (
                       <Link
@@ -126,12 +135,6 @@ export const Navbar = () => {
                         Dashboard
                       </Link>
                     )}
-                    {/* <Link
-                      to={"/dashboard"}
-                      className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                    >
-                      Dashboard
-                    </Link> */}
                   </li>
                   <div className="py-1">
                     <Link
