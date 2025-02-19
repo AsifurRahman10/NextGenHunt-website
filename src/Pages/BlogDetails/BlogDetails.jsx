@@ -106,12 +106,12 @@ export default function BlogDetails() {
       </h3>
       {/* tags */}
       <div className="flex flex-wrap gap-2 mt-4 justify-center">
-        {allTag?.map((item, idx) => (
+        {allTag.map((item, idx) => (
           <div
             key={idx}
             className="badge badge-neutral font-semibold  text-gray-600 border-none rounded-md px-2 py-1 text-sm bg-[#f0f0f2]"
           >
-            {item}
+            {item.text}
           </div>
         ))}
       </div>

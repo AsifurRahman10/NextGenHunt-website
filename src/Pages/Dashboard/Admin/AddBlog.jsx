@@ -83,7 +83,6 @@ export default function AddBlog() {
       blogDetails: value,
       externalLinks: externalLink,
       allTag: tags,
-      userName: user.displayName,
       email: user.email,
       userPhoto: user.photoURL,
       timestamp: new Date(),
@@ -139,7 +138,11 @@ export default function AddBlog() {
                   theme="snow"
                   value={value}
                   onChange={setValue}
-                  className="h-[200px] pb-10 bg-[#efefef]"
+                  style={{
+                    height: "200px",
+                    paddingBottom: "40px",
+                    backgroundColor: "#efefef",
+                  }}
                 />
               </div>
               <div className="flex items-center mt-4 gap-6">
@@ -252,11 +255,11 @@ export default function AddBlog() {
                   <span className="label-text font-medium">Owner Name</span>
                 </label>
                 <input
-                  disabled
                   defaultValue={user?.displayName}
                   type="text"
                   placeholder="Owner Name"
                   className="input input-bordered bg-[#efefef] border-none"
+                  {...register("userName")}
                   required
                 />
               </div>

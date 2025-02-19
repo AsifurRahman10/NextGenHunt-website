@@ -5,14 +5,12 @@ import dot from "../../assets/hero-dot.png";
 import square from "../../assets/hero-square.png";
 import square2 from "../../assets/hero-square-2.png";
 import triangle from "../../assets/hero-triangle.png";
-import { easeInOut, spring } from "motion";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Banner = () => {
   return (
     <div className="bg-bannerPrimary min-h-[calc(100vh-78px)] pt-0 lg:pt-20 relative overflow-hidden">
-      <div className="flex justify-center items-center w-11/12 lg:w-9/12 mx-auto gap-6 py-10 lg:py-0 pt-10 flex-col lg:flex-row relative z-10">
+      <div className="flex justify-center items-center w-11/12 lg:w-9/12 mx-auto gap-6 py-10 mt-0 md:mt-5 lg:mt-0 lg:py-0 pt-10 flex-col lg:flex-row relative z-10">
         {/* text div */}
         <div className="flex-1 space-y-4 lg:space-y-6">
           <h2 className="text-4xl md:text-6xl font-semibold">

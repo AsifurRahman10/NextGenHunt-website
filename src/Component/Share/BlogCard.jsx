@@ -6,7 +6,6 @@ export default function BlogCard({ blog }) {
     image,
     blogName,
     blogDetails,
-    externalLinks,
     allTag,
     userName,
     email,
@@ -26,15 +25,14 @@ export default function BlogCard({ blog }) {
             alt=""
           />
         </div>
-
         {/* Tags */}
         <div className="absolute top-8 flex flex-wrap gap-2 left-6">
-          {allTag.map((item, idx) => (
+          {allTag?.map((item, idx) => (
             <div
               key={idx}
               className="badge badge-neutral font-semibold  text-gray-600 border-none rounded-md px-2 py-1 text-sm bg-[#ffffff]"
             >
-              {item}
+              {item.text}
             </div>
           ))}
         </div>
@@ -44,16 +42,14 @@ export default function BlogCard({ blog }) {
             <span>on</span> {moment(timestamp).format("MMMM D, YYYY")}
           </p>
         </div>
-
         {/* Product Name */}
         <h2 className="font-bold text-[1.5rem] text-gray-800 my-2">
           {blogName}
         </h2>
-
         {/* Description */}
         <p className="text-lg text-gray-600">
           {stripHtmlTags(
-            blogDetails.split(" ").splice(1, 20).join(" ") + "..."
+            blogDetails?.split(" ").splice(1, 20).join(" ") + "..."
           )}
         </p>
       </div>

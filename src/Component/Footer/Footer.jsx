@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 export const Footer = () => {
@@ -12,27 +13,31 @@ export const Footer = () => {
           </p>
         </aside>
         <nav>
-          <h6 className="footer-title">Services</h6>
-          <a className="link link-hover">Branding</a>
-          <a className="link link-hover">Design</a>
-          <a className="link link-hover">Marketing</a>
-          <a className="link link-hover">Advertisement</a>
+          <h6 className="footer-title">Navigation</h6>
+          <Link to="/" className="link link-hover">
+            Home
+          </Link>
+          <Link to="/products" className="link link-hover">
+            Products
+          </Link>
         </nav>
         <nav>
-          <h6 className="footer-title">Company</h6>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
+          <h6 className="footer-title">Login</h6>
+          <Link to="/login" className="link link-hover">
+            Login
+          </Link>
+          <Link to="/register" className="link link-hover">
+            Registration
+          </Link>
         </nav>
         <nav>
-          <h6 className="footer-title">Legal</h6>
-          <a className="link link-hover">Terms of use</a>
-          <a className="link link-hover">Privacy policy</a>
-          <a className="link link-hover">Cookie policy</a>
+          <h6 className="footer-title">More Content</h6>
+          <Link to="/blogs" className="link link-hover">
+            Blogs
+          </Link>
         </nav>
       </div>
-      <footer className="footer text-white items-center w-11/12 lg:w-9/12 mx-auto pb-10 mt-6 md:mt-10">
+      <footer className="footer text-white items-center justify-center w-11/12 lg:w-9/12 mx-auto pb-10 mt-6 md:mt-10">
         <aside className="grid-flow-col items-center">
           <svg
             width="36"
@@ -47,7 +52,7 @@ export const Footer = () => {
           </svg>
           <p>Copyright © {new Date().getFullYear()} - All right reserved</p>
         </aside>
-        <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        {/* <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
           <a>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +86,7 @@ export const Footer = () => {
               <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
             </svg>
           </a>
-        </nav>
+        </nav> */}
       </footer>
     </footer>
   );

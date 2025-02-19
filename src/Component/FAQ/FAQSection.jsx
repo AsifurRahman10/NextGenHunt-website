@@ -2,7 +2,7 @@ import { Title } from "../Share/Title";
 import image from "../../assets/FAQ.svg";
 export const FAQSection = () => {
   return (
-    <div className="pt-5  w-11/12 md:w-9/12 mx-auto">
+    <div className="pt-10  w-11/12 md:w-9/12 mx-auto">
       <Title
         title={"Frequently Asked Questions (FAQ)"}
         para={
