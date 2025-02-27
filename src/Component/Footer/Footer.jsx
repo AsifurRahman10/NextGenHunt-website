@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#14121d]">
+    <footer className="bg-[#14121d] dark:bg-[#1C1C1C]">
       <div className="footer text-white w-11/12 lg:w-9/12 mx-auto pt-10 md:pt-20">
         <aside className="">
           <img className="w-80" src={logo} alt="" />

@@ -19,8 +19,8 @@ export const Title = ({ title, para, align, btn, section }) => {
         }`}
       >
         <div>
-          <h2 className="text-3xl font-bold mb-4">{title}</h2>
-          <p className="font-medium text-gray-600">{para}</p>
+          <h2 className="text-3xl font-bold mb-4 dark:text-white">{title}</h2>
+          <p className="font-medium text-gray-600 dark:text-gray-300">{para}</p>
         </div>
         <div className={`${btn} pt-6`}>
           <Link to={"/products"}>add</Link>

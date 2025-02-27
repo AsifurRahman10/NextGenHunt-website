@@ -96,7 +96,7 @@ export const ProductDetails = () => {
     email: user.email,
   };
   return (
-    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto py-10 lg:py-20">
+    <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto py-10 lg:py-20 dark:text-white">
       <Helmet>
         <title>
           {data?.productName ? data?.productName : "Product details"} -
@@ -165,7 +165,7 @@ export const ProductDetails = () => {
         <textarea
           value={review}
           onChange={(e) => setReview(e.target.value)}
-          className="textarea textarea-bordered w-full mt-4"
+          className="textarea textarea-bordered w-full mt-4 dark:text-black"
           placeholder="Share your thoughts about this product"
           rows={6}
         ></textarea>

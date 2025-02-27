@@ -10,7 +10,7 @@ export const MainLayout = () => {
     return <Loading></Loading>;
   }
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-[#1C1C1C]">
       {/* navbar */}
       <Navbar></Navbar>
       {/* outlet */}

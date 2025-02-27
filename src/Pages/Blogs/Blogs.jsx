@@ -11,13 +11,13 @@ export default function Blogs() {
     });
   }, []);
   return (
-    <div className="w-11/12 lg:w-9/12 mx-auto">
+    <div className="w-11/12 lg:w-9/12 mx-auto dark:text-white">
       {/* title part */}
       <div className="text-center py-[2rem] md:pt-[4rem] lg:py-[4rem]">
         <h3 className="text-3xl lg:text-5xl font-bold mb-4">
           Tech Blog & <span className="text-btnPrimary">Discussions</span>
         </h3>
-        <p className="text-sm lg:text-lg lg:w-10/12 mx-auto text-gray-700 font-medium">
+        <p className="text-sm lg:text-lg lg:w-10/12 mx-auto text-gray-700 dark:text-gray-300 font-medium">
           Stay updated with the latest technology trends, AI breakthroughs, and
           software innovations through our Tech Blog. We cover everything from
           emerging startups and cutting-edge tools to in-depth product analyses

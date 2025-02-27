@@ -13,7 +13,7 @@ body {
   color: #1f2937; /* text-gray-800 */
   line-height: 1.8; /* Improves readability */
   padding: 16px; /* Adds spacing */
-  background-color: white; /* Ensures correct background */
+  /* Ensures correct background */
   border-radius: 8px; /* Rounded corners */
 }
 

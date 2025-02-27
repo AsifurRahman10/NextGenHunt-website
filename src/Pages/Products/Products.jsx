@@ -63,7 +63,7 @@ export const Products = () => {
         <title>Home - All Products</title>
       </Helmet>
       <div className="flex items-center flex-col md:flex-row gap-4 justify-between mt-10">
-        <h3 className="text-2xl lg:text-3xl font-bold">
+        <h3 className="text-2xl lg:text-3xl font-bold dark:text-white">
           Discover the World of Tech Tools
         </h3>
         <div className="flex items-center gap-2 md:gap-4">

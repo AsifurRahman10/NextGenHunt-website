@@ -76,7 +76,7 @@ export const VoteButton = ({ _id, refetch, voteData, upvote }) => {
       </button>
       <button
         onClick={() => handleReport(_id)}
-        className="btn text-black btn-outline hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-full flex items-center gap-2 py-2 px-4 transition-all duration-200"
+        className="btn text-black dark:text-white btn-outline hover:bg-[#4b2bdf] border-2 border-[#613cfc] rounded-full flex items-center gap-2 py-2 px-4 transition-all duration-200"
       >
         <IoIosWarning className="text-xl" />
         <span className="text-sm">Report</span>

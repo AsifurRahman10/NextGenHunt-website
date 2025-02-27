@@ -22,7 +22,7 @@ export const TrendingProducts = () => {
     return <Loading></Loading>;
   }
   return (
-    <div className="bg-bannerPrimary pt-5 lg:pt-10 pb-10 lg:pb-20 ">
+    <div className="bg-bannerPrimary pt-5 lg:pt-10 pb-10 lg:pb-20 dark:bg-[#0a0a0a]">
       <Title
         title={"Trending Products"}
         para={

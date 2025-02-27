@@ -2,7 +2,7 @@ import { Title } from "../Share/Title";
 import image from "../../assets/FAQ.svg";
 export const FAQSection = () => {
   return (
-    <div className="pt-10  w-11/12 md:w-9/12 mx-auto">
+    <div className="pt-10 w-11/12 md:w-9/12 mx-auto">
       <Title
         title={"Frequently Asked Questions (FAQ)"}
         para={
@@ -12,7 +12,7 @@ export const FAQSection = () => {
         btn={"hidden"}
         section={"faq"}
       ></Title>
-      <div className="flex items-center flex-col lg:flex-row gap-6">
+      <div className="flex items-center flex-col lg:flex-row gap-6 dark:text-white">
         {/* question */}
         <div className="flex-1">
           <div className="collapse collapse-arrow border-b-2 rounded-none">

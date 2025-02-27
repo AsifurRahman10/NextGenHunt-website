@@ -11,15 +11,17 @@ import { Loading } from "../../Component/Share/Loading";
 import moment from "moment";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { CommentCard } from "../../Component/CommentCard/CommentCard";
+import { ThemeContext } from "../../Provider/ThemeProvider";
 
 export default function BlogDetails() {
   const { user } = useAuth();
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const [comment, setComment] = useState("");
+  const { isDarkMode } = useContext(ThemeContext);
 
   // get product details
   const {
@@ -92,16 +94,16 @@ export default function BlogDetails() {
   };
 
   return (
-    <div className="w-11/12 lg:w-9/12 mx-auto pt-2 lg:pt-6 pb-10">
+    <div className="w-11/12 lg:w-9/12 mx-auto pt-2 lg:pt-6 pb-10 dark:text-white">
       {/* author description */}
       <div className="flex items-center text-[15px] gap-1 mt-[1.25rem] justify-center">
         <h5 className="text-btnPrimary font-semibold">{userName}</h5>
-        <p className="space-x-1 text-gray-600 text-lg">
+        <p className="space-x-1 text-gray-600 dark:text-gray-300 text-lg">
           <span>on</span> {moment(timestamp).format("MMMM D, YYYY")}
         </p>
       </div>
       {/* title */}
-      <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold my-2 lg:my-4 text-center text-black lg:w-10/12 mx-auto">
+      <h3 className="text-2xl md:text-3xl lg:text-5xl font-bold my-2 lg:my-4 text-center text-black dark:text-white lg:w-10/12 mx-auto">
         {blogName}
       </h3>
       {/* tags */}
@@ -127,7 +129,9 @@ export default function BlogDetails() {
         value={blogDetails}
         readOnly={true}
         theme="bubble"
-        className="custom-quill"
+        className={`custom-quill ${
+          isDarkMode ? "dark:bg-transparent dark:text-white" : ""
+        }`}
       />
       {/* comment section */}
 
