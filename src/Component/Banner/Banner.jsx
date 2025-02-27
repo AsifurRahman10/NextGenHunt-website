@@ -6,19 +6,18 @@ import square from "../../assets/hero-square.png";
 import square2 from "../../assets/hero-square-2.png";
 import triangle from "../../assets/hero-triangle.png";
 import { Link } from "react-router-dom";
-import { AnimatedBtn } from "../Share/AnimatedBtn";
 
 export const Banner = () => {
   return (
-    <div className="bg-bannerPrimary min-h-[calc(100vh-78px)] pt-0 lg:pt-20 relative overflow-hidden">
+    <div className="bg-bannerPrimary dark:bg-[#0a0a0a] min-h-[calc(100vh-78px)] pt-0 lg:pt-20 relative overflow-hidden">
       <div className="flex justify-center items-center w-11/12 lg:w-9/12 mx-auto gap-6 py-10 mt-0 md:mt-5 lg:mt-0 lg:py-0 pt-10 flex-col lg:flex-row relative z-10">
         {/* text div */}
         <div className="flex-1 space-y-4 lg:space-y-6">
-          <h2 className="text-4xl md:text-6xl font-semibold">
+          <h2 className="text-4xl md:text-6xl font-semibold dark:text-white">
             Discover the Latest{" "}
             <span className="text-btnPrimary">Tech Products</span>
           </h2>
-          <p className="text-sm text-gray-600 font-medium">
+          <p className="text-sm text-gray-600 dark:text-gray-300 font-medium">
             Join a vibrant community of tech enthusiasts, where you can explore
             and share the latest web apps, AI tools, software, games, and mobile
             apps. Whether you're a creator or a user, find exciting new tech

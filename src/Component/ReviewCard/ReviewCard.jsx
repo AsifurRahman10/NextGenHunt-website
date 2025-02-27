@@ -2,7 +2,7 @@ import noImg from "../../assets/noImg.png";
 import { Rating } from "@smastrom/react-rating";
 
 export const ReviewCard = ({ review }) => {
-  const { _id, name, photo, review: userReview, rating, productId } = review;
+  const { name, photo, review: userReview, rating } = review;
 
   return (
     <div className="mt-6">

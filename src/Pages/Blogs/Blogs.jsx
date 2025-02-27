@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import BlogCard from "../../Component/Share/BlogCard";
-import img from "../../assets/couponBg.jpg";
+import { motion } from "motion/react";
 import axios from "axios";
 
 export default function Blogs() {
@@ -26,8 +26,19 @@ export default function Blogs() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-6 pb-10">
-        {blogs.map((blog) => (
-          <BlogCard key={blog._id} blog={blog} />
+        {blogs.map((blog, index) => (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: index * 0.2,
+            }}
+            key={blog._id}
+          >
+            <BlogCard blog={blog} />
+          </motion.div>
         ))}
       </div>
     </div>

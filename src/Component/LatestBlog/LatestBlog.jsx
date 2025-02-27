@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Title } from "../Share/Title";
 import axios from "axios";
 import BlogCard from "../Share/BlogCard";
+import { motion } from "motion/react";
 
 export const LatestBlog = () => {
   const [latestBlogs, setLatestBlogs] = useState([]);
@@ -20,9 +21,24 @@ export const LatestBlog = () => {
         align={"center"}
         btn={"hidden"}
       ></Title>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {latestBlogs.map((blog) => (
-          <BlogCard key={blog._id} blog={blog} />
+      <div
+        className={`grid grid-cols-1 lg:${
+          latestBlogs.length === 2 ? "grid-cols-2" : "grid-cols-3"
+        } gap-6`}
+      >
+        {latestBlogs.map((blog, index) => (
+          <motion.div
+            key={blog._id}
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: index * 0.2,
+            }}
+          >
+            <BlogCard blog={blog} />
+          </motion.div>
         ))}
       </div>
     </div>

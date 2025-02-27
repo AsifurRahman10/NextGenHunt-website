@@ -99,9 +99,7 @@ export default function AddBlog() {
       setUploadedImg(null);
       setExternalLink([]);
       setTags([]);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

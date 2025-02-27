@@ -37,7 +37,7 @@ export const SocialLogin = () => {
     <>
       <button
         onClick={handleGoogleLogin}
-        className="inline-flex rounded-full h-14 w-full items-center justify-center gap-2 border-2 border-gray-200 p-2 text-sm font-medium text-black outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
+        className="inline-flex rounded-full h-14 w-full items-center justify-center gap-2 border-2 border-gray-200 p-2 text-sm font-medium text-black dark:text-gray-400 outline-none focus:ring-2 focus:ring-[#333] focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-60"
       >
         <img
           src="https://www.svgrepo.com/show/475656/google-color.svg"

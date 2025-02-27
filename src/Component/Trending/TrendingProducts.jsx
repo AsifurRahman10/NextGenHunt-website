@@ -29,7 +29,7 @@ export const TrendingProducts = () => {
           "Check out the top-rated products with the highest votes from the community. Discover the hottest picks and see what’s trending now!"
         }
         align={"left"}
-        btn={"block"}
+        btn={"block border-2"}
       ></Title>
       <div className="w-11/12 md:w-9/12 lg:w-9/12 mx-auto grid grid-cols-1 lg:grid-cols-3 pt-4 gap-6">
         {trendingProduct.map((product, index) => (

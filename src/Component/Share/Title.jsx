@@ -22,9 +22,11 @@ export const Title = ({ title, para, align, btn, section }) => {
           <h2 className="text-3xl font-bold mb-4 dark:text-white">{title}</h2>
           <p className="font-medium text-gray-600 dark:text-gray-300">{para}</p>
         </div>
-        <div className={`${btn} pt-6`}>
-          <Link to={"/products"}>add</Link>
-        </div>
+        <button
+          className={`${btn} btn  border-btnPrimary mt-4 btn-outline btn-primary`}
+        >
+          <Link to={"/products"}>All Products</Link>
+        </button>
       </div>
     </div>
   );

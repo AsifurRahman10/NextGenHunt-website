@@ -19,7 +19,6 @@ export default function ManageBlog() {
     return <Loading></Loading>;
   }
   const handleDelete = async (id) => {
-    console.log(id);
     await axiosSecure.delete(`${import.meta.env.VITE_DB}/delete-blog/${id}`);
     Swal.fire({
       title: "Blog has been deleted",
@@ -32,7 +31,7 @@ export default function ManageBlog() {
       <Helmet>
         <title>Manage blogs - NextGenHunt</title>
       </Helmet>
-      <h3 className="text-3xl font-bold">My Products</h3>
+      <h3 className="text-3xl font-bold">All blogs</h3>
 
       <div className="overflow-x-auto mt-8">
         <table className="table">

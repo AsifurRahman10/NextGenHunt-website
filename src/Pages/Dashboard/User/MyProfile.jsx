@@ -62,9 +62,7 @@ export const MyProfile = () => {
 
       await updateUser(name, image);
       setLoading(false);
-    } catch (error) {
-      console.error("Image upload failed:", error);
-    }
+    } catch (error) {}
   };
 
   // update info
@@ -75,7 +73,6 @@ export const MyProfile = () => {
     const address = form.address.value;
     const usedData = { number, address };
     try {
-      console.log(data?._id);
       await axiosSecure.patch(
         `${import.meta.env.VITE_DB}/update-user/${data?._id}`,
         usedData

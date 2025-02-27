@@ -19,7 +19,9 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 
 - **Featured Products**: Users can view products marked as "Featured" by the admin, check details, and vote for them.
 - **Trending Technologies**: Displays the most-voted products. Clicking on a product takes users to the **Product Details** page (restricted to logged-in users).
+- **Latest-blogs**: Showcases latest blogs added my admin.
 - **Coupons Slider**: Showcases available coupons with their validity, allowing users to take advantage of discounts.
+- **Other static section**: FAQ section, user reviews about us and newsletter.
 
 ### Product Details Page
 
@@ -30,6 +32,10 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 ### All Products Section
 
 - Displays all products with pagination and a search feature (search by tags).
+
+### All Blogs Section
+
+- Displays all blogs with blog details page
 
 ### Authentication
 
@@ -49,6 +55,7 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 
 ### Moderator
 
+- **My Profile**: View profile details. Update user profile information.
 - **Product Review**: Review all submitted products by users. Moderators can accept, reject, or mark products as "Featured." Products must be approved before going live.
 - **Reported Content**: View and manage all reported content. Moderators can delete products if necessary.
 
@@ -59,9 +66,11 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 
 ### Admin
 
+- **My Profile**: View profile details. Update user profile information.
 - **Statistics**: View insights such as total revenue, total products, pending products, and product status (via pie chart).
 - **Manage Users**: Promote users to Moderator or Admin roles.
 - **Manage Coupons**: Create, update, and delete discount coupons. These coupons can be used during premium account upgrades.
+- **Manage Blogs**: Add new blogs and delete blogs.
 
 > **Admin Credentials**
 >
@@ -77,6 +86,7 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 - React
 - React Router
 - React Hook Form
+- Framer motion
 - Swiper
 - Recharts
 - Lottie
@@ -98,6 +108,7 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 - React Icons
 - TanStack React Query
 - Moment.js
+- react-quill
 
 ## Running the Project Locally
 

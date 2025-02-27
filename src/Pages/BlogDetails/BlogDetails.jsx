@@ -1,7 +1,3 @@
-import { Rating } from "@smastrom/react-rating";
-import image from "../../assets/couponBg.jpg";
-import { ReviewCard } from "../../Component/ReviewCard/ReviewCard";
-import { HiMiniPaperAirplane } from "react-icons/hi2";
 import { useAuth } from "../../Hooks/useAuth";
 import { FaCommentDots } from "react-icons/fa";
 import { useParams } from "react-router-dom";
@@ -15,6 +11,7 @@ import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { CommentCard } from "../../Component/CommentCard/CommentCard";
 import { ThemeContext } from "../../Provider/ThemeProvider";
+import { Helmet } from "react-helmet-async";
 
 export default function BlogDetails() {
   const { user } = useAuth();
@@ -24,11 +21,7 @@ export default function BlogDetails() {
   const { isDarkMode } = useContext(ThemeContext);
 
   // get product details
-  const {
-    data: blogData = {},
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: blogData = {}, isLoading } = useQuery({
     queryKey: ["products", id],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -53,19 +46,8 @@ export default function BlogDetails() {
     },
   });
 
-  const {
-    _id,
-    blogName,
-    image,
-    externalLinks,
-    allTag,
-    blogDetails,
-    userName,
-    email,
-    userPhoto,
-    timestamp,
-    status,
-  } = blogData;
+  const { _id, blogName, image, allTag, blogDetails, userName, timestamp } =
+    blogData;
   if (isLoading || commentLoading) {
     return <Loading></Loading>;
   }
@@ -88,13 +70,17 @@ export default function BlogDetails() {
         text: "You comment has been posted!",
         icon: "success",
       });
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (
     <div className="w-11/12 lg:w-9/12 mx-auto pt-2 lg:pt-6 pb-10 dark:text-white">
+      <Helmet>
+        <title>
+          {blogData?.blogName ? blogData?.blogName : "Product details"} -
+          NextGenHunt
+        </title>
+      </Helmet>
       {/* author description */}
       <div className="flex items-center text-[15px] gap-1 mt-[1.25rem] justify-center">
         <h5 className="text-btnPrimary font-semibold">{userName}</h5>

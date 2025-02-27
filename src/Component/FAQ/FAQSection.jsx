@@ -1,5 +1,6 @@
 import { Title } from "../Share/Title";
 import image from "../../assets/FAQ.svg";
+import { motion } from "motion/react";
 export const FAQSection = () => {
   return (
     <div className="pt-10 w-11/12 md:w-9/12 mx-auto">
@@ -14,7 +15,15 @@ export const FAQSection = () => {
       ></Title>
       <div className="flex items-center flex-col lg:flex-row gap-6 dark:text-white">
         {/* question */}
-        <div className="flex-1">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeOut",
+          }}
+          className="flex-1"
+        >
           <div className="collapse collapse-arrow border-b-2 rounded-none">
             <input type="radio" name="my-accordion-2" defaultChecked />
             <div className="collapse-title text-xl font-medium">
@@ -80,11 +89,19 @@ export const FAQSection = () => {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
         {/* image */}
-        <div className="flex-1">
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{
+            duration: 0.8,
+            ease: "easeOut",
+          }}
+          className="flex-1"
+        >
           <img src={image} className="w-full lg:w-10/12 mx-auto" alt="" />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

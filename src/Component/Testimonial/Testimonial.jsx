@@ -1,4 +1,5 @@
 import { Title } from "../Share/Title";
+import { motion } from "motion/react";
 
 export default function Testimonial() {
   return (
@@ -13,7 +14,15 @@ export default function Testimonial() {
           btn={"hidden"}
         />
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 w-full">
-          <div className="border p-7 rounded-xl bg-btnPrimary drop-shadow-md border-neutral-800/50 col-span-3 lg:col-span-2 flex flex-col gap-y-10 justify-between">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+            }}
+            className="border p-7 rounded-xl bg-btnPrimary drop-shadow-md border-neutral-800/50 col-span-3 lg:col-span-2 flex flex-col gap-y-10 justify-between"
+          >
             <div className="flex flex-col gap-y-3.5">
               <p className="font-bold text-xl text-white">
                 A game-changer for product discovery!
@@ -36,8 +45,16 @@ export default function Testimonial() {
                 Tech Enthusiast & AI Developer
               </p>
             </div>
-          </div>
-          <div className="border p-7 rounded-xl bg-btnPrimary drop-shadow-md border-neutral-800/50 col-span-3 flex flex-col gap-y-10 justify-between">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+            }}
+            className="border p-7 rounded-xl bg-btnPrimary drop-shadow-md border-neutral-800/50 col-span-3 flex flex-col gap-y-10 justify-between"
+          >
             <div className="flex flex-col gap-y-3.5">
               <p className="font-bold text-xl text-white">
                 Perfect platform for launching products
@@ -61,8 +78,16 @@ export default function Testimonial() {
                 Co-Founder at TechWave
               </p>
             </div>
-          </div>
-          <div className="border p-7 rounded-xl bg-btnPrimary drop-shadow-md border-neutral-800/50 col-span-3 flex flex-col gap-y-10 justify-between">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+            }}
+            className="border p-7 rounded-xl bg-btnPrimary drop-shadow-md border-neutral-800/50 col-span-3 flex flex-col gap-y-10 justify-between"
+          >
             <div className="flex flex-col gap-y-3.5">
               <p className="font-bold text-xl text-white">
                 Great for market research
@@ -85,8 +110,16 @@ export default function Testimonial() {
                 Product Manager at InnovateX
               </p>
             </div>
-          </div>
-          <div className="border p-7 rounded-xl bg-btnPrimary drop-shadow-md border-neutral-800/50 col-span-3 lg:col-span-2 flex flex-col gap-y-10 justify-between">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+            }}
+            className="border p-7 rounded-xl bg-btnPrimary drop-shadow-md border-neutral-800/50 col-span-3 lg:col-span-2 flex flex-col gap-y-10 justify-between"
+          >
             <div className="flex flex-col gap-y-3.5">
               <p className="font-bold text-xl text-white">
                 Engaging and active tech community
@@ -109,7 +142,7 @@ export default function Testimonial() {
                 SaaS Founder & Product Enthusiast
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

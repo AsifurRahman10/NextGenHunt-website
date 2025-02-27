@@ -1,4 +1,4 @@
-import { FaEye } from "react-icons/fa";
+import { FaArrowLeft, FaEye } from "react-icons/fa";
 import loginImg from "../../assets/login.jpg";
 import { SocialLogin } from "../../Component/Share/SocialLogin";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -19,7 +19,8 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    setValue,
+  } = useForm({});
 
   const onSubmit = async (data) => {
     setError("");
@@ -39,9 +40,23 @@ export const Login = () => {
       setError(error.message);
     }
   };
+
+  // log in ad admin
+  const handleAdminLogin = () => {
+    const email = "admin@gmail.com";
+    const password = "Admin12345";
+    setValue("email", email);
+    setValue("password", password);
+  };
+  const handleModeratorLogin = () => {
+    const email = "moderator@gmail.com";
+    const password = "Moderator12345";
+    setValue("email", email);
+    setValue("password", password);
+  };
   return (
-    <div className="bg-[#eeee]">
-      <div className="w-full md:w-10/12 lg:w-9/12 mx-auto flex flex-col-reverse py-10 md:py-20 lg:py-0 lg:flex-row justify-center items-center ">
+    <div className="bg-[#eeee] dark:bg-[#0a0a0a]">
+      <div className="w-full md:w-10/12 lg:w-9/12 mx-auto flex flex-col-reverse py-10 md:py-20 lg:py-0 lg:flex-row justify-center items-center dark:text-white">
         <Helmet>
           <title>Login - NextGenHunt</title>
         </Helmet>
@@ -55,9 +70,30 @@ export const Login = () => {
         </div>
         {/* login box */}
         <div className="card flex-1 lg:shrink-0 md:w-9/12 w-11/12 lg:w-fit">
-          <h3 className="text-2xl font-bold text-center">
+          <button
+            className={`  text-black dark:text-white/60 hover:text-btnPrimary mb-4  w-[160px] mx-auto `}
+          >
+            <Link to={"/"} className="flex justify-center items-center text-lg">
+              <FaArrowLeft className="text-xl mr-2" /> Back to home
+            </Link>
+          </button>
+          <h3 className="text-2xl font-bold text-center dark:text-white">
             Sign in to NextGenHunt
           </h3>
+          <div class="join mt-4 mx-auto ">
+            <button
+              onClick={handleAdminLogin}
+              class="btn join-item hover:bg-btnPrimary hover:text-white"
+            >
+              Sign in as Admin
+            </button>
+            <button
+              onClick={handleModeratorLogin}
+              class="btn join-item hover:bg-btnPrimary hover:text-white"
+            >
+              Sign in as moderator
+            </button>
+          </div>
           <form
             className="card-body w-full lg:w-9/12 mx-auto"
             onSubmit={handleSubmit(onSubmit)}
@@ -104,10 +140,7 @@ export const Login = () => {
                 <p className="text-red-500 mt-4">{errors.password.message}</p>
               )}
               <label className="label block text-right mt-4 ">
-                <a
-                  href="#"
-                  className="label-text-alt link link-hover text-gray-700 font-medium"
-                >
+                <a className="label-text-alt link link-hover text-gray-700 dark:text-gray-400 font-medium">
                   Forgot password?
                 </a>
               </label>
@@ -119,7 +152,7 @@ export const Login = () => {
             </div>
             <div className="divider">Or login with</div>
             <SocialLogin />
-            <h5 className="text-center py-6 text-gray-600">
+            <h5 className="text-center py-6 text-gray-600 dark:text-gray-300">
               Don't have an account,{" "}
               <Link to={"/register"}>
                 <span className="text-btnPrimary cursor-pointer font-semibold">

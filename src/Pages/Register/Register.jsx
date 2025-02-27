@@ -50,7 +50,7 @@ export const Register = () => {
   };
 
   return (
-    <div className="bg-[#eee]">
+    <div className="bg-[#eee] dark:bg-[#0a0a0a]">
       <div className="w-11/12 md:w-10/12 lg:w-9/12 mx-auto flex flex-col-reverse py-10 md:py-20 lg:py-0 lg:flex-row justify-center items-center">
         <Helmet>
           <title>Register - NextGenHunt</title>
@@ -65,8 +65,9 @@ export const Register = () => {
         </div>
         {/* login box */}
         <div className="card flex-1 lg:shrink-0 md:w-9/12 w-11/12 lg:w-fit">
-          <h3 className="text-2xl font-bold text-center mb-8">
-            Join our community, register to NextGenHunt
+          <h3 className="text-2xl font-bold text-center mb-8 dark:text-white w-9/12 mx-auto md:w-full">
+            Join our community, register to{" "}
+            <span className="text-btnPrimary">NextGenHunt</span>
           </h3>
           <form
             onSubmit={handleSubmit(onSubmit)}
