@@ -17,6 +17,7 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 
 ### Homepage
 
+- **Light / dark mode**: Light dark mode for better user experience.
 - **Featured Products**: Users can view products marked as "Featured" by the admin, check details, and vote for them.
 - **Trending Technologies**: Displays the most-voted products. Clicking on a product takes users to the **Product Details** page (restricted to logged-in users).
 - **Latest-blogs**: Showcases latest blogs added my admin.
