@@ -24,6 +24,7 @@ import { AdminRouter } from "./AdminRouter";
 import Blogs from "../Pages/Blogs/Blogs";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import AddBlog from "../Pages/Dashboard/Admin/AddBlog";
+import ManageBlog from "../Pages/Dashboard/Admin/ManageBlog";
 
 export const router = createBrowserRouter([
   {
@@ -167,6 +168,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRouter>
             <AddBlog />
+          </AdminRouter>
+        ),
+      },
+      {
+        path: "/dashboard/manage-blogs",
+        element: (
+          <AdminRouter>
+            <ManageBlog />
           </AdminRouter>
         ),
       },

@@ -53,6 +53,15 @@ export const Admin = () => {
           Add blogs
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/dashboard/manage-blogs"
+          className="hover:text-white hover:bg-[#3a3a3a]"
+        >
+          <AiOutlineProduct className="text-xl mr-1" />
+          Manage Blogs
+        </NavLink>
+      </li>
     </>
   );
 };

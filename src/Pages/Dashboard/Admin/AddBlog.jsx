@@ -138,14 +138,10 @@ export default function AddBlog() {
                   theme="snow"
                   value={value}
                   onChange={setValue}
-                  style={{
-                    height: "200px",
-                    paddingBottom: "40px",
-                    backgroundColor: "#efefef",
-                  }}
+                  className="bg-gray-200 h-32 pb-16 md:pb-10"
                 />
               </div>
-              <div className="flex items-center mt-4 gap-6">
+              <div className="flex items-center gap-6 mt-4">
                 {/* tags */}
                 <div className="flex-1">
                   <h3 className="mb-2">Tags</h3>
