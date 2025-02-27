@@ -9,6 +9,14 @@ export const Moderator = () => {
     <>
       <li>
         <NavLink
+          to="/dashboard/moderator-profile"
+          className="hover:text-white hover:bg-[#3a3a3a]"
+        >
+          <CgProfile className="text-xl mr-1" /> Profile
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/dashboard/product-review"
           className="hover:text-white hover:bg-[#3a3a3a]"
         >

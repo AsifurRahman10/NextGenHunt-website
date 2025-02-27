@@ -139,40 +139,22 @@ export const Navbar = () => {
                     Hi {user.displayName}!
                   </li>
                   <li>
-                    {userType === "user" && (
+                    {["user", "moderator", "admin"].includes(userType) && (
                       <>
                         <Link
-                          to={"/dashboard/my-profile"}
+                          to={`/dashboard/${
+                            userType === "user"
+                              ? "my-profile"
+                              : userType === "moderator"
+                              ? "product-review"
+                              : "statistics-page"
+                          }`}
                           className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
                         >
                           Dashboard
                         </Link>
                         <Link
-                          to="/dashboard/my-profile"
-                          className="text-sm hover:bg-gray-100 text-gray-700 px-4 py-2 flex"
-                        >
-                          My Profile
-                        </Link>
-                      </>
-                    )}
-                    {userType === "moderator" && (
-                      <Link
-                        to={"/dashboard/product-review"}
-                        className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                      >
-                        Dashboard
-                      </Link>
-                    )}
-                    {userType === "admin" && (
-                      <>
-                        <Link
-                          to={"/dashboard/statistics-page"}
-                          className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2"
-                        >
-                          Dashboard
-                        </Link>
-                        <Link
-                          to="/dashboard/admin-profile"
+                          to={`/dashboard/${userType}-profile`}
                           className="text-sm hover:bg-gray-100 text-gray-700 px-4 py-2 flex"
                         >
                           My Profile
@@ -180,6 +162,7 @@ export const Navbar = () => {
                       </>
                     )}
                   </li>
+
                   <div className="py-1">
                     <Link
                       onClick={handleSignOut}

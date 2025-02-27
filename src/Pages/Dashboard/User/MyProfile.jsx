@@ -7,14 +7,20 @@ import { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
 import { CgProfile } from "react-icons/cg";
+import { uploadImage } from "../../../Api/Utils";
+import Swal from "sweetalert2";
 
 export const MyProfile = () => {
-  const { user, loading } = useAuth();
+  const { user, loading, updateUser, setLoading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [error, setError] = useState("");
 
   // user info data
-  const { data, isLoading } = useQuery({
+  const {
+    data,
+    isLoading,
+    refetch: userDataRefetch,
+  } = useQuery({
     queryKey: [user],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -22,6 +28,7 @@ export const MyProfile = () => {
       );
       return res.data;
     },
+    enabled: !!user?.email,
   });
   // check is the user is subscribed
   const {
@@ -47,6 +54,41 @@ export const MyProfile = () => {
     setError("");
   };
 
+  // upload image
+  const uploadImageFun = async (file) => {
+    try {
+      const image = await uploadImage(file);
+      const name = user?.name;
+
+      await updateUser(name, image);
+      setLoading(false);
+    } catch (error) {
+      console.error("Image upload failed:", error);
+    }
+  };
+
+  // update info
+  const handleUpdateData = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const number = form.number.value;
+    const address = form.address.value;
+    const usedData = { number, address };
+    try {
+      console.log(data?._id);
+      await axiosSecure.patch(
+        `${import.meta.env.VITE_DB}/update-user/${data?._id}`,
+        usedData
+      );
+      Swal.fire({
+        title: "User info has been updated",
+        icon: "success",
+      });
+      form.reset();
+      userDataRefetch();
+    } catch (error) {}
+  };
+
   return (
     <div className="w-full">
       <Helmet>
@@ -57,6 +99,7 @@ export const MyProfile = () => {
       </h2>
 
       {/* information */}
+
       <div className="mt-6 flex gap-6 flex-col bg-white rounded-lg p-5">
         <div className="flex items-center gap-4">
           <img
@@ -64,24 +107,24 @@ export const MyProfile = () => {
             className="w-[100px] h-[100px] rounded object-cover"
             alt=""
           />
-          <div>
-            <button className="relative hidden group cursor-pointer text-sky-50  overflow-hidden h-10 w-36 rounded-md bg-btnPrimary p-2 flex justify-center items-center font-extrabold">
-              <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#5030ce]"></div>
-              <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#452ab0]"></div>
-              <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#37228b]"></div>
-              <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#2b1a6c]"></div>
-              <p className="z-10 flex justify-center items-center gap-2 font-semibold">
-                Update Photo
-              </p>
-            </button>
-            <p className="mt-2 text-gray-700 font-medium hidden">
-              Allowed JPG, GIF or PNG. Max size of 800K
+          <label className="relative group cursor-pointer text-sky-50 overflow-hidden h-10 w-36 rounded-md bg-btnPrimary p-2 flex justify-center items-center font-extrabold">
+            <input
+              type="file"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              onChange={(e) => uploadImageFun(e.target.files[0])}
+            />
+            <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-5 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#5030ce]"></div>
+            <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-5 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#452ab0]"></div>
+            <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-5 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#37228b]"></div>
+            <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-5 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#2b1a6c]"></div>
+            <p className="z-10 flex justify-center items-center gap-2 font-semibold">
+              Upload Photo
             </p>
-          </div>
+          </label>
         </div>
 
         {/* information */}
-        <form>
+        <form onSubmit={handleUpdateData}>
           <label className="form-control w-full mb-4 space-y-2">
             <span className="label-text">First Name</span>
             <input
@@ -89,6 +132,7 @@ export const MyProfile = () => {
               placeholder="John"
               className="input input-bordered w-full"
               defaultValue={user?.displayName}
+              disabled
             />
           </label>
 
@@ -99,6 +143,7 @@ export const MyProfile = () => {
               placeholder="john.doe@example.com"
               className="input input-bordered w-full"
               defaultValue={user?.email}
+              disabled
             />
           </label>
 
@@ -108,6 +153,8 @@ export const MyProfile = () => {
               type="number"
               placeholder="Enter phone number"
               className="input input-bordered w-full"
+              name="number"
+              defaultValue={data?.number}
             />
           </label>
           <label className="form-control w-full mb-4 space-y-2">
@@ -116,16 +163,18 @@ export const MyProfile = () => {
               type="text"
               placeholder="Enter address"
               className="input input-bordered w-full"
+              name="address"
+              defaultValue={data.address}
             />
           </label>
 
-          <button className="relative hidden group cursor-pointer text-sky-50  overflow-hidden h-10 w-36 rounded-md bg-btnPrimary p-2 flex justify-center items-center font-extrabold">
+          <button className="relative group cursor-pointer text-sky-50  overflow-hidden h-10 w-36 rounded-md bg-btnPrimary p-2 flex justify-center items-center font-extrabold">
             <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-40 h-40 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#5030ce]"></div>
             <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-32 h-32 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#452ab0]"></div>
             <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-24 h-24 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#37228b]"></div>
             <div className="absolute top-3 right-20 group-hover:top-12 group-hover:-right-12 z-10 w-14 h-14 rounded-full group-hover:scale-150 group-hover:opacity-50 duration-500 bg-[#2b1a6c]"></div>
             <p className="z-10 flex justify-center items-center gap-2 font-semibold">
-              Submit
+              Update
             </p>
           </button>
         </form>
@@ -158,6 +207,7 @@ export const MyProfile = () => {
           </div>
         )}
       </div>
+
       {data.role === "user" && (
         <PaymentModal
           error={error}

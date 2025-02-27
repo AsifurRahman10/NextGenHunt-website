@@ -44,7 +44,7 @@ export const DashboardLayout = () => {
           </div>
         </div>
       </div>
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"

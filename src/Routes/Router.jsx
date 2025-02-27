@@ -128,6 +128,14 @@ export const router = createBrowserRouter([
           </ModeratorRouter>
         ),
       },
+      {
+        path: "/dashboard/moderator-profile",
+        element: (
+          <ModeratorRouter>
+            <MyProfile />
+          </ModeratorRouter>
+        ),
+      },
 
       // admin
       {

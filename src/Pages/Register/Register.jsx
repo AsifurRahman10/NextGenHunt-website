@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet-async";
 
 export const Register = () => {
   const [showPass, setShowPass] = useState(false);
-  const { register: registerFn, updateUser, setLoading, user } = useAuth();
+  const { register: registerFn, updateUser, setLoading } = useAuth();
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const {
