@@ -7,10 +7,11 @@ import { motion } from "motion/react";
 export const LatestBlog = () => {
   const [latestBlogs, setLatestBlogs] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/blogs/latest").then((res) => {
+    axios.get(`${import.meta.env.VITE_DB}/blogs/latest`).then((res) => {
       setLatestBlogs(res.data);
     });
   }, []);
+  console.log(latestBlogs);
   return (
     <div className="w-11/12 md:w-9/12 mx-auto pt-5 lg:pt-10 pb-10 lg:py-10 ">
       <Title

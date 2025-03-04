@@ -80,16 +80,16 @@ export const Login = () => {
           <h3 className="text-2xl font-bold text-center dark:text-white">
             Sign in to NextGenHunt
           </h3>
-          <div class="join mt-4 mx-auto ">
+          <div className="join mt-4 mx-auto ">
             <button
               onClick={handleAdminLogin}
-              class="btn join-item hover:bg-btnPrimary hover:text-white"
+              className="btn join-item hover:bg-btnPrimary hover:text-white"
             >
               Sign in as Admin
             </button>
             <button
               onClick={handleModeratorLogin}
-              class="btn join-item hover:bg-btnPrimary hover:text-white"
+              className="btn join-item hover:bg-btnPrimary hover:text-white"
             >
               Sign in as moderator
             </button>

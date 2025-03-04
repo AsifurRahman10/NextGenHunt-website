@@ -19,12 +19,12 @@ import { ManageCoupons } from "../Pages/Dashboard/Admin/ManageCoupons";
 import { Error } from "../Pages/Error/Error";
 import { UserRouter } from "./UserRoute";
 import { ModeratorRouter } from "./ModeratorRoute";
-import { Moderator } from "../Component/DashboardNavLink/Moderator";
 import { AdminRouter } from "./AdminRouter";
 import Blogs from "../Pages/Blogs/Blogs";
 import BlogDetails from "../Pages/BlogDetails/BlogDetails";
 import AddBlog from "../Pages/Dashboard/Admin/AddBlog";
 import ManageBlog from "../Pages/Dashboard/Admin/ManageBlog";
+import { AboutUs } from "../Pages/AboutUs/AboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +58,10 @@ export const router = createBrowserRouter([
             <BlogDetails />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
       },
     ],
   },
