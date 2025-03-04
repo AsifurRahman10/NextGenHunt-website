@@ -38,6 +38,10 @@ NextGen Hunt is a platform where users can discover and share the latest technol
 
 - Displays all blogs with blog details page
 
+### About us section
+
+- Info about our goals and what to learn with us
+
 ### Authentication
 
 - **Login & Registration**: Users can sign up or log in using email/password or social media (Google).
