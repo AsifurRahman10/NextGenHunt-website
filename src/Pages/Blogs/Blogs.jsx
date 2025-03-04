@@ -2,14 +2,21 @@ import { useEffect, useState } from "react";
 import BlogCard from "../../Component/Share/BlogCard";
 import { motion } from "motion/react";
 import axios from "axios";
+import { Loading } from "../../Component/Share/Loading";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_DB}/blogs`).then((res) => {
       setBlogs(res.data);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="w-11/12 lg:w-9/12 mx-auto dark:text-white">
       {/* title part */}
